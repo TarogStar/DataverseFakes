@@ -36,7 +36,7 @@ namespace FakeXrmEasy.Extensions
         /// <returns>A new entity containing only the projected attributes.</returns>
         public static Entity ProjectAttributes(this Entity e, ColumnSet columnSet, XrmFakedContext context)
         {
-            return ProjectAttributes(e, new QueryExpression() { ColumnSet = columnSet }, context);
+            return ProjectAttributes(e, new QueryExpression() { ColumnSet = columnSet }, context, stripImageColumns: false);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace FakeXrmEasy.Extensions
         /// <param name="qe">The query expression defining which columns to include.</param>
         /// <param name="context">The fake context used for metadata validation and proxy type resolution.</param>
         /// <returns>A new entity containing only the projected attributes, with null attributes removed.</returns>
-        public static Entity ProjectAttributes(this Entity e, QueryExpression qe, XrmFakedContext context)
+        public static Entity ProjectAttributes(this Entity e, QueryExpression qe, XrmFakedContext context, bool stripImageColumns = true)
         {
             if (qe.ColumnSet == null || qe.ColumnSet.AllColumns)
             {
@@ -187,6 +187,11 @@ namespace FakeXrmEasy.Extensions
 
                     if (e.Attributes.ContainsKey(attKey) && e.Attributes[attKey] != null)
                     {
+                        // Dataverse silently omits image (byte[]) columns from RetrieveMultiple results.
+                        // They are only returned via individual Retrieve calls.
+                        if (stripImageColumns && e.Attributes[attKey] is byte[])
+                            continue;
+
                         projected[attKey] = CloneAttribute(e[attKey], context);
 
                         string formattedValue = "";
