@@ -1024,7 +1024,22 @@ namespace FakeXrmEasy
                     if (attributeFound != null)
                         return true;
 
-                    if (attributeFound == null && EntityMetadata.ContainsKey(sEntityName))
+                    // Some attributes (e.g. entityimage) have a constant in a nested class but no
+                    // [AttributeLogicalName]-decorated C# property on the proxy class.
+                    // Check nested classes for a matching string constant value.
+                    // XrmToolkit uses "Properties", XrmToolbox Early Bound Generator uses "Fields".
+                    foreach (var nestedType in earlyBoundType.GetNestedTypes())
+                    {
+                        var constantFound = nestedType
+                            .GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.FlattenHierarchy)
+                            .Where(f => f.IsLiteral && !f.IsInitOnly && f.FieldType == typeof(string))
+                            .Any(f => string.Equals((string)f.GetRawConstantValue(), sAttributeName, StringComparison.OrdinalIgnoreCase));
+
+                        if (constantFound)
+                            return true;
+                    }
+
+                    if (EntityMetadata.ContainsKey(sEntityName))
                     {
                         //Try with metadata
                         return AttributeExistsInInjectedMetadata(sEntityName, sAttributeName);

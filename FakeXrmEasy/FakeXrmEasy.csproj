@@ -14,7 +14,7 @@
     <!-- NuGet package metadata -->
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>FakeXrmEasy.Community</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.1.2</Version>
     <Authors>FakeXrmEasy Community Contributors</Authors>
     <Company>FakeXrmEasy Community</Company>
     <Product>FakeXrmEasy Community Edition</Product>
@@ -44,7 +44,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Dynamics 365 SDK -->
+    <!-- Dynamics 365 SDK - Required minimum versions -->
     <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.60" />
     <PackageReference Include="Microsoft.CrmSdk.Workflow" Version="9.0.2.60" />
     <PackageReference Include="Microsoft.CrmSdk.XrmTooling.CoreAssembly" Version="9.1.1.65" />
@@ -58,9 +58,9 @@
 
     <!-- Identity -->
 
-    <!-- System libraries that handle versioning properly -->
-    <PackageReference Include="System.ServiceModel.Http" Version="8.1.2" />
-    <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
+    <!-- System libraries - PrivateAssets to avoid version conflicts with consuming projects -->
+    <PackageReference Include="System.ServiceModel.Http" Version="8.1.2" PrivateAssets="all" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
