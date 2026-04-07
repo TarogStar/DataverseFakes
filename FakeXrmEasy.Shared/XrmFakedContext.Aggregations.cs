@@ -532,7 +532,7 @@ namespace FakeXrmEasy
                 }
                 else if (attributeValue is OptionSetValue)
                 {
-                    return ((OptionSetValue)attributeValue).Value as IComparable;
+                    return ((OptionSetValue)attributeValue).Value;
                 }
                 else
                 {
