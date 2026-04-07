@@ -204,3 +204,4 @@ test/*
 
 # Claude Code
 .claude/
+nupkg/FakeXrmEasy.Community.1.1.2.nupkg
