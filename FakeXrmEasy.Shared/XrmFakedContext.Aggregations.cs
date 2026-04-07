@@ -71,13 +71,9 @@ namespace FakeXrmEasy
                     logicalName = attr.GetAttribute("name")?.Value;
                 }
 
-                if (string.IsNullOrEmpty("alias"))
+                if (string.IsNullOrEmpty(alias))
                 {
                     throw new Exception("Missing alias for attribute in aggregate fetch xml");
-                }
-                if (string.IsNullOrEmpty("name"))
-                {
-                    throw new Exception("Missing name for attribute in aggregate fetch xml");
                 }
 
                 if (attr.IsAttributeTrue("groupby"))
@@ -196,7 +192,7 @@ namespace FakeXrmEasy
                 {
                     throw new Exception("An attribute cannot be specified for an order clause for an aggregate Query. Use an alias");
                 }
-                if (string.IsNullOrEmpty("alias"))
+                if (string.IsNullOrEmpty(alias))
                 {
                     throw new Exception("An alias is required for an order clause for an aggregate Query.");
                 }
