@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Crm;
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
+    [Collection("CounterPlugin")]
     public class PipelineTests
     {
         [Fact]

@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml
+namespace DataverseFakes.Tests.FakeContextTests.FetchXml
 {
     /// <summary>
     /// To test all different condition operators found in FetchXml

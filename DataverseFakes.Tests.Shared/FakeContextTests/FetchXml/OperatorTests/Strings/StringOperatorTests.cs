@@ -9,7 +9,7 @@ using Microsoft.Xrm.Sdk.Query;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml.OperatorTests.Strings
+namespace DataverseFakes.Tests.FakeContextTests.FetchXml.OperatorTests.Strings
 {
     public class StringOperatorTests
     {

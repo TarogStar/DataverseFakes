@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml
+namespace DataverseFakes.Tests.FakeContextTests.FetchXml
 {
     /// <summary>
     /// Tests for hierarchy operators (Above, AboveOrEqual/eq-or-above, Under, UnderOrEqual/eq-or-under, NotUnder).

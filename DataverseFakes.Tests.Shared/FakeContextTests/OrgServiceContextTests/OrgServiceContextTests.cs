@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.OrgServiceContextTests
+namespace DataverseFakes.Tests.FakeContextTests.OrgServiceContextTests
 {
     public class OrgServiceContextTests
     {

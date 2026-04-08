@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.PublishXml
+namespace DataverseFakes.Tests.FakeContextTests.PublishXml
 {
     public class PublishXmlRequestTests
     {

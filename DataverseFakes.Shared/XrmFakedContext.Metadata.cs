@@ -3,14 +3,14 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using System.Reflection;
 using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk;
-using FakeXrmEasy.Metadata;
+using DataverseFakes.Metadata;
 using System.ServiceModel;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Partial class containing entity and attribute metadata functionality for the faked CRM context.

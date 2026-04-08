@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using FakeXrmEasy;
+using DataverseFakes;
 using Microsoft.Xrm.Sdk;
 using Xunit;
 using Microsoft.Crm.Sdk.Messages;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.ModifyAccessRightsTests
+namespace DataverseFakes.Tests.FakeContextTests.ModifyAccessRightsTests
 {
     public class ModifyAccessRequestTests
     {

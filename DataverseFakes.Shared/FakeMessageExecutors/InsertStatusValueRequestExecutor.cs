@@ -4,9 +4,9 @@ using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor for InsertStatusValueRequest

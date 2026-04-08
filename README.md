@@ -1,8 +1,8 @@
-# FakeXrmEasy: Modern Unit Testing for Dynamics 365
+# DataverseFakes: Modern Unit Testing for Dynamics 365
 
 A truly open-source testing framework for Dynamics 365 / Power Platform that makes unit testing plugins, workflows, and custom code simple and fast.
 
-[![NuGet](https://img.shields.io/nuget/v/FakeXrmEasy.Community.svg)](https://www.nuget.org/packages/FakeXrmEasy.Community)
+[![NuGet](https://img.shields.io/nuget/v/DataverseFakes.Community.svg)](https://www.nuget.org/packages/DataverseFakes.Community)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Version 1.1.0 - Enterprise Features and Query Enhancements!
@@ -63,9 +63,9 @@ See [MODERNIZATION.md](MODERNIZATION.md) and [SDK_STYLE_MIGRATION.md](SDK_STYLE_
 
 ---
 
-## What is FakeXrmEasy?
+## What is DataverseFakes?
 
-FakeXrmEasy is a comprehensive mocking framework for Dynamics 365 that enables:
+DataverseFakes is a comprehensive mocking framework for Dynamics 365 that enables:
 
 - **Unit Testing Plugins**: Test your plugin logic without deploying to a real environment
 - **Workflow Testing**: Validate custom workflow activities with in-memory execution
@@ -81,18 +81,18 @@ FakeXrmEasy is a comprehensive mocking framework for Dynamics 365 that enables:
 ### Installation
 
 ```bash
-Install-Package FakeXrmEasy.Community
+Install-Package DataverseFakes.Community
 ```
 
 Or via .NET CLI:
 ```bash
-dotnet add package FakeXrmEasy.Community
+dotnet add package DataverseFakes.Community
 ```
 
 ### Quick Example
 
 ```csharp
-using FakeXrmEasy;
+using DataverseFakes;
 using Microsoft.Xrm.Sdk;
 using Xunit;
 
@@ -154,7 +154,7 @@ Assert.Equal("Hello World", outputs["OutputText"]);
 
 ## Supported SDK Messages
 
-FakeXrmEasy supports **62+ standard CRM messages** organized by category:
+DataverseFakes supports **62+ standard CRM messages** organized by category:
 
 ### CRUD Operations (Core)
 
@@ -284,7 +284,7 @@ FakeXrmEasy supports **62+ standard CRM messages** organized by category:
 
 ## Result ordering
 
-FakeXrmEasy aims to match Dataverse behavior: **result ordering is not guaranteed unless you explicitly specify an `OrderExpression` (QueryExpression) or an `<order />` clause (FetchXML).**
+DataverseFakes aims to match Dataverse behavior: **result ordering is not guaranteed unless you explicitly specify an `OrderExpression` (QueryExpression) or an `<order />` clause (FetchXML).**
 
 This has a couple of implications for tests:
 
@@ -308,7 +308,7 @@ Assert.Single(withAlias);
 Assert.Equal("Lionel", ((AliasedValue)withAlias[0]["aa.firstname"]).Value.ToString());
 ```
 
-FakeXrmEasy supports a comprehensive set of condition operators for QueryExpression and FetchXML queries:
+DataverseFakes supports a comprehensive set of condition operators for QueryExpression and FetchXML queries:
 
 ### Comparison Operators
 
@@ -365,7 +365,7 @@ FakeXrmEasy supports a comprehensive set of condition operators for QueryExpress
 
 ## Date/Time Operators
 
-FakeXrmEasy provides extensive support for date-based condition operators:
+DataverseFakes provides extensive support for date-based condition operators:
 
 ### Relative Date Operators
 
@@ -489,7 +489,7 @@ var results = service.RetrieveMultiple(query);
 
 ## Alternate Keys
 
-FakeXrmEasy provides full support for Dataverse alternate keys:
+DataverseFakes provides full support for Dataverse alternate keys:
 
 ### Defining Alternate Keys
 
@@ -541,7 +541,7 @@ service.Associate(targetRef.LogicalName, targetRef.Id,
 
 ### Alternate Key Constraints
 
-FakeXrmEasy enforces Dataverse alternate key constraints:
+DataverseFakes enforces Dataverse alternate key constraints:
 
 - Maximum **10 alternate keys per entity**
 - Maximum **16 attributes per alternate key**
@@ -552,7 +552,7 @@ FakeXrmEasy enforces Dataverse alternate key constraints:
 
 ## Plugin Pipeline
 
-FakeXrmEasy supports simulating the Dynamics 365 plugin execution pipeline:
+DataverseFakes supports simulating the Dynamics 365 plugin execution pipeline:
 
 ### Enabling Pipeline Simulation
 
@@ -699,11 +699,11 @@ build.bat pack       # Create NuGet package
 ## Project Structure
 
 ```
-FakeXrmEasy/
-|-- FakeXrmEasy/              # Main library project
-|-- FakeXrmEasy.Shared/       # Shared implementation code
-|-- FakeXrmEasy.Tests/        # Test project
-|-- FakeXrmEasy.Tests.Shared/ # Shared test code
+DataverseFakes/
+|-- DataverseFakes/              # Main library project
+|-- DataverseFakes.Shared/       # Shared implementation code
+|-- DataverseFakes.Tests/        # Test project
+|-- DataverseFakes.Tests.Shared/ # Shared test code
 \-- build.bat                 # Build script
 ```
 
@@ -715,7 +715,7 @@ For more detailed documentation, examples, and advanced scenarios, see:
 
 - **Troubleshooting**: [Common issues and solutions](TROUBLESHOOTING.md)
 - **IPluginExecutionContext4**: [New interface support](IPluginExecutionContext4_EXAMPLE.md)
-- **Examples**: Check the [FakeXrmEasy.Tests](FakeXrmEasy.Tests/) project for comprehensive examples
+- **Examples**: Check the [DataverseFakes.Tests](DataverseFakes.Tests/) project for comprehensive examples
 - **Developer Guide**: See [CLAUDE.md](CLAUDE.md) for architecture and development guidelines
 
 ---
@@ -758,7 +758,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Support
 
-If you or your organization uses FakeXrmEasy.Community and finds it valuable, consider contributing to the project by:
+If you or your organization uses DataverseFakes.Community and finds it valuable, consider contributing to the project by:
 
 - Submitting bug fixes and new features
 - Improving documentation
@@ -769,14 +769,16 @@ If you or your organization uses FakeXrmEasy.Community and finds it valuable, co
 
 ## Community
 
-- **NuGet Package**: [FakeXrmEasy.Community on NuGet](https://www.nuget.org/packages/FakeXrmEasy.Community)
+- **NuGet Package**: [DataverseFakes.Community on NuGet](https://www.nuget.org/packages/DataverseFakes.Community)
 - **Documentation**: See [CLAUDE.md](CLAUDE.md) for development guidelines and architecture details
 
 ---
 
-## Acknowledgments
+## Attribution & Acknowledgments
 
-This project builds on the excellent foundation established by the original FakeXrmEasy v1.x. We're committed to keeping it truly open-source and community-driven.
+This project is derived from [FakeXrmEasy](https://github.com/jordimontana82/fake-xrm-easy), originally created by Jordi Montana and contributors. The original work is licensed under the MIT License (see [LICENSE.md](LICENSE.md)).
+
+**FakeXrmEasy is a registered trademark of Jordi Montana.** This project is not affiliated with or endorsed by the trademark holder. The rename to DataverseFakes was made to respect the trademark.
 
 Special thanks to all contributors who have helped make this project better!
 

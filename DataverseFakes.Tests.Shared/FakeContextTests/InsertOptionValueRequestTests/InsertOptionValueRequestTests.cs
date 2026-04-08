@@ -4,13 +4,13 @@ using Microsoft.Xrm.Sdk.Metadata;
 using System.Collections.Generic;
 using Xunit;
 
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 
 using System.Linq;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.InsertOptionValueRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.InsertOptionValueRequestTests
 {
     public class InsertOptionValueRequestTests
     {

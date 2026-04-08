@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
 using System;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     public class CustomMockPlugin : IPlugin
     {

@@ -1,6 +1,6 @@
 ﻿using Crm;
 using FakeItEasy;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -12,7 +12,7 @@ using System.Reflection;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     public class FakeContextTestUpdate
     {

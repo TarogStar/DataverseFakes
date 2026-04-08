@@ -2,7 +2,7 @@ using Microsoft.Xrm.Sdk;
 using System;
 using System.Text;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Provides a fake implementation of <see cref="ITracingService"/> for unit testing Dynamics 365 plugins and custom workflow activities.

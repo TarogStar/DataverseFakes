@@ -1,4 +1,4 @@
-﻿namespace FakeXrmEasy
+﻿namespace DataverseFakes
 {
     /// <summary>
     /// Enumeration of CRM organization service error codes. These codes correspond to

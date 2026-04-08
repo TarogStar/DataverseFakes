@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.DateTimeKindTests
+namespace DataverseFakes.Tests.FakeContextTests.DateTimeKindTests
 {
     /// <summary>
     /// Tests for DateTime Kind handling to ensure parity with real Dataverse behavior.

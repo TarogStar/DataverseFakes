@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.QueryTranslationTests
+namespace DataverseFakes.Tests.FakeContextTests.QueryTranslationTests
 {
     public class ProjectionTests
     {

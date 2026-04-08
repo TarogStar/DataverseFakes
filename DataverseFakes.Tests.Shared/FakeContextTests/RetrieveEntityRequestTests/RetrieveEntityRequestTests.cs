@@ -1,6 +1,6 @@
 ﻿using Crm;
-using FakeXrmEasy.FakeMessageExecutors;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.FakeMessageExecutors;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -10,7 +10,7 @@ using System.Reflection;
 using Xunit;
 using System.Collections.Generic;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.RetrieveEntityRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.RetrieveEntityRequestTests
 {
     public class RetrieveEntityRequestTests
     {

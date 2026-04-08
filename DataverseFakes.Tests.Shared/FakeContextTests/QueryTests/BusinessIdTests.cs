@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.QueryTests
+namespace DataverseFakes.Tests.FakeContextTests.QueryTests
 {
     public class EqualBusinessIdTests
     {

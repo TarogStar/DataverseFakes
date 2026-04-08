@@ -4,7 +4,7 @@ using System;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.CrudTests
+namespace DataverseFakes.Tests.CrudTests
 {
     /// <summary>
     /// Tests for minimum date validation in CRUD operations.

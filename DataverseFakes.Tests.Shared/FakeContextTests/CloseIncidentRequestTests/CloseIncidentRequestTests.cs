@@ -1,4 +1,4 @@
-﻿using FakeXrmEasy.FakeMessageExecutors;
+﻿using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.CloseIncidentRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.CloseIncidentRequestTests
 {
     public class CloseIncidentRequestTests
     {

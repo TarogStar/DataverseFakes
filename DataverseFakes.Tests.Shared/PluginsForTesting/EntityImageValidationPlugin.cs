@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     /// <summary>
     /// Plugin that validates and traces entity image information for testing purposes.

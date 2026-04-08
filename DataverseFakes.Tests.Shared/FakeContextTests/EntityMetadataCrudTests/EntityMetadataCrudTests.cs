@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.EntityMetadataCrudTests
+namespace DataverseFakes.Tests.FakeContextTests.EntityMetadataCrudTests
 {
     /// <summary>
     /// Comprehensive tests for Entity Metadata CRUD operations (CreateEntityRequest,

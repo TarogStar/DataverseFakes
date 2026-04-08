@@ -1,6 +1,6 @@
-# FakeXrmEasy.Community Enhancement Roadmap
+# DataverseFakes.Community Enhancement Roadmap
 
-This document outlines planned enhancements to make FakeXrmEasy.Community the most comprehensive and developer-friendly testing framework for modern Dataverse applications.
+This document outlines planned enhancements to make DataverseFakes.Community the most comprehensive and developer-friendly testing framework for modern Dataverse applications.
 
 **Last Updated:** 2025-11-11
 
@@ -372,24 +372,24 @@ context.InitializeFromJson("testdata/accounts.json");
 #### Command-Line Interface
 ```bash
 # Download metadata for specific entities
-FakeXrmEasy.MetadataDownloader.exe -url "https://org.crm.dynamics.com"
+DataverseFakes.MetadataDownloader.exe -url "https://org.crm.dynamics.com"
     -entities "account,contact,opportunity"
     -output "./testmetadata"
 
 # Download plugin steps
-FakeXrmEasy.MetadataDownloader.exe -url "https://org.crm.dynamics.com"
+DataverseFakes.MetadataDownloader.exe -url "https://org.crm.dynamics.com"
     -plugins -solution "MyCustomizations"
     -output "./pluginsteps.json"
 
 # Download sample data
-FakeXrmEasy.MetadataDownloader.exe -url "https://org.crm.dynamics.com"
+DataverseFakes.MetadataDownloader.exe -url "https://org.crm.dynamics.com"
     -data -entities "account,contact"
     -filter "createdon gt 2024-01-01"
     -limit 100
     -output "./testdata"
 
 # Download everything
-FakeXrmEasy.MetadataDownloader.exe -url "https://org.crm.dynamics.com"
+DataverseFakes.MetadataDownloader.exe -url "https://org.crm.dynamics.com"
     -all -solution "MyCustomizations"
     -output "./testinfrastructure"
 ```
@@ -765,7 +765,7 @@ These enhancements are designed to be implemented incrementally. Each phase buil
 **Community Input Welcome:**
 - Which phases are most valuable to you?
 - What other enhancements would help?
-- What features from the original FakeXrmEasy do you miss?
+- What features from the original DataverseFakes do you miss?
 
 ---
 

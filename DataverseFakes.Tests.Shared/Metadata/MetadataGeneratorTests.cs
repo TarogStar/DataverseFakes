@@ -1,5 +1,5 @@
-using FakeXrmEasy.Extensions;
-using FakeXrmEasy.Metadata;
+using DataverseFakes.Extensions;
+using DataverseFakes.Metadata;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Metadata
+namespace DataverseFakes.Tests.Metadata
 {
     /// <summary>
     /// Tests for the public MetadataGenerator API (GitHub issue #557).

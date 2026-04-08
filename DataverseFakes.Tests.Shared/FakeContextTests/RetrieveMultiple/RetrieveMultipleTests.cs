@@ -1,4 +1,4 @@
-﻿using FakeXrmEasy.Extensions;
+﻿using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Query;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.RetrieveMultiple
+namespace DataverseFakes.Tests.FakeContextTests.RetrieveMultiple
 {
     public class RetrieveMultipleTests
     {
@@ -72,13 +72,13 @@ namespace FakeXrmEasy.Tests.FakeContextTests.RetrieveMultiple
       {
         Id = Guid.NewGuid()
       };
-      e1["name"] = "FakeXrmEasy";
+      e1["name"] = "DataverseFakes";
 
       Entity e2 = new Entity("entity")
       {
         Id = Guid.NewGuid()
       };
-      e2["name"] = "FakeXrmEasy";
+      e2["name"] = "DataverseFakes";
 
             context.Initialize(new Entity[] { e1, e2 });
 

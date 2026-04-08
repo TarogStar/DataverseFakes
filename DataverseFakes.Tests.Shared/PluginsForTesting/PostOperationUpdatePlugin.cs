@@ -2,7 +2,7 @@
 using Crm;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     public class PostOperationUpdatePlugin : IPlugin
     {

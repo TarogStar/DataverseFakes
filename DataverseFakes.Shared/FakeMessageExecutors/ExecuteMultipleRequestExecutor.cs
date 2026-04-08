@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles ExecuteMultipleRequest messages for batch execution of multiple CRM requests.

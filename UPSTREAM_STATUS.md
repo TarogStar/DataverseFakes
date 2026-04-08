@@ -1,4 +1,4 @@
-# FakeXrmEasy.Community - Upstream Status
+# DataverseFakes.Community - Upstream Status
 
 This document consolidates the status of issues and PRs from the archived [jordimontana82/fake-xrm-easy](https://github.com/jordimontana82/fake-xrm-easy) repository (archived June 2024).
 
@@ -469,7 +469,7 @@ Other: Assign, SetState, WhoAmI, InitializeFrom, BulkDelete, CalculateRollupFiel
 
 ## Custom Additions (Community Enhancements)
 
-The following features were developed independently by the community and are NOT fixes for upstream issues. These represent new capabilities added to enhance the testing framework beyond the original FakeXrmEasy.
+The following features were developed independently by the community and are NOT fixes for upstream issues. These represent new capabilities added to enhance the testing framework beyond the original DataverseFakes.
 
 **Total Custom Additions: 18**
 

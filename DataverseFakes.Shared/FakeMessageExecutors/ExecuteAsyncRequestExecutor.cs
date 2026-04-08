@@ -3,12 +3,12 @@ using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles ExecuteAsyncRequest messages for asynchronous execution of CRM operations.
     /// In real Dataverse, ExecuteAsyncRequest wraps another OrganizationRequest and executes it asynchronously,
-    /// returning an AsyncJobId that references an asyncoperation entity. Since FakeXrmEasy uses an in-memory context,
+    /// returning an AsyncJobId that references an asyncoperation entity. Since DataverseFakes uses an in-memory context,
     /// the wrapped request is executed immediately (synchronously) but the executor still creates an asyncoperation
     /// record to simulate the real behavior and allow tests to verify async job creation.
     /// </summary>

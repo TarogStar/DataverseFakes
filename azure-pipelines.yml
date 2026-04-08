@@ -1,5 +1,5 @@
 # =============================================================================
-# Azure DevOps Pipeline for FakeXrmEasy.Community
+# Azure DevOps Pipeline for DataverseFakes.Community
 # =============================================================================
 #
 # PREREQUISITES:
@@ -15,7 +15,7 @@
 #    - Pipelines > New Pipeline > GitHub > Select your repository
 #    - Point to this azure-pipelines.yml file
 #
-# Package ID: FakeXrmEasy.Community
+# Package ID: DataverseFakes.Community
 # Target Framework: .NET Framework 4.6.2
 # =============================================================================
 
@@ -31,7 +31,7 @@ pool:
 
 # Define pipeline variables
 variables:
-  solution: 'FakeXrmEasy.sln'
+  solution: 'DataverseFakes.sln'
   buildConfiguration: 'Release'
   nugetVersion: '6.x'
   # Update this to match your Azure Artifacts feed name
@@ -81,7 +81,7 @@ stages:
 
     # -------------------------------------------------------------------------
     # Step 4: Run Unit Tests
-    # Executes all xUnit tests in the FakeXrmEasy.Tests project
+    # Executes all xUnit tests in the DataverseFakes.Tests project
     # Test results are published for visibility in Azure DevOps
     # -------------------------------------------------------------------------
     - task: VSTest@2
@@ -89,7 +89,7 @@ stages:
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: |
-          **\FakeXrmEasy.Tests.dll
+          **\DataverseFakes.Tests.dll
           !**\obj\**
         searchFolder: '$(System.DefaultWorkingDirectory)'
         configuration: '$(buildConfiguration)'
@@ -98,14 +98,14 @@ stages:
 
     # -------------------------------------------------------------------------
     # Step 5: Pack NuGet Package
-    # Creates the FakeXrmEasy.Community NuGet package using the nuspec file
+    # Creates the DataverseFakes.Community NuGet package using the nuspec file
     # Version is derived from the nuspec file
     # -------------------------------------------------------------------------
     - task: NuGetCommand@2
       displayName: 'Pack NuGet Package'
       inputs:
         command: 'pack'
-        packagesToPack: 'FakeXrmEasy.nuspec'
+        packagesToPack: 'DataverseFakes.nuspec'
         packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
         versioningScheme: 'off'
 
@@ -145,7 +145,7 @@ stages:
 
     # -------------------------------------------------------------------------
     # Step 2: Push NuGet Package to Azure Artifacts Feed
-    # Publishes FakeXrmEasy.Community to the specified Azure Artifacts feed
+    # Publishes DataverseFakes.Community to the specified Azure Artifacts feed
     # NOTE: Update 'vstsFeed' to match your Azure Artifacts feed name
     # -------------------------------------------------------------------------
     - task: NuGetCommand@2

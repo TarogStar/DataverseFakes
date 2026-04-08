@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     /// <summary>
     /// Tests for automatic relationship discovery from metadata (v1.0.2)

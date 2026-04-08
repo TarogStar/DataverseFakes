@@ -2,20 +2,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.0.11104.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeXrmEasy", "FakeXrmEasy\FakeXrmEasy.csproj", "{33BA68B6-1085-4110-ACFC-D4EDCF3FBC32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataverseFakes", "DataverseFakes\DataverseFakes.csproj", "{33BA68B6-1085-4110-ACFC-D4EDCF3FBC32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeXrmEasy.Tests", "FakeXrmEasy.Tests\FakeXrmEasy.Tests.csproj", "{783F88EA-F23F-48F4-9089-8B0AD8AE1772}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataverseFakes.Tests", "DataverseFakes.Tests\DataverseFakes.Tests.csproj", "{783F88EA-F23F-48F4-9089-8B0AD8AE1772}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FakeXrmEasy.Shared", "FakeXrmEasy.Shared\FakeXrmEasy.Shared.shproj", "{D659CC6B-7192-4236-AE49-92881F9BE563}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DataverseFakes.Shared", "DataverseFakes.Shared\DataverseFakes.Shared.shproj", "{D659CC6B-7192-4236-AE49-92881F9BE563}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FakeXrmEasy.Tests.Shared", "FakeXrmEasy.Tests.Shared\FakeXrmEasy.Tests.Shared.shproj", "{3D747BA8-0C4C-456B-8C3B-F4320E256E55}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DataverseFakes.Tests.Shared", "DataverseFakes.Tests.Shared\DataverseFakes.Tests.Shared.shproj", "{3D747BA8-0C4C-456B-8C3B-F4320E256E55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FF0FD95B-2DB2-4E05-A1AB-4FBFB515C7F8}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		CLAUDE.md = CLAUDE.md
-		FakeXrmEasy.nuspec = FakeXrmEasy.nuspec
+		DataverseFakes.nuspec = DataverseFakes.nuspec
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 		UPSTREAM_STATUS.md = UPSTREAM_STATUS.md
@@ -43,9 +43,9 @@ Global
 		SolutionGuid = {7A5741B4-A424-42FD-83C3-4CFE218C2C78}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		FakeXrmEasy.Shared\FakeXrmEasy.Shared.projitems*{33ba68b6-1085-4110-acfc-d4edcf3fbc32}*SharedItemsImports = 5
-		FakeXrmEasy.Tests.Shared\FakeXrmEasy.Tests.Shared.projitems*{3d747ba8-0c4c-456b-8c3b-f4320e256e55}*SharedItemsImports = 13
-		FakeXrmEasy.Tests.Shared\FakeXrmEasy.Tests.Shared.projitems*{783f88ea-f23f-48f4-9089-8b0ad8ae1772}*SharedItemsImports = 5
-		FakeXrmEasy.Shared\FakeXrmEasy.Shared.projitems*{d659cc6b-7192-4236-ae49-92881f9be563}*SharedItemsImports = 13
+		DataverseFakes.Shared\DataverseFakes.Shared.projitems*{33ba68b6-1085-4110-acfc-d4edcf3fbc32}*SharedItemsImports = 5
+		DataverseFakes.Tests.Shared\DataverseFakes.Tests.Shared.projitems*{3d747ba8-0c4c-456b-8c3b-f4320e256e55}*SharedItemsImports = 13
+		DataverseFakes.Tests.Shared\DataverseFakes.Tests.Shared.projitems*{783f88ea-f23f-48f4-9089-8b0ad8ae1772}*SharedItemsImports = 5
+		DataverseFakes.Shared\DataverseFakes.Shared.projitems*{d659cc6b-7192-4236-ae49-92881f9be563}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

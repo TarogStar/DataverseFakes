@@ -2,7 +2,7 @@
 using Microsoft.Xrm.Sdk.Query;
 using System.Linq;
 
-namespace FakeXrmEasy.Extensions
+namespace DataverseFakes.Extensions
 {
     /// <summary>
     /// Extension helpers that add convenience operations to <see cref="QueryExpression"/> instances.

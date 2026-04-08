@@ -1,11 +1,11 @@
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.UtcTimeFromLocalTimeRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.UtcTimeFromLocalTimeRequestTests
 {
     /// <summary>
     /// Tests for UtcTimeFromLocalTimeRequestExecutor.

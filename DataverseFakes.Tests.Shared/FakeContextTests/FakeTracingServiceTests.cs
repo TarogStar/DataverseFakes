@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests
+namespace DataverseFakes.Tests.FakeContextTests
 {
     public class FakeTracingServiceTests
     {

@@ -1,10 +1,10 @@
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     /// <summary>
     /// Tests for auto-populate entity images feature (v1.0.2)

@@ -1,5 +1,5 @@
 ﻿using Crm;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.UpsertRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.UpsertRequestTests
 {
 #if !FAKE_XRM_EASY && !FAKE_XRM_EASY_2013 && !FAKE_XRM_EASY_2015
     public class UpsertRequestTests

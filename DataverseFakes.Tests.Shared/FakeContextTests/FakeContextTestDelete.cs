@@ -1,5 +1,5 @@
 ﻿using Crm;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Messages;
@@ -11,9 +11,9 @@ using System.Reflection;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
-    public class FakeXrmEasyTestDelete
+    public class DataverseFakesTestDelete
     {
         [Fact]
         public void When_delete_is_invoked_with_an_empty_logical_name_an_exception_is_thrown()

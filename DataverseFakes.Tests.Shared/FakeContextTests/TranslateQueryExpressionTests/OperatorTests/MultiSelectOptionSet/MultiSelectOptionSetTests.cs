@@ -2,13 +2,13 @@
 using System.Linq;
 using System.ServiceModel;
 using Crm;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Query;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.TranslateQueryExpressionTests.OperatorTests.MultiSelectOptionSet
+namespace DataverseFakes.Tests.FakeContextTests.TranslateQueryExpressionTests.OperatorTests.MultiSelectOptionSet
 {
     public class MultiSelectOptionSetTests
     {

@@ -5,7 +5,7 @@ using System;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.SendEmailRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.SendEmailRequestTests
 {
     public class SendEmailRequestTests
     {

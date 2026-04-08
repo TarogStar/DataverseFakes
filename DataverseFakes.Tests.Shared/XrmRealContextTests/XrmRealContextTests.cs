@@ -8,7 +8,7 @@ using Xunit;
 using Xunit.Sdk;
 #endif
 
-namespace FakeXrmEasy.Tests.XrmRealContextTests
+namespace DataverseFakes.Tests.XrmRealContextTests
 {
     public class XrmRealContextTests
     {

@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using Xunit;
 using System.Linq;
 
-namespace FakeXrmEasy.Tests.Issues
+namespace DataverseFakes.Tests.Issues
 {
-    public class Issue512: FakeXrmEasyTestsBase
+    public class Issue512: DataverseFakesTestsBase
     {
         private readonly Entity _privilegeObjectTypeCode;
         private readonly Entity _privilege;

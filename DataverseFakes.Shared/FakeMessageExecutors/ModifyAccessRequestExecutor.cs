@@ -2,7 +2,7 @@ using System;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles <see cref="ModifyAccessRequest"/> messages.

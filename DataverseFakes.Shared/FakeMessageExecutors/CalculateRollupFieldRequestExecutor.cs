@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Concurrent;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Executor for CalculateRollupFieldRequest

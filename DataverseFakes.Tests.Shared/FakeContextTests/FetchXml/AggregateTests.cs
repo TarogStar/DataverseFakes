@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml
+namespace DataverseFakes.Tests.FakeContextTests.FetchXml
 {
     public class AggregateTests
     {

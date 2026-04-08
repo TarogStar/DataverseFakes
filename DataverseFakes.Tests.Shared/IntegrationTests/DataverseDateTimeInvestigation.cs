@@ -6,7 +6,7 @@ using System;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace FakeXrmEasy.Tests.IntegrationTests
+namespace DataverseFakes.Tests.IntegrationTests
 {
     /// <summary>
     /// Integration tests to investigate DateTime behavior in real Dataverse.
@@ -16,7 +16,7 @@ namespace FakeXrmEasy.Tests.IntegrationTests
     ///
     /// USAGE:
     /// 1. Set your connection string using dotnet user-secrets:
-    ///    dotnet user-secrets set "Dataverse:ConnectionString" "your-connection-string" --project FakeXrmEasy.Tests
+    ///    dotnet user-secrets set "Dataverse:ConnectionString" "your-connection-string" --project DataverseFakes.Tests
     /// 2. Run these specific tests when needed:
     ///    dotnet test --filter "Category=RequiresDataverse"
     ///
@@ -50,7 +50,7 @@ namespace FakeXrmEasy.Tests.IntegrationTests
             {
                 throw new InvalidOperationException(
                     "No Dataverse connection string found. " +
-                    "Set using: dotnet user-secrets set \"Dataverse:ConnectionString\" \"your-connection-string\" --project FakeXrmEasy.Tests");
+                    "Set using: dotnet user-secrets set \"Dataverse:ConnectionString\" \"your-connection-string\" --project DataverseFakes.Tests");
             }
 
             var client = new CrmServiceClient(connectionString);

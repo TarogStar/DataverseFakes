@@ -5,7 +5,7 @@ using System;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.OptionSetCrudTests
+namespace DataverseFakes.Tests.FakeContextTests.OptionSetCrudTests
 {
     /// <summary>
     /// Comprehensive tests for OptionSet CRUD operations (CreateOptionSetRequest,

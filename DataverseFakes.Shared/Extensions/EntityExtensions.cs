@@ -1,4 +1,4 @@
-using FakeXrmEasy.Metadata;
+using DataverseFakes.Metadata;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
@@ -6,11 +6,11 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FakeXrmEasy.Extensions
+namespace DataverseFakes.Extensions
 {
     /// <summary>
     /// Provides extension methods for <see cref="Entity"/> objects to facilitate cloning,
-    /// attribute manipulation, projection, and join operations within the FakeXrmEasy framework.
+    /// attribute manipulation, projection, and join operations within the DataverseFakes framework.
     /// </summary>
     public static class EntityExtensions
     {

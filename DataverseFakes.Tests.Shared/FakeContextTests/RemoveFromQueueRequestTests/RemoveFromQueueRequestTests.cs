@@ -1,6 +1,6 @@
 ﻿#if FAKE_XRM_EASY_2013 || FAKE_XRM_EASY_2015 || FAKE_XRM_EASY_2016 || FAKE_XRM_EASY_365 || FAKE_XRM_EASY_9
 
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.RemoveFromQueueRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.RemoveFromQueueRequestTests
 {
     public class RemoveFromQueueRequestTests
     {

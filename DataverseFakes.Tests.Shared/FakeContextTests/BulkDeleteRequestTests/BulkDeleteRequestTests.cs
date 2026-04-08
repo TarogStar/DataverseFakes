@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.ServiceModel;
 using Crm;
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
@@ -10,7 +10,7 @@ using Microsoft.Xrm.Sdk.Query;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.BulkDeleteRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.BulkDeleteRequestTests
 {
     public class BulkDeleteRequestTests
     {

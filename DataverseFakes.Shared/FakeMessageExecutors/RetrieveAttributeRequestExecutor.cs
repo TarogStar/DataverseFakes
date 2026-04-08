@@ -4,7 +4,7 @@ using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.Linq;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles <see cref="RetrieveAttributeRequest"/> messages.

@@ -4,7 +4,7 @@ using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Linq;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles DisassociateRequest messages for removing relationships between CRM entities.

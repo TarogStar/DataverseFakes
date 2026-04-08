@@ -1,9 +1,9 @@
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests
+namespace DataverseFakes.Tests.FakeContextTests
 {
     /// <summary>
     /// Tests for service provider exception messages.

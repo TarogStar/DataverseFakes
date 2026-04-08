@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Implements the fake message executor for <see cref="InitializeFromRequest"/>.

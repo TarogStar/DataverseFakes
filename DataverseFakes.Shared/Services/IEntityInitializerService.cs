@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.Services
+namespace DataverseFakes.Services
 {
     /// <summary>
     /// Provides hooks to populate default attribute values before an entity is stored.

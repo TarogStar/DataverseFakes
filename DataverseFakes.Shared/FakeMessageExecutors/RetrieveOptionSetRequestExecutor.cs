@@ -2,7 +2,7 @@
 using Microsoft.Xrm.Sdk.Messages;
 using System;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles <see cref="RetrieveOptionSetRequest"/> messages.

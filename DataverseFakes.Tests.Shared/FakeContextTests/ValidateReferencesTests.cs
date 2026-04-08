@@ -1,6 +1,6 @@
 ﻿using Crm;
 using FakeItEasy;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
@@ -12,7 +12,7 @@ using System.ServiceModel;
 using System.Text;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests
+namespace DataverseFakes.Tests.FakeContextTests
 {
     public class ValidateReferencesTests
     {

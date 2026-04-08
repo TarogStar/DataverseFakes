@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FakeXrmEasy.Services
+namespace DataverseFakes.Services
 {
     /// <summary>
     /// Emulates server-side defaults for invoice line items, including pricing and totals.

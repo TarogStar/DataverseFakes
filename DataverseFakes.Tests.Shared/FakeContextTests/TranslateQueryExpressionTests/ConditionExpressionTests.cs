@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.TranslateQueryExpressionTests
+namespace DataverseFakes.Tests.FakeContextTests.TranslateQueryExpressionTests
 {
     public class ConditionExpressionTests
     {

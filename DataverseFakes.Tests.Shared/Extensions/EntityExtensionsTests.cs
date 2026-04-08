@@ -1,11 +1,11 @@
-﻿using FakeXrmEasy.Extensions;
+﻿using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Extensions
+namespace DataverseFakes.Tests.Extensions
 {
     public class EntityExtensionsTests
     {

@@ -1,5 +1,5 @@
 using Crm;
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
@@ -11,7 +11,7 @@ using System.Threading;
 using System.Xml.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml
+namespace DataverseFakes.Tests.FakeContextTests.FetchXml
 {
     /// <summary>
     /// Tests for GitHub issue #439 - DateTime culture formatting in ExecuteFetchRequestExecutor

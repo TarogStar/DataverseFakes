@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**FakeXrmEasy.Community** is a modern, open-source testing framework for Dynamics 365 / Power Platform that enables unit testing of plugins, code activities, and applications by mocking the `IOrganizationService` with an in-memory context.
+**DataverseFakes.Community** is a modern, open-source testing framework for Dynamics 365 / Power Platform that enables unit testing of plugins, code activities, and applications by mocking the `IOrganizationService` with an in-memory context.
 
 This is the community edition v1.0+ that focuses exclusively on **Dynamics 365 v9.x and later** (Power Platform / Common Data Service / Dataverse).
 
@@ -14,20 +14,20 @@ This is the community edition v1.0+ that focuses exclusively on **Dynamics 365 v
 
 The solution uses **Shared Projects** to organize code efficiently:
 
-- **FakeXrmEasy**: Main library project (targets .NET Framework 4.6.2)
-  - References FakeXrmEasy.Shared for all implementation code
+- **DataverseFakes**: Main library project (targets .NET Framework 4.6.2)
+  - References DataverseFakes.Shared for all implementation code
   - Links to D365 v9.x SDK assemblies
-- **FakeXrmEasy.Shared**: Contains all core implementation code
-- **FakeXrmEasy.Tests**: Test project
-  - References FakeXrmEasy.Tests.Shared for all test code
-- **FakeXrmEasy.Tests.Shared**: Contains all test code
+- **DataverseFakes.Shared**: Contains all core implementation code
+- **DataverseFakes.Tests**: Test project
+  - References DataverseFakes.Tests.Shared for all test code
+- **DataverseFakes.Tests.Shared**: Contains all test code
 
 This structure eliminates code duplication while maintaining clear separation of concerns.
 
 ### Core Components
 
 #### XrmFakedContext
-The central class that simulates the CRM context (`FakeXrmEasy.Shared\XrmFakedContext*.cs`):
+The central class that simulates the CRM context (`DataverseFakes.Shared\XrmFakedContext*.cs`):
 - **XrmFakedContext.cs**: Main context class with in-memory data storage (`Data` dictionary)
 - **XrmFakedContext.Crud.cs**: CRUD operations (Create, Retrieve, Update, Delete)
 - **XrmFakedContext.Queries.cs**: Query translation (QueryExpression, FetchXML, LINQ)
@@ -38,13 +38,13 @@ The central class that simulates the CRM context (`FakeXrmEasy.Shared\XrmFakedCo
 - **XrmFakedContext.Pipeline.cs**: Plugin pipeline simulation
 
 #### FakeMessageExecutors
-Located in `FakeXrmEasy.Shared\FakeMessageExecutors\`, these handle specific CRM request types:
+Located in `DataverseFakes.Shared\FakeMessageExecutors\`, these handle specific CRM request types:
 - Each executor implements `IFakeMessageExecutor`
 - Examples: CreateRequestExecutor, UpdateRequestExecutor, RetrieveMultipleRequestExecutor, AssociateRequestExecutor, ExecuteMultipleRequestExecutor
 - Can be extended with custom executors using `context.AddFakeMessageExecutor()`
 
 #### Entity Initializer Services
-Located in `FakeXrmEasy.Shared\Services\EntityInitializer\`, these initialize entities with default values when using `InitializeFromRequest`:
+Located in `DataverseFakes.Shared\Services\EntityInitializer\`, these initialize entities with default values when using `InitializeFromRequest`:
 - DefaultEntityInitializerService
 - InvoiceInitializerService
 - InvoiceDetailInitializerService
@@ -75,7 +75,7 @@ build.bat pack       # Create NuGet package
 
 ### Running Tests
 
-Tests use **xUnit2** and are located in `FakeXrmEasy.Tests.Shared\FakeContextTests\`.
+Tests use **xUnit2** and are located in `DataverseFakes.Tests.Shared\FakeContextTests\`.
 
 **Run all tests**:
 ```bash
@@ -84,7 +84,7 @@ build.bat test
 
 **Run tests directly with dotnet**:
 ```bash
-dotnet test FakeXrmEasy.Tests\FakeXrmEasy.Tests.csproj --configuration Release
+dotnet test DataverseFakes.Tests\DataverseFakes.Tests.csproj --configuration Release
 ```
 
 **Run a specific test class** (use Visual Studio Test Explorer or specify the filter):
@@ -161,23 +161,23 @@ var collection = service.RetrieveMultiple(new FetchExpression(fetchXml));
 
 ### Adding New Features
 
-1. Add implementation to the appropriate file in `FakeXrmEasy.Shared\`
-2. Add tests to `FakeXrmEasy.Tests.Shared\FakeContextTests\`
+1. Add implementation to the appropriate file in `DataverseFakes.Shared\`
+2. Add tests to `DataverseFakes.Tests.Shared\FakeContextTests\`
 3. Run `build.bat test` to ensure all tests pass
 4. Update documentation in README.md if adding public APIs
 
 ### Adding New Message Executors
 
-1. Create a new class in `FakeXrmEasy.Shared\FakeMessageExecutors\`
+1. Create a new class in `DataverseFakes.Shared\FakeMessageExecutors\`
 2. Implement `IFakeMessageExecutor`
 3. The executor will be automatically discovered and registered
-4. Add comprehensive tests in `FakeXrmEasy.Tests.Shared\`
+4. Add comprehensive tests in `DataverseFakes.Tests.Shared\`
 
 ### Code Organization
 
 - Keep partial class files focused (e.g., XrmFakedContext.Plugins.cs only contains plugin-related methods)
-- Place extension methods in appropriate files under `FakeXrmEasy.Shared\Extensions\`
-- Group related tests in subdirectories under `FakeXrmEasy.Tests.Shared\FakeContextTests\`
+- Place extension methods in appropriate files under `DataverseFakes.Shared\Extensions\`
+- Group related tests in subdirectories under `DataverseFakes.Tests.Shared\FakeContextTests\`
 
 ## NuGet Package
 
@@ -190,7 +190,7 @@ build.bat pack
 The package will be created in the `nuget\` directory.
 
 **Package details**:
-- ID: FakeXrmEasy.Community
+- ID: DataverseFakes.Community
 - Version: 1.0.1
 - Target Framework: .NET Framework 4.6.2
 - Dependencies: D365 v9.x SDK assemblies, FakeItEasy 6.0.0

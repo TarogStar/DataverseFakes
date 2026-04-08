@@ -1,5 +1,5 @@
 using FakeItEasy;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Partial class containing plugin execution functionality for the faked CRM context.

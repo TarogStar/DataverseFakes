@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Executor for UpdateMultiple requests - optimized bulk update operation

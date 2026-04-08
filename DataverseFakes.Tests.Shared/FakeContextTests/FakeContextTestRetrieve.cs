@@ -8,9 +8,9 @@ using System.Reflection;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
-    public class FakeXrmEasyTestRetrieve
+    public class DataverseFakesTestRetrieve
     {
         [Fact]
         public void When_retrieve_is_invoked_with_an_empty_logical_name_an_exception_is_thrown()

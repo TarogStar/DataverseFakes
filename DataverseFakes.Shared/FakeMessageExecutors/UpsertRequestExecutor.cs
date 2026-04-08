@@ -1,4 +1,4 @@
-﻿using FakeXrmEasy.Extensions;
+﻿using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Concurrent;
 
 #if !FAKE_XRM_EASY && !FAKE_XRM_EASY_2013 && !FAKE_XRM_EASY_2015
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Implements the fake message executor for <see cref="UpsertRequest"/>.

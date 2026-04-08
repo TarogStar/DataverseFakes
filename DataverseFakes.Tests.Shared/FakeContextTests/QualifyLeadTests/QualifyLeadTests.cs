@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.QualifyLeadTests
+namespace DataverseFakes.Tests.FakeContextTests.QualifyLeadTests
 {
     public class QualifyLeadTests
     {

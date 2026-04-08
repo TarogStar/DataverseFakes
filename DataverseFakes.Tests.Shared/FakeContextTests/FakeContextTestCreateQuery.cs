@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     public class FakeContextTestCreateQuery
     {

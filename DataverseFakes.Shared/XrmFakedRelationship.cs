@@ -1,4 +1,4 @@
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Represents a relationship between two entities in the faked CRM context.

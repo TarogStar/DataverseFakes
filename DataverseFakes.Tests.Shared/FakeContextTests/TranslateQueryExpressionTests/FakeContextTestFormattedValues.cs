@@ -1,5 +1,5 @@
 ﻿using Crm;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.TranslateQueryExpressionTests
+namespace DataverseFakes.Tests.FakeContextTests.TranslateQueryExpressionTests
 {
     public class FormattedValuesTests
     {

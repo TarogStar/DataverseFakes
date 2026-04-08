@@ -6,7 +6,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.ConcurrencyTests
+namespace DataverseFakes.Tests.FakeContextTests.ConcurrencyTests
 {
     /// <summary>
     /// Tests for RowVersion / Optimistic Concurrency feature.

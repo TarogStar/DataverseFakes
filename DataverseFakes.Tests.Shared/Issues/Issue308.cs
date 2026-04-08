@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using FakeItEasy;
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Issues
+namespace DataverseFakes.Tests.Issues
 {
     public class Issue308
     {

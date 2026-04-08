@@ -1,6 +1,6 @@
-# FakeXrmEasy Modernization Summary
+# DataverseFakes Modernization Summary
 
-This document describes the modernization changes made to transform FakeXrmEasy v1.x into a modern, truly open-source testing framework for Dynamics 365.
+This document describes the modernization changes made to transform DataverseFakes v1.x into a modern, truly open-source testing framework for Dynamics 365.
 
 ## Overview
 
@@ -11,23 +11,23 @@ The project has been streamlined to focus exclusively on modern Dynamics 365 (v9
 ### 1. Removed Legacy Version Support
 
 **Deleted Projects:**
-- FakeXrmEasy (CRM 2011)
-- FakeXrmEasy.2013
-- FakeXrmEasy.2015
-- FakeXrmEasy.2016
-- FakeXrmEasy.365
+- DataverseFakes (CRM 2011)
+- DataverseFakes.2013
+- DataverseFakes.2015
+- DataverseFakes.2016
+- DataverseFakes.365
 - All corresponding test projects
 
 **Kept Projects:**
-- FakeXrmEasy (renamed from FakeXrmEasy.9)
-- FakeXrmEasy.Tests (renamed from FakeXrmEasy.Tests.9)
-- FakeXrmEasy.Shared
-- FakeXrmEasy.Tests.Shared
+- DataverseFakes (renamed from DataverseFakes.9)
+- DataverseFakes.Tests (renamed from DataverseFakes.Tests.9)
+- DataverseFakes.Shared
+- DataverseFakes.Tests.Shared
 
 ### 2. Removed Obsolete Warnings
 
 **Changed Files:**
-- `FakeXrmEasy.Shared\XrmFakedContext.cs`
+- `DataverseFakes.Shared\XrmFakedContext.cs`
   - Removed `[Obsolete]` attribute from constructor
   - Removed `[Obsolete]` attribute from Initialize method
   - Removed all references to v2.x/v3.x migration
@@ -52,11 +52,11 @@ The project has been streamlined to focus exclusively on modern Dynamics 365 (v9
 ### 4. New Solution File
 
 **Created:**
-- `FakeXrmEasy.sln` - Simplified solution with only 4 projects:
-  1. FakeXrmEasy (main library)
-  2. FakeXrmEasy.Tests
-  3. FakeXrmEasy.Shared
-  4. FakeXrmEasy.Tests.Shared
+- `DataverseFakes.sln` - Simplified solution with only 4 projects:
+  1. DataverseFakes (main library)
+  2. DataverseFakes.Tests
+  3. DataverseFakes.Shared
+  4. DataverseFakes.Tests.Shared
 
 **Removed:**
 - Old complex solution with 13+ projects
@@ -79,7 +79,7 @@ The project has been streamlined to focus exclusively on modern Dynamics 365 (v9
 - Added development guidelines
 
 **Created:**
-- `FakeXrmEasy.nuspec` - Single NuGet package specification
+- `DataverseFakes.nuspec` - Single NuGet package specification
 - `MODERNIZATION.md` - This document
 
 ### 6. Cleaned Up Repository
@@ -108,14 +108,14 @@ The modernized version **only supports**:
 ## Version Number
 
 The community edition is designated as **v1.0.0** to indicate:
-- First release of FakeXrmEasy.Community
+- First release of DataverseFakes.Community
 - Major breaking change from original (removed legacy version support)
 - Clean slate for truly open-source development
 - Focus on modern Dynamics 365
 
 ## Project Vision
 
-This modernization transforms FakeXrmEasy into:
+This modernization transforms DataverseFakes into:
 - **Truly Open Source**: MIT licensed, community-driven
 - **Modern**: Focused on current Dynamics 365 / Power Platform
 - **Simple**: Easy to build, test, and contribute
@@ -125,7 +125,7 @@ This modernization transforms FakeXrmEasy into:
 ## Migration Path
 
 For users still on legacy CRM versions (2011-2016):
-- Use the original FakeXrmEasy v1.x branch (if maintained)
+- Use the original DataverseFakes v1.x branch (if maintained)
 - Consider upgrading to Dynamics 365 v9.x+
 - The v1.x codebase remains available in git history
 
@@ -144,7 +144,7 @@ For users still on legacy CRM versions (2011-2016):
 **MAJOR IMPROVEMENT**: Converted from old-style .NET Framework projects to modern SDK-style projects.
 
 **What Changed:**
-- Converted both FakeXrmEasy.csproj and FakeXrmEasy.Tests.csproj to SDK-style
+- Converted both DataverseFakes.csproj and DataverseFakes.Tests.csproj to SDK-style
 - Replaced packages.config with PackageReference
 - Removed app.config (binding redirects now auto-generated)
 - Project files reduced from 180+ lines to ~95 lines
@@ -202,7 +202,7 @@ Suggested future improvements:
 Added support for testing rollup field calculations:
 
 **Changes:**
-- New `CalculateRollupFieldRequestExecutor` in `FakeXrmEasy.Shared\FakeMessageExecutors\`
+- New `CalculateRollupFieldRequestExecutor` in `DataverseFakes.Shared\FakeMessageExecutors\`
 - Comprehensive test coverage in `FakeContextTestCalculateRollupField.cs`
 - Support for pre-populating rollup values in tests
 - Detailed documentation on testing approaches
@@ -215,4 +215,4 @@ See the executor documentation for details on extending with actual calculation 
 ---
 
 **Date**: October 2025
-**Version**: 1.0.1 (FakeXrmEasy.Community)
+**Version**: 1.0.1 (DataverseFakes.Community)

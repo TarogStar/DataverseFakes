@@ -4,7 +4,7 @@ using Microsoft.Crm.Sdk.Messages;
 using System.Reflection;
 using System.Diagnostics;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor for RetrieveVersionRequest

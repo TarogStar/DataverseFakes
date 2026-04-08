@@ -204,4 +204,10 @@ test/*
 
 # Claude Code
 .claude/
-nupkg/FakeXrmEasy.Community.1.1.2.nupkg
+
+# NuGet package output
+nupkg/
+nupkg_test/
+
+# Old config files
+*.config.old

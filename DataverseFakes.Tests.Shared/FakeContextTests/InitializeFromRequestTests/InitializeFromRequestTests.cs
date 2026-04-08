@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.InitializeFromRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.InitializeFromRequestTests
 {
     public class InitializeFromRequestTests
     {

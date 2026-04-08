@@ -12,7 +12,7 @@ using Microsoft.Crm.Sdk.Messages;
 using Crm;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.RemoveMembersTeamRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.RemoveMembersTeamRequestTests
 {
     public class Tests
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     public class EntityImagesPlugin : IPlugin
     {

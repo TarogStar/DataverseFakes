@@ -1,6 +1,6 @@
 ﻿using Crm;
 using FakeItEasy;
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     public class FakeContextTestPlugins
     {

@@ -1,4 +1,4 @@
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.RetrieveMetadataChangesRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.RetrieveMetadataChangesRequestTests
 {
     /// <summary>
     /// Tests for RetrieveMetadataChangesRequestExecutor.

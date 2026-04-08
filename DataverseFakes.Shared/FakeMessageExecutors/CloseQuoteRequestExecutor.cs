@@ -2,7 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using System;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor for CloseQuoteRequest

@@ -20,8 +20,8 @@ jobs:
           # the below token should have repo scope and must be manually added by you in the repository's secret
           PERSONAL_ACCESS_TOKEN : ${{ secrets.CLA_TOKEN }}
         with:
-          path-to-signatures: 'FakeXrmEasy/cla/signatures/version1/cla.json'
-          path-to-document: 'https://github.com/DynamicsValue/licence-agreements/blob/main/FakeXrmEasy/CLA.md' # e.g. a CLA or a DCO document
+          path-to-signatures: 'DataverseFakes/cla/signatures/version1/cla.json'
+          path-to-document: 'https://github.com/DynamicsValue/licence-agreements/blob/main/DataverseFakes/CLA.md' # e.g. a CLA or a DCO document
           # branch should not be protected
           branch: 'main'
           allowlist: dependabot

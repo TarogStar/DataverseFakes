@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
-    public class FakeXrmEasyTestsBase
+    public class DataverseFakesTestsBase
     {
         protected readonly IOrganizationService _service;
         protected readonly XrmFakedContext _context;
 
-        public FakeXrmEasyTestsBase()
+        public DataverseFakesTestsBase()
         {
             _context = new XrmFakedContext();
             _service = _context.GetOrganizationService();

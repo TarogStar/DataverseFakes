@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xrm.Sdk;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     /// <summary>
     /// Tests for thread-safe parallel CRUD operations on the XrmFakedContext.

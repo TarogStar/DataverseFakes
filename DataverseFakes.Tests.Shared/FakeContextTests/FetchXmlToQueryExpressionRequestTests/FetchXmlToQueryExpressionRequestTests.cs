@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.FetchXmlToQueryExpressionRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.FetchXmlToQueryExpressionRequestTests
 {
     public class FetchXmlToQueryExpressionRequestTests
     {

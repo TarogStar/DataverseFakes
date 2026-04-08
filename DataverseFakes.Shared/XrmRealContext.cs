@@ -20,7 +20,7 @@ using Microsoft.Xrm.Client.Services;
 
 #endif
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Reuse unit test syntax to test against a real CRM organisation.

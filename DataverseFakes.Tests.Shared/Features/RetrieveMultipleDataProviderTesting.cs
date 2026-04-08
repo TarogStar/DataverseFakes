@@ -1,6 +1,6 @@
 #if FAKE_XRM_EASY_9
-using FakeXrmEasy.Extensions;
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Extensions;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Query;
@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Features
+namespace DataverseFakes.Tests.Features
 {
     public class RetrieveMultipleDataProviderTesting
     {

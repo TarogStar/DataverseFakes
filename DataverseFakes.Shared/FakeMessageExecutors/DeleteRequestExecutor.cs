@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Handles the execution of <see cref="DeleteRequest"/> messages in the faked CRM context.

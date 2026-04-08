@@ -1,4 +1,4 @@
-﻿namespace FakeXrmEasy
+﻿namespace DataverseFakes
 {
     /// <summary>
     /// Defines the stages in the Dynamics 365 plugin pipeline where a plugin can be registered to execute.

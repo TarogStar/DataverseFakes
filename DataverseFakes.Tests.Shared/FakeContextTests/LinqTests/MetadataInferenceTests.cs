@@ -1,6 +1,6 @@
 ﻿using Crm;
 using FakeItEasy;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Query;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Reflection;  //TypedEntities generated code for testing
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.LinqTests
+namespace DataverseFakes.Tests.FakeContextTests.LinqTests
 {
     public class MetadataInferenceTests
     {

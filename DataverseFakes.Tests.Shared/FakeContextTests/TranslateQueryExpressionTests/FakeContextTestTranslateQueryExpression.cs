@@ -8,7 +8,7 @@ using System.Linq;
 using System.ServiceModel;  //TypedEntities generated code for testing
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     public class FakeContextTestTranslateQueryExpression
     {

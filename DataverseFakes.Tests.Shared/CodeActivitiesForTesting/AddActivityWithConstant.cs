@@ -2,7 +2,7 @@
 using Microsoft.Xrm.Sdk.Workflow;
 using System.Activities;
 
-namespace FakeXrmEasy.Tests.CodeActivitiesForTesting
+namespace DataverseFakes.Tests.CodeActivitiesForTesting
 {
     /// <summary>
     /// A simple code activity that adds 2 parameters and a constant

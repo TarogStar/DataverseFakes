@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using FakeItEasy;
-using FakeXrmEasy.Services;
+using DataverseFakes.Services;
 
 
-namespace FakeXrmEasy.Tests.Services.EntityInitializer
+namespace DataverseFakes.Tests.Services.EntityInitializer
 {
     public class InvoiceDetailInitializerServiceTests
     {

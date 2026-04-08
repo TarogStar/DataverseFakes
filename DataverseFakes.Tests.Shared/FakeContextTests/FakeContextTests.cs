@@ -2,19 +2,19 @@
 
 using Xunit;
 using FakeItEasy;
-using FakeXrmEasy;
+using DataverseFakes;
 
 using System.Collections.Generic;
 using Microsoft.Xrm.Sdk;
 using System.Linq;
 using System.Threading;
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Tests.PluginsForTesting;
 using Crm;
 using System.Reflection;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
-    public class FakeXrmEasyTests
+    public class DataverseFakesTests
     {
         [Fact]
         public void When_a_fake_context_is_created_the_data_is_initialized()

@@ -1,4 +1,4 @@
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -8,7 +8,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Handles the execution of <see cref="RetrieveRequest"/> messages in the faked CRM context.

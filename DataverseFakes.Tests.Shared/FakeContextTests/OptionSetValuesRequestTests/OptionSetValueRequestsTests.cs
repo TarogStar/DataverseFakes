@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.OptionSetValuesRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.OptionSetValuesRequestTests
 {
     public class OptionSetValueRequestsTests
     {

@@ -1,6 +1,6 @@
 # IPluginExecutionContext4 Support
 
-FakeXrmEasy now fully supports `IPluginExecutionContext4` and all its predecessor interfaces (`IPluginExecutionContext`, `IPluginExecutionContext2`, `IPluginExecutionContext3`).
+DataverseFakes now fully supports `IPluginExecutionContext4` and all its predecessor interfaces (`IPluginExecutionContext`, `IPluginExecutionContext2`, `IPluginExecutionContext3`).
 
 ## What's New
 
@@ -150,4 +150,4 @@ IsTransactionIntegrationMessage = false
 
 ## Complete Example
 
-See [PluginExecutionContext4Tests.cs](FakeXrmEasy.Tests.Shared/FakeContextTests/PluginExecutionContext4Tests.cs) for comprehensive test examples.
+See [PluginExecutionContext4Tests.cs](DataverseFakes.Tests.Shared/FakeContextTests/PluginExecutionContext4Tests.cs) for comprehensive test examples.

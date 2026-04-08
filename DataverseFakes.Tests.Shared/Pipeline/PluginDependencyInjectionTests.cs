@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using Crm;
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Pipeline
+namespace DataverseFakes.Tests.Pipeline
 {
     /// <summary>
     /// Tests for plugin dependency injection support in RegisterPluginStep.

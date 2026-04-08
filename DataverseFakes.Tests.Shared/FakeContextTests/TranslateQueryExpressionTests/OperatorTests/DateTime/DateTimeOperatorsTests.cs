@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.TranslateQueryExpressionTests.OperatorTests.DateTimes
+namespace DataverseFakes.Tests.FakeContextTests.TranslateQueryExpressionTests.OperatorTests.DateTimes
 {
     public class DateTimeOperatorsTests
     {

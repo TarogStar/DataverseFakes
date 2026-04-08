@@ -3,9 +3,9 @@ using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.Linq;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor for InsertOptionValueRequest

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Executor for CreateMultiple requests - optimized bulk create operation
@@ -89,7 +89,7 @@ namespace FakeXrmEasy.FakeMessageExecutors
             {
                 // In a real transactional scenario, this would rollback
                 // For now, we'll just throw the exception
-                // Note: FakeXrmEasy doesn't support full transaction rollback by default
+                // Note: DataverseFakes doesn't support full transaction rollback by default
                 throw new FaultException<OrganizationServiceFault>(
                     new OrganizationServiceFault { Message = $"CreateMultiple operation failed: {ex.Message}" },
                     ex.Message);

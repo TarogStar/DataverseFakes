@@ -1,7 +1,7 @@
 using Microsoft.Xrm.Sdk;
 using System.ServiceModel;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Provides utility methods for simulating organization service faults in tests.

@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Linq;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles AssociateRequest messages for creating relationships between CRM entities.

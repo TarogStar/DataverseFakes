@@ -2,11 +2,11 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using System;
 using System.Linq;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.RetrieveAttributeRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.RetrieveAttributeRequestTests
 {
     public class RetrieveAttributeTests
     {

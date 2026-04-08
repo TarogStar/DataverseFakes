@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk;
 using System;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor for WinQuoteRequest.

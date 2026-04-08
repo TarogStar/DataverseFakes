@@ -2,7 +2,7 @@
 using Microsoft.Xrm.Sdk.Workflow;
 using System.Activities;
 
-namespace FakeXrmEasy.Tests.CodeActivitiesForTesting
+namespace DataverseFakes.Tests.CodeActivitiesForTesting
 {
     public sealed partial class CheckContextPropertyActivity : CodeActivity
     {

@@ -1,4 +1,4 @@
-namespace FakeXrmEasy.Models
+namespace DataverseFakes.Models
 {
     /// <summary>
     /// Marker class to indicate a column-to-column comparison in FetchXML conditions.

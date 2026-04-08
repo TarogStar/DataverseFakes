@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Crm.Sdk.Messages;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles <see cref="LoseOpportunityRequest"/> messages.

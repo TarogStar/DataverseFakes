@@ -7,7 +7,7 @@ using System.Reflection;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Issues
+namespace DataverseFakes.Tests.Issues
 {
     /// <summary>
     /// GitHub Issue #258: GUID comparison type validation
@@ -22,7 +22,7 @@ namespace FakeXrmEasy.Tests.Issues
     /// - EntityReference-to-GUID (comparing GUID field with EntityReference value) throws an exception
     ///   because this is a true type mismatch - a GUID field expects a GUID, not an EntityReference
     /// </summary>
-    public class Issue258 : FakeXrmEasyTestsBase
+    public class Issue258 : DataverseFakesTestsBase
     {
         private readonly Guid _productId;
         private readonly Guid _salesOrderDetailId;

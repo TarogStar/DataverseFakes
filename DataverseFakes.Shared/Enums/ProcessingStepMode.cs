@@ -1,4 +1,4 @@
-﻿namespace FakeXrmEasy
+﻿namespace DataverseFakes
 {
     /// <summary>
     /// Defines the execution mode for a plugin step in the Dynamics 365 plugin pipeline.

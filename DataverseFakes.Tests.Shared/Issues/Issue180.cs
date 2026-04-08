@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     public class Issue180
     {

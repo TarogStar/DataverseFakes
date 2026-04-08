@@ -2,12 +2,12 @@
 using Microsoft.Xrm.Sdk.Metadata;
 using System.Collections.Generic;
 using Xunit;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk.Messages;
 using System.Linq;
 
 
-namespace FakeXrmEasy.Tests.FakeContextTests.InsertStatusValueRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.InsertStatusValueRequestTests
 {
     public class InsertStatusValueRequestTests
     {

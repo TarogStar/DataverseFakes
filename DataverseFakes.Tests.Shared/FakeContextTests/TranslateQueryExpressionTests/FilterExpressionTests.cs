@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.TranslateQueryExpressionTests
+namespace DataverseFakes.Tests.FakeContextTests.TranslateQueryExpressionTests
 {
     public class FilterExpressionTests
     {

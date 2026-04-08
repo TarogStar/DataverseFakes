@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     /// <summary>
     /// This plugins writes information about the current pipeline execution to the <see cref="ITracingService"/>.

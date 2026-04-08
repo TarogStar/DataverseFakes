@@ -1,7 +1,7 @@
 ﻿using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.Permissions
+namespace DataverseFakes.Permissions
 {
     /// <summary>
     /// Contract that abstracts access right CRUD operations used by the fake security model.

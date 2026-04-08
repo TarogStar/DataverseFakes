@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FakeXrmEasy.Services
+namespace DataverseFakes.Services
 {
     /// <summary>
     /// Ensures invoice entities mimic Dynamics 365 auto-numbering behavior.
@@ -20,7 +20,7 @@ namespace FakeXrmEasy.Services
         {
             if (string.IsNullOrEmpty(e.GetAttributeValue<string>("invoicenumber")))
             {
-                //first FakeXrmEasy auto-numbering emulation
+                //first DataverseFakes auto-numbering emulation
                 e["invoicenumber"] = "INV-" + DateTime.Now.Ticks;
             }
 

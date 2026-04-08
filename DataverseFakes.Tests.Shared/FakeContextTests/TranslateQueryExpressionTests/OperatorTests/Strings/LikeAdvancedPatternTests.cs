@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.TranslateQueryExpressionTests.OperatorTests.Strings
+namespace DataverseFakes.Tests.FakeContextTests.TranslateQueryExpressionTests.OperatorTests.Strings
 {
     /// <summary>
     /// Tests for advanced LIKE pattern matching including:

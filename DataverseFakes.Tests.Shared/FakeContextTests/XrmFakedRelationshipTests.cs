@@ -1,10 +1,10 @@
-﻿using FakeXrmEasy.Extensions;
+﻿using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests
+namespace DataverseFakes.Tests.FakeContextTests
 {
     public class XrmFakedRelationshipTests
     {

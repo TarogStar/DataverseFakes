@@ -6,7 +6,7 @@
     <SharedGUID>d659cc6b-7192-4236-ae49-92881f9be563</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>FakeXrmEasy</Import_RootNamespace>
+    <Import_RootNamespace>DataverseFakes</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Enums\**\*.cs" />

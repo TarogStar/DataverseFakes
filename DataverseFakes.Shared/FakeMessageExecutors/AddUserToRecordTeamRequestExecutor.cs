@@ -5,7 +5,7 @@ using Microsoft.Xrm.Sdk;
 using System.ServiceModel;
 using Microsoft.Crm.Sdk.Messages;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor for AddUserToRecordTeamRequest

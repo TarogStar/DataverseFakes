@@ -1,5 +1,5 @@
 ﻿using Crm;
-using FakeXrmEasy.Tests.CodeActivitiesForTesting;
+using DataverseFakes.Tests.CodeActivitiesForTesting;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     public class FakeContextTestCodeActivities
     {

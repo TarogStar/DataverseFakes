@@ -1,4 +1,4 @@
-﻿using FakeXrmEasy.FakeMessageExecutors;
+﻿using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.ReviseQuoteRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.ReviseQuoteRequestTests
 {
     public class ReviseQuoteRequestTests
     {

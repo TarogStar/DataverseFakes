@@ -1,7 +1,7 @@
 using Microsoft.Xrm.Sdk.Query;
 using System;
 
-namespace FakeXrmEasy.Models
+namespace DataverseFakes.Models
 {
     /// <summary>
     /// A condition expression with a decorated type.

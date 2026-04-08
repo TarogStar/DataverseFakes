@@ -4,7 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Handles the execution of <see cref="UpdateRequest"/> messages in the faked CRM context.

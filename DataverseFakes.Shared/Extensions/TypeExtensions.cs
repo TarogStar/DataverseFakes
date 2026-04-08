@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace FakeXrmEasy.Extensions
+namespace DataverseFakes.Extensions
 {
     /// <summary>
     /// Utility extensions that make it easier to reason about CRM-specific CLR types.

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     public class AccountNumberPlugin : IPlugin
     {

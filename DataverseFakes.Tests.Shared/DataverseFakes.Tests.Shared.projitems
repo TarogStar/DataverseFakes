@@ -6,7 +6,7 @@
     <SharedGUID>3d747ba8-0c4c-456b-8c3b-f4320e256e55</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>FakeXrmEasy.Tests</Import_RootNamespace>
+    <Import_RootNamespace>DataverseFakes.Tests</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <!-- Use wildcard to include all .cs files automatically - no need to manually add new test files! -->

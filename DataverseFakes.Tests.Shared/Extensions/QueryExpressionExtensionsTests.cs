@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 
-namespace FakeXrmEasy.Tests.Extensions
+namespace DataverseFakes.Tests.Extensions
 {
     public class QueryExpressionExtensionsTests
     {

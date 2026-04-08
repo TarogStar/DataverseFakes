@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     public abstract partial class BasePlugin : IPlugin
     {

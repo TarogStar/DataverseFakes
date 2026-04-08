@@ -4,7 +4,7 @@ using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Defines the contract for a faked or real CRM context used for testing.

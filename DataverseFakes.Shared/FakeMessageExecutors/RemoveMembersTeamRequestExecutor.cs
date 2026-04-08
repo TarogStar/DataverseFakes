@@ -5,7 +5,7 @@ using System.Linq;
 using System.ServiceModel;
 using Microsoft.Xrm.Sdk.Query;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor for RemoveMembersTeamRequest

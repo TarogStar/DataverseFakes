@@ -2,7 +2,7 @@ using Microsoft.Xrm.Sdk;
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     /// <summary>
     /// Tests for IPluginExecutionContext4 support

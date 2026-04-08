@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Executor for UpsertMultiple requests - optimized bulk upsert (create or update) operation

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FakeXrmEasy.Permissions
+namespace DataverseFakes.Permissions
 {
     /// <summary>
     /// In-memory repository that stores access rights per record for fake security operations.

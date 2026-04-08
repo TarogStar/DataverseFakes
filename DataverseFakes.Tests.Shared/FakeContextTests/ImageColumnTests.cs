@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests
+namespace DataverseFakes.Tests.FakeContextTests
 {
     /// <summary>
     /// Tests that image (byte[]) columns follow real Dataverse behavior:

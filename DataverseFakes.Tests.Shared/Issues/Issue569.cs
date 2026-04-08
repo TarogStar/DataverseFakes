@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Issues
+namespace DataverseFakes.Tests.Issues
 {
     /// <summary>
     /// GitHub Issue #569: Query on associatedentitytypecode should work with both Entity Name and ObjectTypeCode
@@ -15,11 +15,11 @@ namespace FakeXrmEasy.Tests.Issues
     /// - String values (entity names like "salesorder")
     /// - Integer values (ObjectTypeCode like 1088)
     ///
-    /// FakeXrmEasy fails with integer inputs because the query engine calls ToLowerInvariant() on an integer,
+    /// DataverseFakes fails with integer inputs because the query engine calls ToLowerInvariant() on an integer,
     /// producing: "Method 'System.String ToLowerInvariant()' declared on type 'System.String' cannot be called
     /// with instance of type 'System.Int32'"
     /// </summary>
-    public class Issue569 : FakeXrmEasyTestsBase
+    public class Issue569 : DataverseFakesTestsBase
     {
         private readonly Entity _documentTemplateWithSalesOrderTypeCode;
         private readonly Entity _documentTemplateWithOrderTypeCode;
@@ -111,7 +111,7 @@ namespace FakeXrmEasy.Tests.Issues
         /// <summary>
         /// This test verifies that querying with integer value against string-stored attribute also works.
         /// In Dynamics 365, this would work because the system knows to convert ObjectTypeCode to entity name.
-        /// In FakeXrmEasy, without metadata, this is trickier - but the basic case should not throw.
+        /// In DataverseFakes, without metadata, this is trickier - but the basic case should not throw.
         /// </summary>
         [Fact]
         public void Should_not_throw_when_querying_string_attribute_with_integer_value()

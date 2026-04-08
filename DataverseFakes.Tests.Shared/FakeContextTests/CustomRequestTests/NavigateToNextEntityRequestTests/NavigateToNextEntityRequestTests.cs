@@ -1,11 +1,11 @@
 ﻿using Crm;
-using FakeXrmEasy.FakeMessageExecutors.CustomExecutors;
+using DataverseFakes.FakeMessageExecutors.CustomExecutors;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.CustomRequestTests.NavigateToNextEntityRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.CustomRequestTests.NavigateToNextEntityRequestTests
 {
     public class NavigateToNextEntityRequestTests
     {

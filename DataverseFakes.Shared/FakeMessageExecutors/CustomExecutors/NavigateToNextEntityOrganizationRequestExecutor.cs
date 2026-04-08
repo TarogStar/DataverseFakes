@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.FakeMessageExecutors.CustomExecutors
+namespace DataverseFakes.FakeMessageExecutors.CustomExecutors
 {
     /// <summary>
     /// It will navigate to next Entity in Workflow path and add next Stage Id to traversed path.

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Issues
+namespace DataverseFakes.Tests.Issues
 {
     public class ActivityPartyTests
     {

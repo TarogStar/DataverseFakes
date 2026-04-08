@@ -1,4 +1,4 @@
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.AlternateKeyTests
+namespace DataverseFakes.Tests.FakeContextTests.AlternateKeyTests
 {
 #if !FAKE_XRM_EASY && !FAKE_XRM_EASY_2013 && !FAKE_XRM_EASY_2015
     /// <summary>

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.LoseOpportunityTests
+namespace DataverseFakes.Tests.FakeContextTests.LoseOpportunityTests
 {
     public class LoseOpportunityTests
     {

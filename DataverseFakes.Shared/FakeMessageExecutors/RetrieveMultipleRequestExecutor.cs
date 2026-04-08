@@ -1,5 +1,5 @@
-using FakeXrmEasy.Extensions;
-using FakeXrmEasy.Extensions.FetchXml;
+using DataverseFakes.Extensions;
+using DataverseFakes.Extensions.FetchXml;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -9,7 +9,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Handles the execution of <see cref="RetrieveMultipleRequest"/> messages in the faked CRM context.

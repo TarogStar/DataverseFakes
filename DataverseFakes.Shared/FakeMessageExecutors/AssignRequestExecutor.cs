@@ -5,7 +5,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles AssignRequest messages for changing the owner of CRM entities.

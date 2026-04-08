@@ -10,14 +10,14 @@ using System.ServiceModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using FakeXrmEasy.Extensions;
-using FakeXrmEasy.Extensions.FetchXml;
-using FakeXrmEasy.Models;
+using DataverseFakes.Extensions;
+using DataverseFakes.Extensions.FetchXml;
+using DataverseFakes.Models;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Query;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Partial class containing query translation functionality for the XrmFakedContext.

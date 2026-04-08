@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
-    <id>FakeXrmEasy.Community</id>
+    <id>DataverseFakes.Community</id>
     <version>1.1.4</version>
-    <title>FakeXrmEasy.Community - Unit Testing for Dynamics 365</title>
-    <authors>FakeXrmEasy Community Contributors</authors>
-    <owners>FakeXrmEasy Community</owners>
+    <title>DataverseFakes.Community - Unit Testing for Dynamics 365</title>
+    <authors>DataverseFakes Community Contributors</authors>
+    <owners>DataverseFakes Community</owners>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/TarogStar/fake-xrm-easy</projectUrl>
-    <repository type="git" url="https://github.com/TarogStar/fake-xrm-easy.git" />
-    <iconUrl>https://raw.githubusercontent.com/TarogStar/fake-xrm-easy/master/FakeXrmEasyLogo_128x128.png</iconUrl>
+    <projectUrl>https://github.com/TarogStar/DataverseFakes</projectUrl>
+    <repository type="git" url="https://github.com/TarogStar/DataverseFakes.git" />
+    <iconUrl>https://raw.githubusercontent.com/TarogStar/DataverseFakes/master/FakeXrmEasyLogo_128x128.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       A truly open-source testing framework for Dynamics 365 / Power Platform that makes unit testing plugins, workflows, and custom code simple and fast.
@@ -39,13 +39,13 @@
       Version 1.0.1 - CalculateRollupFieldRequest Support
       - Added CalculateRollupFieldRequestExecutor for testing rollup field calculations
 
-      Version 1.0.0 - FakeXrmEasy.Community Initial Release
+      Version 1.0.0 - DataverseFakes.Community Initial Release
       - Truly open-source and community-driven fork
       - Focus exclusively on D365 v9.x and later (Power Platform / Dataverse)
       - Removed support for legacy CRM versions (2011-2016)
     </releaseNotes>
-    <copyright>Copyright © FakeXrmEasy Community</copyright>
-    <tags>Dynamics365 CRM CommonDataService PowerPlatform UnitTesting Mocking Testing Plugins Workflows FakeXrmEasy Dataverse Community OpenSource</tags>
+    <copyright>Copyright © DataverseFakes Community</copyright>
+    <tags>Dynamics365 CRM CommonDataService PowerPlatform UnitTesting Mocking Testing Plugins Workflows DataverseFakes Dataverse Community OpenSource</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.6.2">
         <dependency id="Microsoft.CrmSdk.CoreAssemblies" version="[9.0.2.60,)" />
@@ -56,8 +56,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="FakeXrmEasy\bin\Release\FakeXrmEasy.dll" target="lib\net462" />
-    <file src="FakeXrmEasy\bin\Release\FakeXrmEasy.xml" target="lib\net462" />
+    <file src="DataverseFakes\bin\Release\DataverseFakes.dll" target="lib\net462" />
+    <file src="DataverseFakes\bin\Release\DataverseFakes.xml" target="lib\net462" />
     <file src="LICENSE.md" target="" />
     <file src="README.md" target="" />
   </files>

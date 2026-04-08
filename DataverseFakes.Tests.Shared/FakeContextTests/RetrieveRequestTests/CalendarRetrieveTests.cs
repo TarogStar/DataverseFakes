@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk.Query;
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests
+namespace DataverseFakes.Tests.FakeContextTests
 {
     public class CalendarRetrieveTests
     {

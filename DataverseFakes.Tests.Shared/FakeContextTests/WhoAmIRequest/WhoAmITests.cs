@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.WhoAmIRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.WhoAmIRequestTests
 {
     public class WhoAmITests
     {

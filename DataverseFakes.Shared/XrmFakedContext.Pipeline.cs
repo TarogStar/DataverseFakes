@@ -5,7 +5,7 @@ using System.Reflection;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Partial class containing plugin pipeline simulation functionality for the faked CRM context.

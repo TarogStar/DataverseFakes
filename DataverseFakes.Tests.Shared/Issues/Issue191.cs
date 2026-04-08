@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk.Query;
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Issues
+namespace DataverseFakes.Tests.Issues
 {
     public class Issue191
     {

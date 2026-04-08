@@ -9,7 +9,7 @@ using System.Reflection;
 using Xunit;
 
 
-namespace FakeXrmEasy.Tests.Issues
+namespace DataverseFakes.Tests.Issues
 {
     public class Issue253
     {

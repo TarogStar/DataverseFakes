@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk.Query;
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     /// <summary>
     /// Tests to verify that preImage does NOT get target values merged into it.

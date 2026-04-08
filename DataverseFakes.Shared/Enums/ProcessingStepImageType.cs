@@ -1,4 +1,4 @@
-﻿namespace FakeXrmEasy
+﻿namespace DataverseFakes
 {
     /// <summary>
     /// Defines the types of entity images that can be registered with a plugin step.

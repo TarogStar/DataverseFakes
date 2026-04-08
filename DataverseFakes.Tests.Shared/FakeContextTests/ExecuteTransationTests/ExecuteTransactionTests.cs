@@ -1,6 +1,6 @@
 ﻿#if FAKE_XRM_EASY_2016 || FAKE_XRM_EASY_365 || FAKE_XRM_EASY_9
 
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.ExecuteTransationTests
+namespace DataverseFakes.Tests.FakeContextTests.ExecuteTransationTests
 {
     public class ExecuteTransactionTests
     {

@@ -4,7 +4,7 @@ using Microsoft.Xrm.Sdk.Extensions;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     public class RetrieveMultipleDataProvider : IPlugin
     {

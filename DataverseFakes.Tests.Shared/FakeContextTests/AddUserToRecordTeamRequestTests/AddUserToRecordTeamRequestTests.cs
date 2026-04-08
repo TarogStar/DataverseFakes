@@ -1,5 +1,5 @@
 ﻿#if FAKE_XRM_EASY_2013 || FAKE_XRM_EASY_2015 || FAKE_XRM_EASY_2016 || FAKE_XRM_EASY_365 || FAKE_XRM_EASY_9
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using Crm;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.AddUserToRecordTeamRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.AddUserToRecordTeamRequestTests
 {
     public class AddUserToRecordTeamRequestTests
     {

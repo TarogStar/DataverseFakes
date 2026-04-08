@@ -6,12 +6,12 @@ using System.Linq;
 using System.Xml.Linq;
 using Microsoft.Xrm.Sdk;
 using System.Globalization;
-using FakeXrmEasy.Models;
+using DataverseFakes.Models;
 
-namespace FakeXrmEasy.Extensions.FetchXml
+namespace DataverseFakes.Extensions.FetchXml
 {
     /// <summary>
-    /// Helper methods that translate FetchXML documents into the SDK query representation used by FakeXrmEasy.
+    /// Helper methods that translate FetchXML documents into the SDK query representation used by DataverseFakes.
     /// </summary>
     public static class XmlExtensionsForFetchXml
     {

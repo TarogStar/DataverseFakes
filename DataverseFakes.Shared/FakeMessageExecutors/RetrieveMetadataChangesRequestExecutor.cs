@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor for RetrieveMetadataChangesRequest.

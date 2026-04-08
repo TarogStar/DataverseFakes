@@ -1,8 +1,8 @@
-﻿using FakeXrmEasy.Metadata;
+﻿using DataverseFakes.Metadata;
 using System;
 using System.Collections.Generic;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     public partial class XrmFakedContext : IXrmContext
     {

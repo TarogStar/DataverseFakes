@@ -1,10 +1,10 @@
-﻿using FakeXrmEasy.FakeMessageExecutors;
+﻿using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.DeleteRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.DeleteRequestTests
 {
     public class DeleteRequestTests
     {

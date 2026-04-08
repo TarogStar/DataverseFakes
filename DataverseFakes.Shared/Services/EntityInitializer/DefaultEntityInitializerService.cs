@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.Xrm.Sdk;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using System.Collections.Generic;
 using Microsoft.Xrm.Sdk.Query;
 
-namespace FakeXrmEasy.Services
+namespace DataverseFakes.Services
 {
     /// <summary>
-    /// Indicates how aggressively FakeXrmEasy should populate default values.
+    /// Indicates how aggressively DataverseFakes should populate default values.
     /// </summary>
     public enum EntityInitializationLevel
     {

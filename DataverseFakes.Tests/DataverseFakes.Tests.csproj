@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net462</TargetFramework>
-    <AssemblyName>FakeXrmEasy.Tests</AssemblyName>
-    <RootNamespace>FakeXrmEasy.Tests</RootNamespace>
+    <AssemblyName>DataverseFakes.Tests</AssemblyName>
+    <RootNamespace>DataverseFakes.Tests</RootNamespace>
     <LangVersion>latest</LangVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IsPackable>false</IsPackable>
@@ -66,9 +66,9 @@
 
   <ItemGroup>
     <!-- Project reference to main library -->
-    <ProjectReference Include="..\FakeXrmEasy\FakeXrmEasy.csproj" />
+    <ProjectReference Include="..\DataverseFakes\DataverseFakes.csproj" />
   </ItemGroup>
 
-  <Import Project="..\FakeXrmEasy.Tests.Shared\FakeXrmEasy.Tests.Shared.projitems" Label="Shared" />
+  <Import Project="..\DataverseFakes.Tests.Shared\DataverseFakes.Tests.Shared.projitems" Label="Shared" />
 
 </Project>

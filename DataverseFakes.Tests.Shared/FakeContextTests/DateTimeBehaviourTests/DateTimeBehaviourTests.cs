@@ -1,7 +1,7 @@
 ﻿#if !FAKE_XRM_EASY && !FAKE_XRM_EASY_2013
 
 using Crm;
-using FakeXrmEasy.Metadata;
+using DataverseFakes.Metadata;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests
+namespace DataverseFakes.Tests.FakeContextTests
 {
     public class DateTimeBehaviourTests
     {

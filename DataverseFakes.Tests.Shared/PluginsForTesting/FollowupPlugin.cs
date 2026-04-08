@@ -2,7 +2,7 @@
 using System;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     public class FollowupPlugin : IPlugin
     {

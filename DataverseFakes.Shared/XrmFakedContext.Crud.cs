@@ -1,5 +1,5 @@
 ﻿using FakeItEasy;
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Partial class containing CRUD (Create, Retrieve, Update, Delete) operations for the faked CRM context.

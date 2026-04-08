@@ -1,11 +1,11 @@
-﻿using FakeXrmEasy.Tests.CodeActivitiesForTesting;
-using FakeXrmEasy.Tests.PluginsForTesting;
+﻿using DataverseFakes.Tests.CodeActivitiesForTesting;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Tracing
+namespace DataverseFakes.Tests.Tracing
 {
     public class XrmFakeTracingExample
     {

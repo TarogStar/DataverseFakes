@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.TranslateQueryExpressionTests.OperatorTests.Strings
+namespace DataverseFakes.Tests.FakeContextTests.TranslateQueryExpressionTests.OperatorTests.Strings
 {
     public class StringOperatorsTests
     {

@@ -1,9 +1,9 @@
 using System;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
-    /// Exception thrown when functionality is not yet implemented in FakeXrmEasy.
+    /// Exception thrown when functionality is not yet implemented in DataverseFakes.
     /// Encourages contributors to submit pull requests with the missing implementation.
     /// </summary>
     public class PullRequestException : Exception
@@ -13,7 +13,7 @@ namespace FakeXrmEasy
         /// </summary>
         /// <param name="sMessage">The message describing the missing functionality.</param>
         public PullRequestException(string sMessage) :
-            base(string.Format("Exception: {0}. This functionality is not available yet. Please consider contributing to FakeXrmEasy.Community by cloning the repository and issuing a pull request.", sMessage))
+            base(string.Format("Exception: {0}. This functionality is not available yet. Please consider contributing to DataverseFakes.Community by cloning the repository and issuing a pull request.", sMessage))
         {
         }
 

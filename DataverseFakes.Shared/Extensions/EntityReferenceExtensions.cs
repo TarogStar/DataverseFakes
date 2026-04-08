@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FakeXrmEasy.Extensions
+namespace DataverseFakes.Extensions
 {
     /// <summary>
     /// Extension methods for EntityReference

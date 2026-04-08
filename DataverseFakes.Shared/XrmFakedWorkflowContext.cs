@@ -2,7 +2,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Workflow;
 using System;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Provides a fake implementation of <see cref="IWorkflowContext"/> for unit testing Dynamics 365 custom workflow activities (code activities).

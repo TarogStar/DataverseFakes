@@ -5,7 +5,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Implements a fake message executor for the CloseIncidentRequest CRM message.

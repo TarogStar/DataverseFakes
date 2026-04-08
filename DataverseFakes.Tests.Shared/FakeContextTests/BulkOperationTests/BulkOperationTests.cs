@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.BulkOperationTests
+namespace DataverseFakes.Tests.BulkOperationTests
 {
     /// <summary>
     /// Tests for modern bulk operations (v1.0.2):

@@ -7,7 +7,7 @@ using System.Text;
 using System.Linq;
 using Microsoft.Xrm.Sdk.Client;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor that handles <see cref="RetrieveEntityRequest"/> messages.

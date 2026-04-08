@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.NestedQueryIssuesTests
+namespace DataverseFakes.Tests.FakeContextTests.NestedQueryIssuesTests
 {
     /// <summary>
     /// Tests for issue #547 - ConditionOperator.Null broken in nested filters.

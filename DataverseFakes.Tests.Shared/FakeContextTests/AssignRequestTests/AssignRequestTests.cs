@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
@@ -8,7 +8,7 @@ using System.ServiceModel;
 using Xunit;
 using Crm;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.AssignRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.AssignRequestTests
 {
     public class AssignRequestTests
     {

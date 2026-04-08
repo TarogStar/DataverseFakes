@@ -1,7 +1,7 @@
 ﻿using Crm;
 using FakeItEasy;
-using FakeXrmEasy.Extensions;
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.Extensions;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.RetrieveVersionRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.RetrieveVersionRequestTests
 {
     public class RetrieveVersionRequestTests
     {

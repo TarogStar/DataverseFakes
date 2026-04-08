@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.LinqTests
+namespace DataverseFakes.Tests.FakeContextTests.LinqTests
 {
     public class MinClientContext
     {

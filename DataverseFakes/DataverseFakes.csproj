@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net462</TargetFramework>
-    <AssemblyName>FakeXrmEasy</AssemblyName>
-    <RootNamespace>FakeXrmEasy</RootNamespace>
+    <AssemblyName>DataverseFakes</AssemblyName>
+    <RootNamespace>DataverseFakes</RootNamespace>
     <LangVersion>latest</LangVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 
@@ -13,26 +13,26 @@
 
     <!-- NuGet package metadata -->
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageId>FakeXrmEasy.Community</PackageId>
+    <PackageId>DataverseFakes.Community</PackageId>
     <Version>1.1.4</Version>
-    <Authors>FakeXrmEasy Community Contributors</Authors>
-    <Company>FakeXrmEasy Community</Company>
-    <Product>FakeXrmEasy Community Edition</Product>
-    <Description>A truly open-source, community-driven testing framework for Dynamics 365 / Power Platform. This is a modern fork of the original FakeXrmEasy project, maintained by the community with no paid license requirements. Unit test your plugins, workflows, and custom code with ease.</Description>
+    <Authors>DataverseFakes Community Contributors</Authors>
+    <Company>DataverseFakes Community</Company>
+    <Product>DataverseFakes Community Edition</Product>
+    <Description>A truly open-source, community-driven testing framework for Dynamics 365 / Power Platform. This is a modern fork of the original DataverseFakes project, maintained by the community with no paid license requirements. Unit test your plugins, workflows, and custom code with ease.</Description>
     <PackageProjectUrl>https://github.com/TarogStar/fake-xrm-easy</PackageProjectUrl>
     <RepositoryUrl>https://github.com/TarogStar/fake-xrm-easy.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>Dynamics365 CRM CommonDataService PowerPlatform UnitTesting Mocking Testing Plugins Workflows FakeXrmEasy Dataverse Community OpenSource</PackageTags>
+    <PackageTags>Dynamics365 CRM CommonDataService PowerPlatform UnitTesting Mocking Testing Plugins Workflows DataverseFakes Dataverse Community OpenSource</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Copyright>Copyright © FakeXrmEasy Community Contributors</Copyright>
+    <Copyright>Copyright © DataverseFakes Community Contributors</Copyright>
 
     <!-- Build settings -->
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <DocumentationFile>bin\$(Configuration)\FakeXrmEasy.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\DataverseFakes.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -95,6 +95,6 @@
     <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
-  <Import Project="..\FakeXrmEasy.Shared\FakeXrmEasy.Shared.projitems" Label="Shared" />
+  <Import Project="..\DataverseFakes.Shared\DataverseFakes.Shared.projitems" Label="Shared" />
 
 </Project>

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.SetStateRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.SetStateRequestTests
 {
     public class SetStateRequestTests
     {

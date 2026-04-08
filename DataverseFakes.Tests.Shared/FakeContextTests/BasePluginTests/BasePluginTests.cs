@@ -1,8 +1,8 @@
-﻿using FakeXrmEasy.Tests.PluginsForTesting;
+﻿using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.BasePluginTests
+namespace DataverseFakes.Tests.FakeContextTests.BasePluginTests
 {
     public class BasePluginTests
     {

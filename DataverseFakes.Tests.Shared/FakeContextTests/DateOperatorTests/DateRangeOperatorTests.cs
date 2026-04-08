@@ -1,4 +1,4 @@
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.DateOperatorTests
+namespace DataverseFakes.Tests.DateOperatorTests
 {
     /// <summary>
     /// Tests for date range operator fixes (v1.0.3)

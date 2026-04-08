@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.QueryByAttributeTests
+namespace DataverseFakes.Tests.FakeContextTests.QueryByAttributeTests
 {
     public class Tests
     {

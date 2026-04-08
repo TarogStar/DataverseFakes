@@ -1,4 +1,4 @@
-﻿using FakeXrmEasy.Extensions;
+﻿using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace FakeXrmEasy.Metadata
+namespace DataverseFakes.Metadata
 {
     /// <summary>
     /// Provides static methods for generating Dynamics 365 metadata from early-bound entity types.

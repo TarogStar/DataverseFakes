@@ -1,5 +1,5 @@
 ﻿using Crm;
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.AddToQueueRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.AddToQueueRequestTests
 {
     public class AddToQueueRequestTests
     {

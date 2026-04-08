@@ -1,9 +1,9 @@
 @echo off
-REM Simple build script for FakeXrmEasy
+REM Simple build script for DataverseFakes
 
 echo.
 echo ===================================
-echo   FakeXrmEasy Build Script
+echo   DataverseFakes Build Script
 echo ===================================
 echo.
 
@@ -39,7 +39,7 @@ goto restore
 
 :restore
 echo Restoring NuGet packages...
-dotnet restore FakeXrmEasy.sln
+dotnet restore DataverseFakes.sln
 if errorlevel 1 (
     echo ERROR: NuGet restore failed
     exit /b 1
@@ -50,7 +50,7 @@ goto build
 
 :build
 echo Building solution...
-dotnet build FakeXrmEasy.sln --configuration Release --no-restore
+dotnet build DataverseFakes.sln --configuration Release --no-restore
 if errorlevel 1 (
     echo ERROR: Build failed
     exit /b 1
@@ -61,7 +61,7 @@ goto test
 
 :test
 echo Running tests...
-dotnet test FakeXrmEasy.Tests\FakeXrmEasy.Tests.csproj --configuration Release --no-build --verbosity normal
+dotnet test DataverseFakes.Tests\DataverseFakes.Tests.csproj --configuration Release --no-build --verbosity normal
 if errorlevel 1 (
     echo ERROR: Tests failed
     exit /b 1
@@ -73,7 +73,7 @@ goto end
 :pack
 echo Creating NuGet package...
 if not exist nuget mkdir nuget
-dotnet pack FakeXrmEasy\FakeXrmEasy.csproj --configuration Release --output nuget --no-build
+dotnet pack DataverseFakes\DataverseFakes.csproj --configuration Release --output nuget --no-build
 if errorlevel 1 (
     echo ERROR: Pack failed
     exit /b 1

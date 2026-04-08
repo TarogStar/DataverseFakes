@@ -1,11 +1,11 @@
-﻿using FakeXrmEasy.Extensions.FetchXml;
+﻿using DataverseFakes.Extensions.FetchXml;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Partial class containing FetchXML aggregate query processing functionality for the faked CRM context.

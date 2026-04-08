@@ -7,7 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     /// <summary>
     /// Tests for EntityReference.Name population on retrieval (v1.0.3)

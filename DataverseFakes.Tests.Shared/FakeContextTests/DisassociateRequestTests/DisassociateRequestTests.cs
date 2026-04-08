@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.DisassociateRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.DisassociateRequestTests
 {
     public class DisassociateRequestTests
     {

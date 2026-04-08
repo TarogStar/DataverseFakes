@@ -5,7 +5,7 @@ using System;
 using System.Activities;
 using System.Collections.Generic;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Partial class containing workflow code activity execution functionality for the faked CRM context.

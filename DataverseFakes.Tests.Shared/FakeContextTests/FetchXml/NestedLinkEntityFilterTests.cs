@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml
+namespace DataverseFakes.Tests.FakeContextTests.FetchXml
 {
     /// <summary>
     /// Tests for GitHub Issue #560 - FindReflectedAttributeType throws NRE when filtering on linked entity attributes.
@@ -260,11 +260,11 @@ namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml
             qe.LinkEntities.Add(contactLink);
 
             // Test that we can find the nested alias
-            var result = FakeXrmEasy.Extensions.QueryExpressionExtensions.GetEntityNameFromAlias(qe, "l");
+            var result = DataverseFakes.Extensions.QueryExpressionExtensions.GetEntityNameFromAlias(qe, "l");
             Assert.Equal("lead", result);
 
             // Test that we can still find the top-level alias
-            var result2 = FakeXrmEasy.Extensions.QueryExpressionExtensions.GetEntityNameFromAlias(qe, "c");
+            var result2 = DataverseFakes.Extensions.QueryExpressionExtensions.GetEntityNameFromAlias(qe, "c");
             Assert.Equal("contact", result2);
         }
 
@@ -283,7 +283,7 @@ namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml
             qe.LinkEntities.Add(contactLink);
 
             // Test that we can find by entity logical name
-            var result = FakeXrmEasy.Extensions.QueryExpressionExtensions.GetEntityNameFromAlias(qe, "contact");
+            var result = DataverseFakes.Extensions.QueryExpressionExtensions.GetEntityNameFromAlias(qe, "contact");
             Assert.Equal("contact", result);
         }
 
@@ -303,7 +303,7 @@ namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml
       qe.LinkEntities.Add(contactLink);
 
             // Test with dot notation (extracting entity portion)
-            var result = FakeXrmEasy.Extensions.QueryExpressionExtensions.GetEntityNameFromAlias(qe, "c.fullname");
+            var result = DataverseFakes.Extensions.QueryExpressionExtensions.GetEntityNameFromAlias(qe, "c.fullname");
             Assert.Equal("contact", result);
         }
 

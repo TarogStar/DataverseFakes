@@ -9,7 +9,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Xml.Linq;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Fake message executor for ExecuteFetchRequest

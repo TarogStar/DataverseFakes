@@ -1,4 +1,4 @@
-using FakeXrmEasy.Extensions;
+using DataverseFakes.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Query;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.FormattedValuesTests
+namespace DataverseFakes.Tests.FakeContextTests.FormattedValuesTests
 {
     /// <summary>
     /// Tests for Issue #218: FormattedValues for OptionSet fields not populated

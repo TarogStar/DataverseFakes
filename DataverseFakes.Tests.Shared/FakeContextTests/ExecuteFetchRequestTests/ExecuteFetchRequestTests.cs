@@ -1,5 +1,5 @@
 ﻿using Crm;
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.ExecuteFetchRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.ExecuteFetchRequestTests
 {
     public class ExecuteFetchRequestTests
     {

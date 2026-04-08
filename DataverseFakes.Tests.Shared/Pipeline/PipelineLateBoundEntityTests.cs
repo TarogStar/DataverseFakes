@@ -1,11 +1,11 @@
 using System;
-using FakeXrmEasy.Extensions;
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Extensions;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.Pipeline
+namespace DataverseFakes.Tests.Pipeline
 {
     /// <summary>
     /// Tests for plugin pipeline functionality with late-bound Entity class.

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     public class Issue116
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.ServiceModel;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.ExecuteMultipleRequestTests
+namespace DataverseFakes.Tests.FakeContextTests.ExecuteMultipleRequestTests
 {
     public class ExecuteMultipleRequestTests
     {

@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     /// <summary>
     /// Interface for a mock external service used to test dependency injection in plugins.

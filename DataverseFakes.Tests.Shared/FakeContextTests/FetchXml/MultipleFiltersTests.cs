@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FetchXml
+namespace DataverseFakes.Tests.FetchXml
 {
     /// <summary>
     /// Tests for FetchXML multiple filter elements (v1.0.3)

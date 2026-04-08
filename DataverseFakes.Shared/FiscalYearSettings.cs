@@ -2,7 +2,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Represents the fiscal year settings for an organization in Dynamics 365.

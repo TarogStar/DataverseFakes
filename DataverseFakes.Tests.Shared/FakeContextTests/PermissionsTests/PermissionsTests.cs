@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.PermissionsTests
+namespace DataverseFakes.Tests.FakeContextTests.PermissionsTests
 {
     public class PermissionsTests
     {

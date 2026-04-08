@@ -1,7 +1,7 @@
 ﻿using FakeItEasy;
-using FakeXrmEasy.FakeMessageExecutors;
-using FakeXrmEasy.Permissions;
-using FakeXrmEasy.Services;
+using DataverseFakes.FakeMessageExecutors;
+using DataverseFakes.Permissions;
+using DataverseFakes.Services;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -12,10 +12,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
-    /// The main context class for the FakeXrmEasy testing framework that simulates the Dynamics 365 CRM context.
+    /// The main context class for the DataverseFakes testing framework that simulates the Dynamics 365 CRM context.
     /// Stores in-memory entities indexed by logical name and then by entity record GUID, simulating
     /// how entities are persisted in Dataverse tables (with the logical name) and then the records themselves
     /// where the Primary Key is the Guid. This class provides a complete mock of the IOrganizationService

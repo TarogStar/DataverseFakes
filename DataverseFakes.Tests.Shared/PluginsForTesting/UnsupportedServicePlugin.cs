@@ -1,7 +1,7 @@
 using Microsoft.Xrm.Sdk;
 using System;
 
-namespace FakeXrmEasy.Tests.PluginsForTesting
+namespace DataverseFakes.Tests.PluginsForTesting
 {
     /// <summary>
     /// A test plugin that requests an unsupported service type to verify

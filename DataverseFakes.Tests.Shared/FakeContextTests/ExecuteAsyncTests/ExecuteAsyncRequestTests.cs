@@ -3,13 +3,13 @@ using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
 using Crm;
-using FakeXrmEasy.FakeMessageExecutors;
+using DataverseFakes.FakeMessageExecutors;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Xunit;
 
-namespace FakeXrmEasy.Tests.FakeContextTests.ExecuteAsyncTests
+namespace DataverseFakes.Tests.FakeContextTests.ExecuteAsyncTests
 {
     public class ExecuteAsyncRequestTests
     {

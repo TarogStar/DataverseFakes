@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using FakeXrmEasy;
+using DataverseFakes;
 using Microsoft.Xrm.Sdk;
 
-namespace FakeXrmEasy.Tests.FakeContextTests
+namespace DataverseFakes.Tests.FakeContextTests
 {
     public class TestGenericMessageExecutors
     {
@@ -33,7 +33,7 @@ namespace FakeXrmEasy.Tests.FakeContextTests
             OrganizationResponse response = service.Execute(request);
             Assert.Equal("testinput", response["output"]);
             context.RemoveGenericFakeMessageExecutor("new_TestAction");
-            Assert.Throws<FakeXrmEasy.PullRequestException>(() => service.Execute(request));
+            Assert.Throws<DataverseFakes.PullRequestException>(() => service.Execute(request));
         }
     }
 

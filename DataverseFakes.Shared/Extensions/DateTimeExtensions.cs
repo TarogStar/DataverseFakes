@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace FakeXrmEasy.Extensions
+namespace DataverseFakes.Extensions
 {
     /// <summary>
     /// Provides extension methods for <see cref="DateTime"/> to support date-based filtering operations

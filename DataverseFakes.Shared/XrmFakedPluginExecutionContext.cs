@@ -2,7 +2,7 @@ using Microsoft.Xrm.Sdk;
 using System;
 using System.Runtime.Serialization;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// Provides a fake implementation of <see cref="IPluginExecutionContext4"/> for unit testing Dynamics 365 plugins.

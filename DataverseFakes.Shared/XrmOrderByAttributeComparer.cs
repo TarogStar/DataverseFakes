@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FakeXrmEasy
+namespace DataverseFakes
 {
     /// <summary>
     /// A comparer for sorting CRM attribute values used in OrderBy operations.

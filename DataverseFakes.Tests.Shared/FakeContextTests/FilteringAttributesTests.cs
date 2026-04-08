@@ -1,13 +1,14 @@
-using FakeXrmEasy.Tests.PluginsForTesting;
+using DataverseFakes.Tests.PluginsForTesting;
 using Microsoft.Xrm.Sdk;
 using System;
 using Xunit;
 
-namespace FakeXrmEasy.Tests
+namespace DataverseFakes.Tests
 {
     /// <summary>
     /// Tests for filtering attributes validation in pipeline simulation (v1.0.2)
     /// </summary>
+    [Collection("CounterPlugin")]
     public class FilteringAttributesTests
     {
         [Fact]

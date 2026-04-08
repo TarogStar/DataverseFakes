@@ -1,7 +1,7 @@
 using Microsoft.Xrm.Sdk;
 using System;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Defines the contract for fake message executors that handle specific CRM organization requests.
@@ -9,7 +9,7 @@ namespace FakeXrmEasy.FakeMessageExecutors
     /// and returning an appropriate <see cref="OrganizationResponse"/>.
     /// </summary>
     /// <remarks>
-    /// Implementations of this interface are used by the FakeXrmEasy framework to simulate
+    /// Implementations of this interface are used by the DataverseFakes framework to simulate
     /// the behavior of Dynamics 365/CRM's IOrganizationService.Execute method in unit tests.
     /// Custom executors can be registered using <c>context.AddFakeMessageExecutor()</c>.
     /// </remarks>

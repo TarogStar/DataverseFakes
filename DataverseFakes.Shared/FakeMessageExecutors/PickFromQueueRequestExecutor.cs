@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using System.ServiceModel;
 
-namespace FakeXrmEasy.FakeMessageExecutors
+namespace DataverseFakes.FakeMessageExecutors
 {
     /// <summary>
     /// Implements a fake message executor for the CRM PickFromQueueRequest message.
