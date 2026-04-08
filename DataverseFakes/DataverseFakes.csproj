@@ -14,13 +14,13 @@
     <!-- NuGet package metadata -->
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>DataverseFakes.Community</PackageId>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
     <Authors>DataverseFakes Community Contributors</Authors>
     <Company>DataverseFakes Community</Company>
     <Product>DataverseFakes Community Edition</Product>
-    <Description>A truly open-source, community-driven testing framework for Dynamics 365 / Power Platform. This is a modern fork of the original DataverseFakes project, maintained by the community with no paid license requirements. Unit test your plugins, workflows, and custom code with ease.</Description>
-    <PackageProjectUrl>https://github.com/TarogStar/fake-xrm-easy</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/TarogStar/fake-xrm-easy.git</RepositoryUrl>
+    <Description>A modern, open-source unit testing framework for Dynamics 365 / Dataverse. Mock IOrganizationService with an in-memory context for fast plugin, workflow, and custom code testing. Supports 62+ SDK messages, FetchXML, QueryExpression, pipeline simulation, and more.</Description>
+    <PackageProjectUrl>https://github.com/TarogStar/DataverseFakes</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TarogStar/DataverseFakes.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Dynamics365 CRM CommonDataService PowerPlatform UnitTesting Mocking Testing Plugins Workflows DataverseFakes Dataverse Community OpenSource</PackageTags>
