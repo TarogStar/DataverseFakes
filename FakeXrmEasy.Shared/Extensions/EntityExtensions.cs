@@ -142,6 +142,7 @@ namespace FakeXrmEasy.Extensions
         /// <param name="e">The source entity containing the attributes to project.</param>
         /// <param name="qe">The query expression defining which columns to include.</param>
         /// <param name="context">The fake context used for metadata validation and proxy type resolution.</param>
+        /// <param name="stripImageColumns">Whether to strip image columns from the projected attributes.</param>
         /// <returns>A new entity containing only the projected attributes, with null attributes removed.</returns>
         public static Entity ProjectAttributes(this Entity e, QueryExpression qe, XrmFakedContext context, bool stripImageColumns = true)
         {

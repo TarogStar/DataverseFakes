@@ -69,7 +69,7 @@ namespace FakeXrmEasy.Tests.FakeContextTests.FetchXml
                 new Contact() { Id = Guid.NewGuid(), GenderCode = male, FirstName = "John" },
             });
 
-            var collection = ctx.GetFakedOrganizationService().RetrieveMultiple(new FetchExpression(fetchXml));
+            var collection = ctx.GetOrganizationService().RetrieveMultiple(new FetchExpression(fetchXml));
 
             // Make sure we only have the expected properties
             foreach (var e in collection.Entities)
