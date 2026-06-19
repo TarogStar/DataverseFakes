@@ -334,6 +334,9 @@ namespace DataverseFakes
                     ExecutePipelineStage("Update", ProcessingStepStage.Preoperation, ProcessingStepMode.Synchronous, e, preImage, null);
                 }
 
+                // Validate hierarchy cycle BEFORE writing the record.
+                ValidateNoHierarchyCycle(e);
+
                 // Add as many attributes to the entity as the ones received (this will keep existing ones)
 
                 // Check alternate key uniqueness constraints for the merged entity
@@ -789,6 +792,9 @@ namespace DataverseFakes
                     }
                 }
             }
+
+            // Validate hierarchy cycle BEFORE writing the record.
+            ValidateNoHierarchyCycle(clone);
 
             AddEntityWithDefaults(clone, false, this.UsePipelineSimulation);
 

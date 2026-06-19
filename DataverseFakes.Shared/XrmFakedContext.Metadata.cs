@@ -162,6 +162,7 @@ namespace DataverseFakes
 
                         AddRelationship(oneToMany.SchemaName, relationship);
                         RegisterCascadeRuleFromMetadata(oneToMany);
+                        RegisterHierarchyFromRelationshipMetadata(oneToMany);
                     }
                 }
 
@@ -192,6 +193,7 @@ namespace DataverseFakes
 
                         AddRelationship(manyToOne.SchemaName, relationship);
                         RegisterCascadeRuleFromMetadata(manyToOne);
+                        RegisterHierarchyFromRelationshipMetadata(manyToOne);
                     }
                 }
             }

@@ -18,6 +18,10 @@ All notable changes to this project will be documented in this file.
 - **Relationship cascade behaviors** - metadata-driven Delete cascade (Cascade / RemoveLink / Restrict)
   for 1:N relationships, `AddCascadeDeleteRelationship` convenience helper, and Assign cascade. Self-
   referential/cyclic cascades terminate safely. (Share/Unshare/Reparent/Merge not yet simulated.)
+- **Hierarchy cycle guard** - Create/Update reject circular parent/child references on self-referential
+  (hierarchical) relationships, matching Dataverse ("...would create a loop in {entity} hierarchy.").
+  Detected from self-referential 1:N `EntityMetadata` or via `AddSelfReferentialHierarchy(entity, attr)`;
+  validated against a live Dataverse environment.
 - **Full net10 test leg** - the shared test suite now runs against the `net10.0` build in CI (previously
   only 3 net10 smoke tests).
 

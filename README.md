@@ -185,6 +185,17 @@ service.Delete("account", accountId);  // child contacts are cascade-deleted
 `CascadeConfiguration` on initialized `EntityMetadata` is auto-applied. Restrict throws and leaves data
 unchanged when children exist; RemoveLink nulls the child lookup. (Share/Reparent are not yet simulated.)
 
+Self-referential hierarchies reject circular references on Create/Update, matching Dataverse:
+
+```csharp
+context.AddSelfReferentialHierarchy("account", "parentaccountid");
+// service.Update setting A.parentaccountid = B when B.parentaccountid = A throws:
+//   "Creating this parental association would create a loop in account hierarchy."
+```
+
+Hierarchies are also auto-detected from self-referential 1:N `EntityMetadata`. The guard catches both
+direct self-references and transitive loops, and is inert unless a hierarchy is registered.
+
 ---
 
 ## Elastic Tables

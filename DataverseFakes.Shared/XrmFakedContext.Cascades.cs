@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.ServiceModel;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -12,6 +13,7 @@ namespace DataverseFakes
     /// Relationship cascade behavior support (metadata-driven). Currently simulates
     /// Delete cascade (Cascade / RemoveLink / Restrict / no-op) for 1:N relationships and a
     /// simple Assign cascade. Share, Unshare, Reparent and Merge cascades are NOT yet simulated.
+    /// Also validates that hierarchical self-referential lookups do not form cycles on Create/Update.
     /// </summary>
     public partial class XrmFakedContext
     {
@@ -31,6 +33,154 @@ namespace DataverseFakes
 
         private readonly Dictionary<string, CascadeRule> CascadeRules =
             new Dictionary<string, CascadeRule>(StringComparer.OrdinalIgnoreCase);
+
+        // -----------------------------------------------------------------------
+        // Hierarchy cycle detection
+        // -----------------------------------------------------------------------
+
+        /// <summary>
+        /// Registry of self-referential hierarchical lookups: maps entity logical name to the
+        /// set of referencing attribute names that represent the parent pointer in a hierarchy.
+        /// Populated via <see cref="AddSelfReferentialHierarchy"/>, from initialized
+        /// <see cref="OneToManyRelationshipMetadata"/> where ReferencedEntity == ReferencingEntity,
+        /// and from any <see cref="CascadeRule"/> where ReferencedEntity == ReferencingEntity.
+        /// </summary>
+        private readonly Dictionary<string, HashSet<string>> _hierarchyLookups =
+            new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// Registers a self-referential hierarchical lookup so that Create/Update operations on
+        /// the entity are checked for parent/child cycles.  Call this when full EntityMetadata
+        /// is not available (e.g. in simple unit tests that use late-bound entities).
+        /// </summary>
+        /// <param name="entityLogicalName">The logical name of the hierarchical entity (e.g. "account").</param>
+        /// <param name="referencingAttribute">The lookup attribute that points to the parent record
+        /// of the same entity type (e.g. "parentaccountid").</param>
+        public void AddSelfReferentialHierarchy(string entityLogicalName, string referencingAttribute)
+        {
+            if (string.IsNullOrWhiteSpace(entityLogicalName) || string.IsNullOrWhiteSpace(referencingAttribute))
+            {
+                return;
+            }
+
+            if (!_hierarchyLookups.TryGetValue(entityLogicalName, out var attrs))
+            {
+                attrs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                _hierarchyLookups[entityLogicalName] = attrs;
+            }
+            attrs.Add(referencingAttribute);
+        }
+
+        /// <summary>
+        /// Registers a hierarchy lookup discovered from a <see cref="OneToManyRelationshipMetadata"/>
+        /// where the referenced and referencing entity are the same (self-referential relationship).
+        /// Prefers relationships flagged as hierarchical; if the SDK surface does not expose
+        /// <c>IsHierarchical</c> on older assemblies, all self-referential parental 1:N relationships
+        /// are treated as hierarchical.
+        /// </summary>
+        internal void RegisterHierarchyFromRelationshipMetadata(OneToManyRelationshipMetadata rel)
+        {
+            if (rel == null) return;
+            if (!string.Equals(rel.ReferencedEntity, rel.ReferencingEntity, StringComparison.OrdinalIgnoreCase))
+            {
+                return; // Not self-referential.
+            }
+            if (string.IsNullOrEmpty(rel.ReferencingEntity) || string.IsNullOrEmpty(rel.ReferencingAttribute))
+            {
+                return;
+            }
+
+            // If IsHierarchical is available via reflection and is explicitly false, skip.
+            try
+            {
+                var prop = typeof(OneToManyRelationshipMetadata).GetProperty(
+                    "IsHierarchical", BindingFlags.Public | BindingFlags.Instance);
+                if (prop != null)
+                {
+                    var val = prop.GetValue(rel);
+                    if (val is bool b && !b)
+                    {
+                        return; // Explicitly non-hierarchical; skip.
+                    }
+                }
+            }
+            catch
+            {
+                // Reflection failed; treat as hierarchical (safe default).
+            }
+
+            AddSelfReferentialHierarchy(rel.ReferencingEntity, rel.ReferencingAttribute);
+        }
+
+        /// <summary>
+        /// Validates that the entity being written does not introduce a cycle in any registered
+        /// hierarchical self-referential lookup.  Throws <see cref="FaultException"/> (string
+        /// message form, matching Dataverse HTTP 400 behavior) if a loop is detected.
+        /// This method is INERT when no hierarchy lookup is registered for the entity type.
+        /// </summary>
+        /// <param name="record">The entity about to be created or updated.</param>
+        internal void ValidateNoHierarchyCycle(Entity record)
+        {
+            if (record == null) return;
+            if (!_hierarchyLookups.TryGetValue(record.LogicalName, out var attrs)) return;
+
+            // Build a read view of the entity's own current stored state (for updates we need the
+            // existing Id so the walk starts from the proposed parent, not the record itself).
+            var recordId = record.Id;
+            if (recordId == Guid.Empty) return; // Can't detect a cycle without an Id.
+
+            foreach (var attr in attrs)
+            {
+                if (!record.Attributes.ContainsKey(attr)) continue;
+
+                var parentRef = record.GetAttributeValue<EntityReference>(attr);
+                if (parentRef == null) continue; // Null parent → no cycle possible.
+
+                var proposedParentId = parentRef.Id;
+                if (proposedParentId == Guid.Empty) continue;
+
+                // Direct self-reference: A.parent = A.
+                if (proposedParentId == recordId)
+                {
+                    throw new FaultException(
+                        $"Creating this parental association would create a loop in {record.LogicalName} hierarchy.");
+                }
+
+                // Transitive loop: walk up the ancestry chain.
+                var visited = new HashSet<Guid> { recordId };
+                var currentId = proposedParentId;
+
+                ConcurrentDictionary<Guid, Entity> entityTable;
+                if (!Data.TryGetValue(record.LogicalName, out entityTable))
+                {
+                    continue; // No data for this entity type yet — no chain to walk.
+                }
+
+                while (currentId != Guid.Empty)
+                {
+                    if (!entityTable.TryGetValue(currentId, out var ancestor))
+                    {
+                        break; // Ancestor doesn't exist in store; chain ends here.
+                    }
+
+                    // Cycle termination: if ancestor's id is the record we're writing.
+                    if (ancestor.Id == recordId)
+                    {
+                        throw new FaultException(
+                            $"Creating this parental association would create a loop in {record.LogicalName} hierarchy.");
+                    }
+
+                    if (visited.Contains(ancestor.Id))
+                    {
+                        break; // Pre-existing cycle in stored data (anomaly); stop to avoid infinite loop.
+                    }
+                    visited.Add(ancestor.Id);
+
+                    var nextRef = ancestor.GetAttributeValue<EntityReference>(attr);
+                    currentId = nextRef?.Id ?? Guid.Empty;
+                }
+            }
+        }
 
         // Shared across one cascade chain so recursive child deletes terminate cycles.
         [ThreadStatic]
@@ -54,6 +204,8 @@ namespace DataverseFakes
 
         /// <summary>
         /// Registers or updates a cascade rule keyed by relationship schema name.
+        /// If the rule is self-referential (ReferencedEntity == ReferencingEntity) it is also
+        /// registered as a hierarchy lookup so cycle detection fires on Create/Update.
         /// </summary>
         internal void RegisterCascadeRule(string schemaName, string referencedEntity,
             string referencingEntity, string referencingAttribute,
@@ -74,6 +226,12 @@ namespace DataverseFakes
                 DeleteBehavior = deleteBehavior,
                 AssignBehavior = assignBehavior
             };
+
+            // Auto-register hierarchy lookup for self-referential cascade rules.
+            if (string.Equals(referencedEntity, referencingEntity, StringComparison.OrdinalIgnoreCase))
+            {
+                AddSelfReferentialHierarchy(referencingEntity, referencingAttribute);
+            }
         }
 
         /// <summary>
