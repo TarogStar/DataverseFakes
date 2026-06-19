@@ -23,6 +23,7 @@
 trigger:
   branches:
     include:
+      - main
       - master
 
 # Use Windows agent for .NET Framework 4.6.2 compatibility
@@ -56,6 +57,15 @@ stages:
       displayName: 'Install NuGet'
       inputs:
         versionSpec: '$(nugetVersion)'
+
+    # -------------------------------------------------------------------------
+    # Install the .NET 10 SDK so VSBuild can build the net10.0 target
+    # -------------------------------------------------------------------------
+    - task: UseDotNet@2
+      displayName: 'Install .NET 10 SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '10.x'
 
     # -------------------------------------------------------------------------
     # Step 2: Restore NuGet Packages
