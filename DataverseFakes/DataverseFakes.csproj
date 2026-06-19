@@ -14,11 +14,11 @@
     <!-- NuGet package metadata -->
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>DataverseFakes.Community</PackageId>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>DataverseFakes Community Contributors</Authors>
     <Company>DataverseFakes Community</Company>
     <Product>DataverseFakes Community Edition</Product>
-    <Description>A modern, open-source unit testing framework for Dynamics 365 / Dataverse. Mock IOrganizationService with an in-memory context for fast plugin, workflow, and custom code testing. Supports 62+ SDK messages, FetchXML, QueryExpression, pipeline simulation, and more.</Description>
+    <Description>A modern, open-source unit testing framework for Dynamics 365 / Dataverse. Mock IOrganizationService with an in-memory context for fast plugin, workflow, and custom code testing. Supports 70+ SDK messages, FetchXML, QueryExpression, pipeline simulation, plugin tracing, relationship cascades, elastic tables, and more.</Description>
     <PackageProjectUrl>https://github.com/TarogStar/DataverseFakes</PackageProjectUrl>
     <RepositoryUrl>https://github.com/TarogStar/DataverseFakes.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

@@ -358,7 +358,7 @@ Formalize the testing coverage into a structured map:
 
 Based on decompiled Microsoft.Xrm.Sdk.Messages (61 messages total).
 
-**Coverage:** 26 implemented (43%) | 35 not implemented (57%)
+**Coverage:** 33 implemented (54%) | 28 not implemented (46%) — updated v1.3.0
 
 #### CRUD Operations (15/15 implemented)
 
@@ -382,10 +382,10 @@ Based on decompiled Microsoft.Xrm.Sdk.Messages (61 messages total).
 | RetrieveRelationship | ✅ | - | |
 | RetrieveMetadataChanges | ✅ | - | |
 | CreateEntity, DeleteEntity, UpdateEntity | ❌ | MEDIUM | Entity metadata CRUD |
-| CreateAttribute, DeleteAttribute, UpdateAttribute | ❌ | MEDIUM | Attribute metadata CRUD |
+| CreateAttribute, DeleteAttribute, UpdateAttribute | ✅ | - | Attribute metadata CRUD (v1.3.0) |
 | CreateManyToMany, CreateOneToMany | ❌ | MEDIUM | Relationship creation |
 | DeleteRelationship, UpdateRelationship | ❌ | MEDIUM | Relationship management |
-| RetrieveAllEntities | ❌ | MEDIUM | Bulk metadata retrieval |
+| RetrieveAllEntities | ✅ | - | Bulk metadata retrieval (v1.3.0) |
 | RetrieveEntityChanges | ❌ | MEDIUM | Change tracking / delta sync |
 | CreateEntityKey, RetrieveEntityKey | ❌ | LOW | Alternate key metadata |
 | DeleteEntityKey, ReactivateEntityKey | ❌ | LOW | Alternate key metadata |
@@ -401,9 +401,9 @@ Based on decompiled Microsoft.Xrm.Sdk.Messages (61 messages total).
 | UpdateOptionSet | ✅ | COMPLETE |
 | DeleteOptionSet | ✅ | COMPLETE |
 | DeleteOptionValue | ❌ | LOW |
-| UpdateOptionValue, UpdateStateValue | ❌ | MEDIUM |
+| UpdateOptionValue, UpdateStateValue | ✅ | - |
 | OrderOption | ❌ | LOW |
-| RetrieveAllOptionSets | ❌ | MEDIUM |
+| RetrieveAllOptionSets | ✅ | - |
 
 #### Encryption/Security (0/3) - LOW priority
 
@@ -576,8 +576,8 @@ All 4 issues fixed in v1.1.1 Phase 1. See "Fixed Issues - v1.1.1 Phase 1" sectio
 
 | # | Title | Category | Complexity | Description |
 |---|-------|----------|------------|-------------|
-| 183 | Auto-trigger plugin steps | Plugin | High | Automatically trigger registered plugin steps on Create/Update |
-| 218 | FormattedValues for OptionSet | Metadata | Medium | FormattedValues require EntityMetadata injection for proper labels |
+| 183 | Auto-trigger plugin steps | Plugin | High | **DONE (v1.3.0)** — registered steps auto-fire on Create/Update/Delete when UsePipelineSimulation=true; verified end-to-end + assertable via AssertPluginExecuted<T> |
+| 218 | FormattedValues for OptionSet | Metadata | Medium | **DONE (v1.3.0)** — Retrieve/RetrieveMultiple resolve labels from entity-attribute metadata and fall back to global OptionSetValuesMetadata |
 | 220 | EntityFilters.All support | Metadata | Medium | RetrieveEntityRequest needs Relationships, Privileges, All filters |
 | 288 | AddToQueue move vs duplicate | Message | High | Creates new QueueItems instead of moving existing ones |
 | 342 | Validate execution context params | Plugin | Medium | Validate parameter types (Delete requires EntityReference, not Entity) |
@@ -668,6 +668,25 @@ When integrating a PR:
 ---
 
 ## Changelog
+
+### 2026-06-19 - v1.3.0 — Metadata tail, elastic tables, cascades, plugin tracing
+
+- Added: Metadata/OptionSet CRUD tail — UpdateOptionValue, UpdateStateValue, RetrieveAllOptionSets,
+  RetrieveAllEntities, CreateAttribute, UpdateAttribute, DeleteAttribute executors (+51 tests)
+- Fixed: #218 — FormattedValues fall back to global OptionSetValuesMetadata when entity-attribute
+  metadata is absent
+- Added: Elastic tables — MarkAsElasticTable/IsElasticTable (+ TableType auto-detect), partitionid/TTL
+  round-trip, RemoveExpiredElasticRecords, and validation rejecting multi-record transactions +
+  Associate/Disassociate on elastic tables (+23 tests)
+- Verified: #183 — registered plugin steps auto-fire on Create/Update/Delete (UsePipelineSimulation);
+  added structured plugin execution tracing + AssertPluginExecuted<T> helpers (+19 tests)
+- Added: Relationship cascade behaviors — metadata-driven Delete cascade (Cascade/RemoveLink/Restrict) +
+  Assign cascade; Share/Reparent not yet simulated (+15 tests)
+- Added: full net10 test leg in CI (was 3 smoke tests)
+- Build: Source Link + snupkg symbols, NU5048 fix, Central Package Management, dropped Newtonsoft.Json,
+  unified pack onto dotnet pack
+- SDK Message Coverage: 33/61 (54%)
+- Test suite: 1511 passed / 6 skipped on net462 (+108 over the 1403 baseline)
 
 ### 2026-01-07 - v1.1.1 Phase 4 Complete
 

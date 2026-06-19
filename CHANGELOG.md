@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-06-19
+
+### Added
+- **Metadata / OptionSet CRUD tail** - `UpdateOptionValue`, `UpdateStateValue`, `RetrieveAllOptionSets`,
+  `RetrieveAllEntities`, `CreateAttribute`, `UpdateAttribute`, `DeleteAttribute` message executors.
+- **FormattedValues from global OptionSets** (#218) - `Retrieve`/`RetrieveMultiple` resolve OptionSet
+  labels from `OptionSetValuesMetadata` when entity-attribute metadata is absent.
+- **Elastic tables** - `MarkAsElasticTable` / `IsElasticTable` (+ auto-detect from `EntityMetadata.TableType`),
+  `partitionid`/`ttlinseconds` round-trip, opt-in `RemoveExpiredElasticRecords`, and validation that rejects
+  multi-record transactions and Associate/Disassociate against elastic tables.
+- **Plugin execution tracing** - `PluginExecutions`, `GetPluginStepTrace()`, `ClearPluginExecutions()`.
+- **Plugin assertion helpers** - `AssertPluginExecuted<T>()`, `AssertPluginExecuted<T>(message)`,
+  `AssertPluginExecutedTimes<T>(n)`, `AssertPluginNotExecuted<T>()`.
+- **Relationship cascade behaviors** - metadata-driven Delete cascade (Cascade / RemoveLink / Restrict)
+  for 1:N relationships, `AddCascadeDeleteRelationship` convenience helper, and Assign cascade. Self-
+  referential/cyclic cascades terminate safely. (Share/Unshare/Reparent/Merge not yet simulated.)
+- **Full net10 test leg** - the shared test suite now runs against the `net10.0` build in CI (previously
+  only 3 net10 smoke tests).
+
+### Changed
+- **Packaging**: emit a **symbol package** (`.snupkg`) with **Source Link** for step-into debugging;
+  enabled Deterministic + ContinuousIntegrationBuild. Introduced **Central Package Management**
+  (`Directory.Packages.props`). Unified the NuGet pack path onto `dotnet pack` and removed the redundant
+  hand-maintained `DataverseFakes.nuspec`.
+- Confirmed registered plugin steps **auto-fire** on Create/Update/Delete when
+  `UsePipelineSimulation = true` (upstream #183), now verified end-to-end and assertable.
+
+### Fixed
+- **NU5048**: replaced the deprecated nuspec `<iconUrl>` with a packaged `<icon>`.
+- Removed the unused `Newtonsoft.Json` dependency from the shipped library.
+
+## [1.2.0] - 2026-06
+
+### Added
+- **Cross-platform targets** - the library now multi-targets `net462`, `net48`, and `net10.0`. The
+  `net10.0` leg builds against `Microsoft.PowerPlatform.Dataverse.Client`.
+- **XrmRealContext on net10** - ported to `ServiceClient` so live-connect compiles on all legs.
+
+### Changed
+- Upgraded FakeItEasy to 8.3.0.
+- `net10.0` leg excludes .NET Framework-only workflow/CodeActivity simulation.
+
 ## [1.1.5] - 2026-04-07
 
 ### Changed
