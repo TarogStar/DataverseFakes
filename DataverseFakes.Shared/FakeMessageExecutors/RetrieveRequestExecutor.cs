@@ -456,6 +456,24 @@ namespace DataverseFakes.FakeMessageExecutors
                 }
             }
 
+            // Fallback: check OptionSetValuesMetadata using entity#attribute key (issue #218)
+            var globalKey = $"{entityLogicalName}#{attributeName}";
+            if (context.OptionSetValuesMetadata.ContainsKey(globalKey))
+            {
+                var globalOptions = context.OptionSetValuesMetadata[globalKey];
+                if (globalOptions?.Options != null)
+                {
+                    var globalOption = globalOptions.Options.FirstOrDefault(o => o.Value == optionValue);
+                    if (globalOption?.Label != null)
+                    {
+                        if (globalOption.Label.UserLocalizedLabel?.Label != null)
+                            return globalOption.Label.UserLocalizedLabel.Label;
+                        if (globalOption.Label.LocalizedLabels?.Count > 0)
+                            return globalOption.Label.LocalizedLabels[0].Label;
+                    }
+                }
+            }
+
             return optionValue.ToString();
         }
 
