@@ -29,3 +29,6 @@ jobs:
 
       - name: Smoke test (net10 type identity)
         run: dotnet test DataverseFakes.Smoke.Net10\DataverseFakes.Smoke.Net10.csproj --configuration Release
+
+      - name: Full test leg (net10 cross-platform)
+        run: dotnet test DataverseFakes.Tests.Net10\DataverseFakes.Tests.Net10.csproj --configuration Release
