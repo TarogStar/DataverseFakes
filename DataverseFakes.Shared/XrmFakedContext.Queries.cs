@@ -2014,7 +2014,7 @@ namespace DataverseFakes
                 }
                 else
                 {
-                    throw new FaultException(new FaultReason(faultReason));
+                    throw new FaultException(faultReason);
                 }
             }
             else if (isOptionSetValueCollectionAccepted && input is OptionSetValueCollection)
@@ -2028,7 +2028,7 @@ namespace DataverseFakes
             }
             else
             {
-                throw new FaultException(new FaultReason(faultReason));
+                throw new FaultException(faultReason);
             }
 
             return set;
@@ -2283,7 +2283,7 @@ namespace DataverseFakes
 
             if (c.Values.Count(v => v != null) != 1)
             {
-                throw new FaultException(new FaultReason($"The ConditonOperator.{c.Operator} requires 1 value/s, not {c.Values.Count(v => v != null)}. Parameter Name: {c.AttributeName}"));
+                throw new FaultException($"The ConditonOperator.{c.Operator} requires 1 value/s, not {c.Values.Count(v => v != null)}. Parameter Name: {c.AttributeName}");
             }
 
             if (tc.AttributeType == typeof(string))
@@ -2422,7 +2422,7 @@ namespace DataverseFakes
 
             if (c.Values.Count(v => v != null) != 1)
             {
-                throw new FaultException(new FaultReason($"The ConditonOperator.{c.Operator} requires 1 value/s, not {c.Values.Count(v => v != null)}. Parameter Name: {c.AttributeName}"));
+                throw new FaultException($"The ConditonOperator.{c.Operator} requires 1 value/s, not {c.Values.Count(v => v != null)}. Parameter Name: {c.AttributeName}");
             }
 
             if (tc.AttributeType == typeof(string))

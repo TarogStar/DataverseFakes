@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>DataverseFakes.Community</id>
-    <version>1.1.5</version>
+    <version>1.2.0</version>
     <title>DataverseFakes.Community - Unit Testing for Dynamics 365</title>
     <authors>DataverseFakes Community Contributors</authors>
     <owners>DataverseFakes Community</owners>
@@ -18,7 +18,13 @@
     </description>
     <summary>Unit testing framework for Dynamics 365 plugins, workflows, and custom code with in-memory mocking</summary>
     <releaseNotes>
-      Version 1.1.1 
+      Version 1.2.0
+      - Added net10.0 cross-platform target (built against Microsoft.PowerPlatform.Dataverse.Client 1.2.10)
+      - Multi-targets net462;net10.0
+      - Upgraded FakeItEasy to 8.3.0
+      - net10 leg excludes FW-only workflow/CodeActivity simulation and live-connect (XrmRealContext)
+
+      Version 1.1.1
       - Possibly breaking change - order of create no longer determines order of return
       - ExecuteAsync request executor with asyncoperation tracking
       - MetadataGenerator public API (FromEarlyBoundEntity, CreateAttributeMetadataByType)
@@ -50,14 +56,28 @@
       <group targetFramework=".NETFramework4.6.2">
         <dependency id="Microsoft.CrmSdk.CoreAssemblies" version="[9.0.2.60,)" />
         <dependency id="Microsoft.CrmSdk.Workflow" version="[9.0.2.60,)" />
-        <dependency id="Microsoft.CrmSdk.XrmTooling.CoreAssembly" version="[9.0.2.60,)" />
-        <dependency id="FakeItEasy" version="6.0.0" />
+        <dependency id="Microsoft.CrmSdk.XrmTooling.CoreAssembly" version="[9.1.1.65,)" />
+        <dependency id="FakeItEasy" version="8.3.0" />
+      </group>
+      <group targetFramework=".NETFramework4.8">
+        <dependency id="Microsoft.CrmSdk.CoreAssemblies" version="[9.0.2.60,)" />
+        <dependency id="Microsoft.CrmSdk.Workflow" version="[9.0.2.60,)" />
+        <dependency id="Microsoft.CrmSdk.XrmTooling.CoreAssembly" version="[9.1.1.65,)" />
+        <dependency id="FakeItEasy" version="8.3.0" />
+      </group>
+      <group targetFramework="net10.0">
+        <dependency id="Microsoft.PowerPlatform.Dataverse.Client" version="1.2.10" />
+        <dependency id="FakeItEasy" version="8.3.0" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="DataverseFakes\bin\Release\DataverseFakes.dll" target="lib\net462" />
-    <file src="DataverseFakes\bin\Release\DataverseFakes.xml" target="lib\net462" />
+    <file src="DataverseFakes\bin\Release\net462\DataverseFakes.dll" target="lib\net462" />
+    <file src="DataverseFakes\bin\Release\net462\DataverseFakes.xml" target="lib\net462" />
+    <file src="DataverseFakes\bin\Release\net48\DataverseFakes.dll" target="lib\net48" />
+    <file src="DataverseFakes\bin\Release\net48\DataverseFakes.xml" target="lib\net48" />
+    <file src="DataverseFakes\bin\Release\net10.0\DataverseFakes.dll" target="lib\net10.0" />
+    <file src="DataverseFakes\bin\Release\net10.0\DataverseFakes.xml" target="lib\net10.0" />
     <file src="LICENSE.md" target="" />
     <file src="README.md" target="" />
   </files>

@@ -82,5 +82,19 @@ namespace DataverseFakes.Tests.FakeContextTests.CustomRequestTests.NavigateToNex
             Assert.True(traversedPath.ToString() == (currentStage.Id + "," + nextStage.Id));
             Assert.True(traversedPath.ToString() == oppAfterSet["traversedpath"].ToString());
         }
+
+        [Fact]
+        public void When_process_id_is_empty_a_required_parameter_exception_is_thrown()
+        {
+            var context = new XrmFakedContext();
+            var executor = new NavigateToNextEntityOrganizationRequestExecutor();
+
+            var request = new OrganizationRequest(NavigateToNextEntityOrganizationRequestExecutor.RequestName);
+            // ProcessId present but empty -> the required-parameter guard must reject it.
+            request.Parameters.Add(NavigateToNextEntityOrganizationRequestExecutor.ParameterProcessId, Guid.Empty);
+
+            var ex = Assert.Throws<Exception>(() => executor.Execute(request, context));
+            Assert.Contains("is a required parameter", ex.Message);
+        }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Linq;
+using System.ServiceModel;
 using Xunit;
 
 namespace DataverseFakes.Tests.FakeContextTests.AddToQueueRequestTests
@@ -17,6 +18,30 @@ namespace DataverseFakes.Tests.FakeContextTests.AddToQueueRequestTests
             var executor = new AddToQueueRequestExecutor();
             var anotherRequest = new RetrieveMultipleRequest();
             Assert.False(executor.CanExecute(anotherRequest));
+        }
+
+        [Fact]
+        public void When_destination_queue_id_is_empty_a_fault_is_thrown()
+        {
+            var context = new XrmFakedContext();
+
+            var email = new Entity
+            {
+                LogicalName = Crm.Email.EntityLogicalName,
+                Id = Guid.NewGuid(),
+            };
+            context.Initialize(new[] { email });
+
+            var executor = new AddToQueueRequestExecutor();
+
+            // DestinationQueueId left unset -> Guid.Empty; the guard must reject it.
+            var req = new AddToQueueRequest
+            {
+                Target = email.ToEntityReference(),
+            };
+
+            var ex = Assert.Throws<FaultException<OrganizationServiceFault>>(() => executor.Execute(req, context));
+            Assert.Equal("Can not add to queue without destination queue", ex.Message);
         }
 
         [Fact]

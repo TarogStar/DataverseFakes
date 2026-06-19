@@ -41,7 +41,7 @@ namespace DataverseFakes.FakeMessageExecutors
                 throw new FaultException<OrganizationServiceFault>(new OrganizationServiceFault(), "Can not add to queue without target");
             }
 
-            if (destinationQueueId == null)
+            if (destinationQueueId == Guid.Empty)
             {
                 throw new FaultException<OrganizationServiceFault>(new OrganizationServiceFault(), "Can not add to queue without destination queue");
             }
