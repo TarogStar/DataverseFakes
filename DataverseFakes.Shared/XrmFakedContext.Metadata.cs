@@ -75,6 +75,9 @@ namespace DataverseFakes
                     throw new Exception("An entity metadata record with the same logical name was previously added. ");
                 }
                 EntityMetadata.Add(eMetadata.LogicalName, eMetadata.Copy());
+
+                // Auto-detect elastic tables via reflection (TableType property may not exist on older SDK)
+                AutoDetectElasticTableFromMetadata(eMetadata);
             }
 
             // Auto-register relationships from metadata

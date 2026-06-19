@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Linq;
+using System.ServiceModel;
 
 namespace DataverseFakes.FakeMessageExecutors
 {
@@ -39,6 +40,30 @@ namespace DataverseFakes.FakeMessageExecutors
             if (associateRequest == null)
             {
                 throw new Exception("Only associate request can be processed!");
+            }
+
+            // Elastic tables do not support N:N relationships or relational operations.
+            var targetLogicalName = associateRequest.Target?.LogicalName;
+            if (targetLogicalName != null && ctx.IsElasticTable(targetLogicalName))
+            {
+                throw new FaultException<OrganizationServiceFault>(
+                    new OrganizationServiceFault(),
+                    $"AssociateRequest is not supported for elastic table '{targetLogicalName}'. " +
+                    "Elastic tables do not support relationship operations.");
+            }
+
+            if (associateRequest.RelatedEntities != null)
+            {
+                foreach (var related in associateRequest.RelatedEntities)
+                {
+                    if (related?.LogicalName != null && ctx.IsElasticTable(related.LogicalName))
+                    {
+                        throw new FaultException<OrganizationServiceFault>(
+                            new OrganizationServiceFault(),
+                            $"AssociateRequest is not supported for elastic table '{related.LogicalName}'. " +
+                            "Elastic tables do not support relationship operations.");
+                    }
+                }
             }
 
             var associateRelationship = associateRequest.Relationship;
