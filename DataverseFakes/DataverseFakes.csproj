@@ -60,6 +60,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="System.ServiceModel.Http" Version="8.1.2" PrivateAssets="all" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" PrivateAssets="all" />
+    <!-- Pin patched version to override the vulnerable 8.0.2 pulled transitively by System.ServiceModel.* (NU1903: GHSA-37gx-xxp4-5rgx, GHSA-w3x6-4m5h-cxqf) -->
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="8.0.3" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net462'">
