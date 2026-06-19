@@ -59,6 +59,12 @@
         <dependency id="Microsoft.CrmSdk.XrmTooling.CoreAssembly" version="[9.1.1.65,)" />
         <dependency id="FakeItEasy" version="8.3.0" />
       </group>
+      <group targetFramework=".NETFramework4.8">
+        <dependency id="Microsoft.CrmSdk.CoreAssemblies" version="[9.0.2.60,)" />
+        <dependency id="Microsoft.CrmSdk.Workflow" version="[9.0.2.60,)" />
+        <dependency id="Microsoft.CrmSdk.XrmTooling.CoreAssembly" version="[9.1.1.65,)" />
+        <dependency id="FakeItEasy" version="8.3.0" />
+      </group>
       <group targetFramework="net10.0">
         <dependency id="Microsoft.PowerPlatform.Dataverse.Client" version="1.2.10" />
         <dependency id="FakeItEasy" version="8.3.0" />
@@ -68,6 +74,8 @@
   <files>
     <file src="DataverseFakes\bin\Release\net462\DataverseFakes.dll" target="lib\net462" />
     <file src="DataverseFakes\bin\Release\net462\DataverseFakes.xml" target="lib\net462" />
+    <file src="DataverseFakes\bin\Release\net48\DataverseFakes.dll" target="lib\net48" />
+    <file src="DataverseFakes\bin\Release\net48\DataverseFakes.xml" target="lib\net48" />
     <file src="DataverseFakes\bin\Release\net10.0\DataverseFakes.dll" target="lib\net10.0" />
     <file src="DataverseFakes\bin\Release\net10.0\DataverseFakes.xml" target="lib\net10.0" />
     <file src="LICENSE.md" target="" />

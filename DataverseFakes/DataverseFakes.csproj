@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net462;net10.0</TargetFrameworks>
+    <TargetFrameworks>net462;net48;net10.0</TargetFrameworks>
     <AssemblyName>DataverseFakes</AssemblyName>
     <RootNamespace>DataverseFakes</RootNamespace>
     <LangVersion>latest</LangVersion>
@@ -41,16 +41,16 @@
     <DefineConstants>TRACE;FAKE_XRM_EASY_9</DefineConstants>
   </PropertyGroup>
 
-  <!-- net462: legacy CRM SDK -->
-  <ItemGroup Condition="'$(TargetFramework)'=='net462'">
+  <!-- .NET Framework (net462 + net48): legacy CRM SDK -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'">
     <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.60" />
     <PackageReference Include="Microsoft.CrmSdk.Workflow" Version="9.0.2.60" />
     <PackageReference Include="Microsoft.CrmSdk.XrmTooling.CoreAssembly" Version="9.1.1.65" />
     <PackageReference Include="Microsoft.CrmSdk.Deployment" Version="9.0.2.34" />
   </ItemGroup>
 
-  <!-- net10: cross-platform Dataverse SDK (bundles modern Microsoft.Xrm.Sdk + Microsoft.Crm.Sdk.Proxy) -->
-  <ItemGroup Condition="'$(TargetFramework)'=='net10.0'">
+  <!-- .NET (net10): cross-platform Dataverse SDK (bundles modern Microsoft.Xrm.Sdk + Microsoft.Crm.Sdk.Proxy) -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)'=='.NETCoreApp'">
     <PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" Version="1.2.10" />
   </ItemGroup>
 
@@ -64,8 +64,8 @@
     <PackageReference Include="System.Security.Cryptography.Xml" Version="8.0.3" PrivateAssets="all" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net462'">
-    <!-- net462 GAC assemblies actually used by the compiled source:
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'">
+    <!-- .NET Framework (net462 + net48) GAC assemblies actually used by the compiled source:
          System.Activities      -> WorkflowInvoker/CodeActivity (XrmFakedContext.CodeActivities.cs)
          System.Configuration   -> ConfigurationManager (XrmRealContext.cs)
          System.Runtime.Serialization -> [DataContract]/[DataMember] + DataContractSerializer
@@ -86,8 +86,8 @@
 
   <Import Project="..\DataverseFakes.Shared\DataverseFakes.Shared.projitems" Label="Shared" />
 
-  <!-- FW-only files: excluded on net10. MUST be after the projitems Import (items must exist before Remove). -->
-  <ItemGroup Condition="'$(TargetFramework)'!='net462'">
+  <!-- FW-only files: excluded on .NET (net10), kept on .NET Framework (net462 + net48). MUST be after the projitems Import (items must exist before Remove). -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)'=='.NETCoreApp'">
     <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Shared\XrmFakedContext.CodeActivities.cs" />
     <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Shared\XrmFakedWorkflowContext.cs" />
   </ItemGroup>
