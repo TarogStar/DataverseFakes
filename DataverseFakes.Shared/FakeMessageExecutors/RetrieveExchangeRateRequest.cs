@@ -35,7 +35,7 @@ namespace DataverseFakes.FakeMessageExecutors
 
             var currencyId = retrieveExchangeRateRequest.TransactionCurrencyId;
 
-            if (currencyId == null)
+            if (currencyId == Guid.Empty)
             {
                 throw new FaultException<OrganizationServiceFault>(new OrganizationServiceFault(), "Can not retrieve Exchange Rate without Transaction Currency Guid");
             }
