@@ -31,5 +31,18 @@ namespace DataverseFakes.Smoke.Net10
 
             Assert.Equal("Contoso", retrieved.GetAttributeValue<string>("name"));
         }
+
+        [Fact]
+        public void XrmRealContext_compiles_and_returns_injected_service_on_net10()
+        {
+            // XrmRealContext now builds on net10 (ServiceClient instead of CrmServiceClient).
+            // The IOrganizationService-injecting constructor needs no live org, so we can
+            // prove the ported type works without connecting.
+            IOrganizationService inner = new XrmFakedContext().GetOrganizationService();
+
+            var real = new XrmRealContext(inner);
+
+            Assert.Same(inner, real.GetOrganizationService());
+        }
     }
 }

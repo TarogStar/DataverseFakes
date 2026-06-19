@@ -90,7 +90,6 @@
   <ItemGroup Condition="'$(TargetFramework)'!='net462'">
     <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Shared\XrmFakedContext.CodeActivities.cs" />
     <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Shared\XrmFakedWorkflowContext.cs" />
-    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Shared\XrmRealContext.cs" />
   </ItemGroup>
 
 </Project>

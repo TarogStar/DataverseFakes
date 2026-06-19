@@ -2,22 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xrm.Sdk;
-using System.Configuration;
 using System.IO;
-
 using System.Xml.Linq;
 using System.Linq;
-
 using System.IO.Compression;
 using System.Runtime.Serialization;
 
-#if FAKE_XRM_EASY_2016 || FAKE_XRM_EASY_365 || FAKE_XRM_EASY_9
+#if NETFRAMEWORK
+using System.Configuration;
 using Microsoft.Xrm.Tooling.Connector;
 #else
-
-using Microsoft.Xrm.Client;
-using Microsoft.Xrm.Client.Services;
-
+using Microsoft.PowerPlatform.Dataverse.Client;
 #endif
 
 namespace DataverseFakes
@@ -93,27 +88,31 @@ namespace DataverseFakes
         /// <returns>An IOrganizationService instance connected to the CRM.</returns>
         protected IOrganizationService GetOrgService()
         {
+#if NETFRAMEWORK
             var connection = ConfigurationManager.ConnectionStrings[ConnectionStringName];
 
             // In case of missing connection string in configuration,
             // use ConnectionStringName as an explicit connection string
             var connectionString = connection == null ? ConnectionStringName : connection.ConnectionString;
+#else
+            // .NET (net8+/net10) has no app.config connection-string store;
+            // treat ConnectionStringName as the connection string itself.
+            var connectionString = ConnectionStringName;
+#endif
 
             if (string.IsNullOrWhiteSpace(connectionString))
             {
                 throw new Exception("The ConnectionStringName property must be either a connection string or a connection string name");
             }
 
-#if FAKE_XRM_EASY_2016 || FAKE_XRM_EASY_365 || FAKE_XRM_EASY_9
-
-            // Connect to the CRM web service using a connection string.
-            CrmServiceClient client = new Microsoft.Xrm.Tooling.Connector.CrmServiceClient(connectionString);
+#if NETFRAMEWORK
+            // Connect using the legacy XrmTooling client.
+            CrmServiceClient client = new CrmServiceClient(connectionString);
             return client;
-
 #else
-            CrmConnection crmConnection = CrmConnection.Parse(connectionString);
-            OrganizationService service = new OrganizationService(crmConnection);
-            return service;
+            // Connect using the cross-platform Dataverse ServiceClient.
+            ServiceClient client = new ServiceClient(connectionString);
+            return client;
 #endif
         }
 
