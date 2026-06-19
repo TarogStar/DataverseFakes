@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFrameworks>net462;net10.0</TargetFrameworks>
     <AssemblyName>DataverseFakes</AssemblyName>
     <RootNamespace>DataverseFakes</RootNamespace>
     <LangVersion>latest</LangVersion>
@@ -14,7 +14,7 @@
     <!-- NuGet package metadata -->
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>DataverseFakes.Community</PackageId>
-    <Version>1.1.5</Version>
+    <Version>1.2.0</Version>
     <Authors>DataverseFakes Community Contributors</Authors>
     <Company>DataverseFakes Community</Company>
     <Product>DataverseFakes Community Edition</Product>
@@ -30,9 +30,7 @@
     <!-- Build settings -->
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <DocumentationFile>bin\$(Configuration)\DataverseFakes.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -43,28 +41,29 @@
     <DefineConstants>TRACE;FAKE_XRM_EASY_9</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup>
-    <!-- Dynamics 365 SDK - Required minimum versions -->
+  <!-- net462: legacy CRM SDK -->
+  <ItemGroup Condition="'$(TargetFramework)'=='net462'">
     <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.60" />
     <PackageReference Include="Microsoft.CrmSdk.Workflow" Version="9.0.2.60" />
     <PackageReference Include="Microsoft.CrmSdk.XrmTooling.CoreAssembly" Version="9.1.1.65" />
     <PackageReference Include="Microsoft.CrmSdk.Deployment" Version="9.0.2.34" />
+  </ItemGroup>
 
-    <!-- Mocking framework -->
+  <!-- net10: cross-platform Dataverse SDK (bundles modern Microsoft.Xrm.Sdk + Microsoft.Crm.Sdk.Proxy) -->
+  <ItemGroup Condition="'$(TargetFramework)'=='net10.0'">
+    <PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" Version="1.2.10" />
+  </ItemGroup>
+
+  <!-- both legs -->
+  <ItemGroup>
     <PackageReference Include="FakeItEasy" Version="8.3.0" />
-
-    <!-- JSON -->
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-
-    <!-- Identity -->
-
-    <!-- System libraries - PrivateAssets to avoid version conflicts with consuming projects -->
     <PackageReference Include="System.ServiceModel.Http" Version="8.1.2" PrivateAssets="all" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" PrivateAssets="all" />
   </ItemGroup>
 
-  <ItemGroup>
-    <!-- Framework references -->
+  <ItemGroup Condition="'$(TargetFramework)'=='net462'">
+    <!-- Framework references (net462 GAC assemblies; not present on net10) -->
     <Reference Include="System.Activities" />
     <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.Configuration" />
@@ -96,5 +95,12 @@
   </ItemGroup>
 
   <Import Project="..\DataverseFakes.Shared\DataverseFakes.Shared.projitems" Label="Shared" />
+
+  <!-- FW-only files: excluded on net10. MUST be after the projitems Import (items must exist before Remove). -->
+  <ItemGroup Condition="'$(TargetFramework)'!='net462'">
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Shared\XrmFakedContext.CodeActivities.cs" />
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Shared\XrmFakedWorkflowContext.cs" />
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Shared\XrmRealContext.cs" />
+  </ItemGroup>
 
 </Project>

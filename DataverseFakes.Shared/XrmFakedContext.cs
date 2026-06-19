@@ -471,11 +471,13 @@ namespace DataverseFakes
         /// <returns>A mocked <see cref="IOrganizationService"/> instance that can be used to perform CRM operations in tests.</returns>
         public virtual IOrganizationService GetOrganizationService()
         {
+#if NETFRAMEWORK
             if (this is XrmRealContext)
             {
                 Service = GetOrganizationService();
                 return Service;
             }
+#endif
             return GetFakedOrganizationService(this);
         }
 

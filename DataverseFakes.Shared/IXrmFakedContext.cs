@@ -1,6 +1,8 @@
 using Microsoft.Xrm.Sdk;
 using System;
+#if NETFRAMEWORK
 using System.Activities;
+#endif
 using System.Collections.Generic;
 using System.Linq;
 
@@ -155,6 +157,7 @@ namespace DataverseFakes
         IPlugin ExecutePluginWithConfigurations<T>(XrmFakedPluginExecutionContext plugCtx, T instance, string unsecureConfiguration, string secureConfiguration)
             where T : class, IPlugin;
 
+#if NETFRAMEWORK
         /// <summary>
         /// Executes a code activity against this context
         /// An optional instance can be passed.
@@ -171,5 +174,6 @@ namespace DataverseFakes
         /// <typeparam name="T"></typeparam>
         IDictionary<string, object> ExecuteCodeActivity<T>(Entity primaryEntity, Dictionary<string, object> inputs = null, T instance = null)
             where T : CodeActivity, new();
+#endif
     }
 }
