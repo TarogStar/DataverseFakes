@@ -51,7 +51,7 @@
         <dependency id="Microsoft.CrmSdk.CoreAssemblies" version="[9.0.2.60,)" />
         <dependency id="Microsoft.CrmSdk.Workflow" version="[9.0.2.60,)" />
         <dependency id="Microsoft.CrmSdk.XrmTooling.CoreAssembly" version="[9.0.2.60,)" />
-        <dependency id="FakeItEasy" version="6.0.0" />
+        <dependency id="FakeItEasy" version="8.3.0" />
       </group>
     </dependencies>
   </metadata>
