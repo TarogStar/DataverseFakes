@@ -89,6 +89,9 @@ namespace DataverseFakes.FakeMessageExecutors
 
             service.Update(assignment);
 
+            // Cascade the new owner to child records for relationships configured to cascade Assign.
+            ctx.ApplyAssignCascade(target, assignee);
+
             return new AssignResponse();
         }
 

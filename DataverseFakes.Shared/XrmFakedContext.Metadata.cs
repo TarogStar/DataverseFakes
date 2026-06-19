@@ -161,6 +161,7 @@ namespace DataverseFakes
                         };
 
                         AddRelationship(oneToMany.SchemaName, relationship);
+                        RegisterCascadeRuleFromMetadata(oneToMany);
                     }
                 }
 
@@ -190,9 +191,40 @@ namespace DataverseFakes
                         };
 
                         AddRelationship(manyToOne.SchemaName, relationship);
+                        RegisterCascadeRuleFromMetadata(manyToOne);
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Reads CascadeConfiguration (Delete + Assign) from a 1:N relationship metadata and
+        /// registers a cascade rule so DeleteEntity / AssignRequestExecutor can apply it.
+        /// </summary>
+        /// <param name="oneToMany">The one-to-many (or many-to-one) relationship metadata to read.</param>
+        private void RegisterCascadeRuleFromMetadata(OneToManyRelationshipMetadata oneToMany)
+        {
+            var config = oneToMany.CascadeConfiguration;
+            if (config == null)
+            {
+                return; // No cascade info on this relationship.
+            }
+
+            var deleteBehavior = config.Delete ?? CascadeType.NoCascade;
+            var assignBehavior = config.Assign ?? CascadeType.NoCascade;
+
+            if (deleteBehavior == CascadeType.NoCascade && assignBehavior == CascadeType.NoCascade)
+            {
+                return; // Nothing to cascade; keep store small and behavior inert.
+            }
+
+            RegisterCascadeRule(
+                oneToMany.SchemaName,
+                oneToMany.ReferencedEntity,
+                oneToMany.ReferencingEntity,
+                oneToMany.ReferencingAttribute,
+                deleteBehavior,
+                assignBehavior);
         }
 
         /// <summary>

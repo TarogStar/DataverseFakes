@@ -526,33 +526,46 @@ namespace DataverseFakes
             if (this.Data.TryGetValue(er.LogicalName, out entityDict) && entityDict != null &&
                 entityDict.ContainsKey(er.Id))
             {
-                // Capture pre-image BEFORE deletion (clone the entity with all fields)
-                Entity preImage = null;
-                Entity entityToDelete;
-                if (entityDict.TryGetValue(er.Id, out entityToDelete))
+                // Apply Delete cascade rules BEFORE any mutation so Restrict throws with data unchanged.
+                // ownsChain is true only for the outermost delete in a cascade chain.
+                bool ownsChain = RunDeleteCascades(er);
+                try
                 {
+                    // Capture pre-image BEFORE deletion (clone the entity with all fields)
+                    Entity preImage = null;
+                    Entity entityToDelete;
+                    if (entityDict.TryGetValue(er.Id, out entityToDelete))
+                    {
+                        if (this.UsePipelineSimulation)
+                        {
+                            preImage = entityToDelete.Clone(entityToDelete.GetType());
+                        }
+                    }
+
                     if (this.UsePipelineSimulation)
                     {
-                        preImage = entityToDelete.Clone(entityToDelete.GetType());
+                        // For Delete, we have preImage but no postImage (entity no longer exists after delete)
+                        ExecutePipelineStage("Delete", ProcessingStepStage.Prevalidation, ProcessingStepMode.Synchronous, er, preImage, null);
+                        ExecutePipelineStage("Delete", ProcessingStepStage.Preoperation, ProcessingStepMode.Synchronous, er, preImage, null);
+                    }
+
+                    // Entity found => remove it using thread-safe TryRemove
+                    Entity removedEntity;
+                    entityDict.TryRemove(er.Id, out removedEntity);
+
+                    if (this.UsePipelineSimulation)
+                    {
+                        // Post-operation still has preImage, but no postImage (entity is deleted)
+                        ExecutePipelineStage("Delete", ProcessingStepStage.Postoperation, ProcessingStepMode.Synchronous, er, preImage, null);
+                        ExecutePipelineStage("Delete", ProcessingStepStage.Postoperation, ProcessingStepMode.Asynchronous, er, preImage, null);
                     }
                 }
-
-                if (this.UsePipelineSimulation)
+                finally
                 {
-                    // For Delete, we have preImage but no postImage (entity no longer exists after delete)
-                    ExecutePipelineStage("Delete", ProcessingStepStage.Prevalidation, ProcessingStepMode.Synchronous, er, preImage, null);
-                    ExecutePipelineStage("Delete", ProcessingStepStage.Preoperation, ProcessingStepMode.Synchronous, er, preImage, null);
-                }
-
-                // Entity found => remove it using thread-safe TryRemove
-                Entity removedEntity;
-                entityDict.TryRemove(er.Id, out removedEntity);
-
-                if (this.UsePipelineSimulation)
-                {
-                    // Post-operation still has preImage, but no postImage (entity is deleted)
-                    ExecutePipelineStage("Delete", ProcessingStepStage.Postoperation, ProcessingStepMode.Synchronous, er, preImage, null);
-                    ExecutePipelineStage("Delete", ProcessingStepStage.Postoperation, ProcessingStepMode.Asynchronous, er, preImage, null);
+                    if (ownsChain)
+                    {
+                        EndDeleteCascadeChain();
+                    }
                 }
             }
             else
