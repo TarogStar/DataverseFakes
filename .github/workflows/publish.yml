@@ -5,15 +5,18 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write   # allow the Create GitHub Release step to create releases/upload assets
+
 jobs:
   publish:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.x'
 
@@ -37,7 +40,7 @@ jobs:
         run: dotnet nuget push nupkg\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             nupkg/*.nupkg
