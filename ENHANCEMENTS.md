@@ -105,7 +105,10 @@ All modern bulk operations are now implemented:
 ---
 
 #### 2. Elastic Tables Support (MEDIUM PRIORITY)
-**Status:** NOT IMPLEMENTED
+**Status:** ✅ IMPLEMENTED (v1.3.0) — MarkAsElasticTable/IsElasticTable (+ EntityMetadata.TableType
+auto-detect), partitionid/ttlinseconds round-trip, RemoveExpiredElasticRecords, and validation that
+rejects multi-record transactions and Associate/Disassociate against elastic tables. Bulk messages
+remain allowed. (Eventual-consistency simulation intentionally out of scope.)
 
 Elastic tables are a different table type in Dataverse (Cosmos DB-backed vs SQL):
 
@@ -698,18 +701,19 @@ Better suggestions when metadata is needed but not available
 Make pipeline simulation easier to use without sacrificing simple execution for basic tests
 
 #### 2. Plugin Execution Tracing
+**Status:** ✅ IMPLEMENTED (v1.3.0) — every execution (explicit or pipeline-fired) is recorded in
+`context.PluginExecutions`; `context.GetPluginStepTrace()` dumps a readable trace, and
+`AssertPluginExecuted<T>()` / `AssertPluginExecutedTimes<T>(n)` / `AssertPluginNotExecuted<T>()` assert it.
 ```csharp
-context.EnablePluginTracing = true;
-// After execution:
-Console.WriteLine(context.GetPluginTrace());
-// Output:
-// [Stage 20] AccountNumberPlugin executed (5ms)
-// [Stage 40] AccountValidationPlugin executed (2ms)
-// [Stage 40] AccountNotificationPlugin executed (15ms)
+context.AssertPluginExecuted<AccountPlugin>("Create");
+Console.WriteLine(context.GetPluginStepTrace());
 ```
 
 #### 3. Cascade Operations
-Support for relationship cascade behaviors (delete, assign, share, etc.)
+**Status:** ✅ PARTIAL (v1.3.0) — metadata-driven Delete cascade (Cascade / RemoveLink / Restrict) for
+1:N relationships + Assign cascade, via initialized `CascadeConfiguration` or the
+`AddCascadeDeleteRelationship(...)` helper. Share, Unshare, Reparent and Merge cascades are not yet
+simulated.
 
 ### Modern Dataverse Features
 

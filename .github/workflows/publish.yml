@@ -20,11 +20,6 @@ jobs:
         with:
           dotnet-version: '10.x'
 
-      - name: Setup NuGet
-        uses: nuget/setup-nuget@v4
-        with:
-          nuget-version: '6.x'
-
       - name: Restore
         run: dotnet restore DataverseFakes.sln
 
@@ -34,14 +29,20 @@ jobs:
       - name: Test
         run: dotnet test DataverseFakes.Tests\DataverseFakes.Tests.csproj --configuration Release --no-build --verbosity normal
 
+      # dotnet pack reads all package metadata from DataverseFakes.csproj and emits both
+      # the .nupkg and (via IncludeSymbols/snupkg) the symbol package. This replaces the
+      # previous hand-maintained DataverseFakes.nuspec path.
       - name: Pack
-        run: nuget pack DataverseFakes.nuspec -OutputDirectory nupkg
+        run: dotnet pack DataverseFakes\DataverseFakes.csproj --configuration Release --no-build --output nupkg
 
+      # `dotnet nuget push *.nupkg` also pushes the co-located *.snupkg automatically.
       - name: Push to NuGet
         run: dotnet nuget push nupkg\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
-          files: nupkg/*.nupkg
+          files: |
+            nupkg/*.nupkg
+            nupkg/*.snupkg
           generate_release_notes: true

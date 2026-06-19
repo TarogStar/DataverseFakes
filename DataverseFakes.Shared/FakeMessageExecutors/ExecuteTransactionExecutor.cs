@@ -3,6 +3,7 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
+using System.ServiceModel;
 
 namespace DataverseFakes.FakeMessageExecutors
 {
@@ -35,6 +36,37 @@ namespace DataverseFakes.FakeMessageExecutors
         {
             var executeTransactionRequest = (ExecuteTransactionRequest)request;
             var response = new ExecuteTransactionResponse { ["Responses"] = new OrganizationResponseCollection() };
+
+            // Elastic tables do not support multi-record ACID transactions.
+            // Check every request in the collection for an elastic target entity.
+            foreach (var r in executeTransactionRequest.Requests)
+            {
+                string targetLogicalName = null;
+
+                if (r is CreateRequest cr)
+                    targetLogicalName = cr.Target?.LogicalName;
+                else if (r is UpdateRequest ur)
+                    targetLogicalName = ur.Target?.LogicalName;
+                else if (r is DeleteRequest dr)
+                    targetLogicalName = dr.Target?.LogicalName;
+                else if (r is UpsertRequest upsertR)
+                    targetLogicalName = upsertR.Target?.LogicalName;
+                else if (r.Parameters.Contains("Target"))
+                {
+                    if (r.Parameters["Target"] is Entity e)
+                        targetLogicalName = e.LogicalName;
+                    else if (r.Parameters["Target"] is EntityReference er)
+                        targetLogicalName = er.LogicalName;
+                }
+
+                if (targetLogicalName != null && ctx.IsElasticTable(targetLogicalName))
+                {
+                    throw new FaultException<OrganizationServiceFault>(
+                        new OrganizationServiceFault(),
+                        $"ExecuteTransactionRequest is not supported for elastic table '{targetLogicalName}'. " +
+                        "Use bulk messages (CreateMultiple/UpdateMultiple/UpsertMultiple/DeleteMultiple) instead.");
+                }
+            }
 
             var service = ctx.GetOrganizationService();
 

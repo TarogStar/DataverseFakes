@@ -3,6 +3,7 @@ using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Linq;
+using System.ServiceModel;
 
 namespace DataverseFakes.FakeMessageExecutors
 {
@@ -38,6 +39,30 @@ namespace DataverseFakes.FakeMessageExecutors
             if (disassociateRequest == null)
             {
                 throw new Exception("Only disassociate request can be processed!");
+            }
+
+            // Elastic tables do not support N:N relationships or relational operations.
+            var targetLogicalName = disassociateRequest.Target?.LogicalName;
+            if (targetLogicalName != null && ctx.IsElasticTable(targetLogicalName))
+            {
+                throw new FaultException<OrganizationServiceFault>(
+                    new OrganizationServiceFault(),
+                    $"DisassociateRequest is not supported for elastic table '{targetLogicalName}'. " +
+                    "Elastic tables do not support relationship operations.");
+            }
+
+            if (disassociateRequest.RelatedEntities != null)
+            {
+                foreach (var related in disassociateRequest.RelatedEntities)
+                {
+                    if (related?.LogicalName != null && ctx.IsElasticTable(related.LogicalName))
+                    {
+                        throw new FaultException<OrganizationServiceFault>(
+                            new OrganizationServiceFault(),
+                            $"DisassociateRequest is not supported for elastic table '{related.LogicalName}'. " +
+                            "Elastic tables do not support relationship operations.");
+                    }
+                }
             }
 
             var relationShipName = disassociateRequest.Relationship.SchemaName;

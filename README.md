@@ -8,12 +8,17 @@ A modern, open-source unit testing framework for Dynamics 365 / Dataverse that m
 ## Features
 
 - **Unit test plugins** without deploying to a real environment
-- **Test workflow activities** with in-memory execution
+- **Test workflow activities** with in-memory execution (.NET Framework)
 - **Fast execution** - run 1000+ tests in seconds
 - **No server required** - test offline, no Dynamics 365 connection needed
 - **Early and late bound** - works with generated entities or dynamic `Entity` objects
-- **62+ SDK messages** supported out of the box
-- **Pipeline simulation** - register plugin steps with filtering attributes, stages, and rank ordering
+- **Cross-platform** - multi-targets `net462`, `net48`, and `net10.0`
+- **70+ SDK messages** supported out of the box (including metadata & OptionSet CRUD)
+- **Pipeline simulation** - register plugin steps that auto-fire on Create/Update/Delete, with filtering attributes, stages, and rank ordering
+- **Plugin execution tracing** - assert which plugins ran with `AssertPluginExecuted<T>()`
+- **Relationship cascades** - metadata-driven Cascade / RemoveLink / Restrict on delete
+- **Elastic tables** - mark tables elastic, with partitionid/TTL and limitation validation
+- **Assertion helpers** - fluent `AssertExists`, `AssertAttributeValue`, `AssertAssociated`, and more
 - **FetchXML and QueryExpression** - full query translation with aggregates, joins, and date operators
 
 ---
@@ -115,11 +120,102 @@ context.ExecutePluginWithTarget<MyPlugin>(target,
     postImageColumns: new ColumnSet(true));
 ```
 
+With `UsePipelineSimulation = true`, registered steps **auto-fire** on regular CRUD calls
+(`service.Create` / `Update` / `Delete`) at the correct stage, honoring filtering attributes and rank:
+
+```csharp
+context.UsePipelineSimulation = true;
+context.RegisterPluginStep<AccountPlugin>("Create", ProcessingStepStage.Postoperation);
+
+service.Create(new Entity("account") { ["name"] = "Contoso" }); // AccountPlugin runs automatically
+```
+
+---
+
+## Plugin Execution Tracing & Assertions
+
+Every plugin execution (explicit or pipeline-fired) is recorded, so you can assert what ran:
+
+```csharp
+context.AssertPluginExecuted<AccountPlugin>();              // ran at least once
+context.AssertPluginExecuted<AccountPlugin>("Create");      // ran for the Create message
+context.AssertPluginExecutedTimes<AccountPlugin>(1);        // ran exactly once
+context.AssertPluginNotExecuted<ValidationPlugin>();        // never ran
+
+foreach (var rec in context.PluginExecutions)              // structured execution log
+    Console.WriteLine($"{rec.Stage} {rec.MessageName} {rec.PluginType.Name}");
+
+Console.WriteLine(context.GetPluginStepTrace());           // human-readable dump
+context.ClearPluginExecutions();
+```
+
+---
+
+## Assertion Helpers
+
+Fluent, test-runner-neutral assertions over the in-memory data:
+
+```csharp
+context.AssertExists("account", accountId);
+context.AssertDoesNotExist("account", accountId);
+context.AssertAttributeValue("account", accountId, "name", "Contoso");
+context.AssertHasAttribute("account", accountId, "name");
+context.AssertAttributeNull("account", accountId, "fax");
+context.AssertAssociated("account", accountId, "contact", contactId, "account_contacts");
+context.AssertRecordCount("account", 3);
+```
+
+---
+
+## Relationship Cascades
+
+Simulate Dataverse cascade behavior on delete. Register from metadata, or with the convenience helper:
+
+```csharp
+context.AddCascadeDeleteRelationship(
+    schemaName: "account_contacts",
+    referencedEntity: "account",      // parent
+    referencingEntity: "contact",     // child
+    referencingAttribute: "parentcustomerid",
+    deleteBehavior: CascadeType.Cascade);   // or RemoveLink / Restrict
+
+service.Delete("account", accountId);  // child contacts are cascade-deleted
+```
+
+`CascadeConfiguration` on initialized `EntityMetadata` is auto-applied. Restrict throws and leaves data
+unchanged when children exist; RemoveLink nulls the child lookup. (Share/Reparent are not yet simulated.)
+
+Self-referential hierarchies reject circular references on Create/Update, matching Dataverse:
+
+```csharp
+context.AddSelfReferentialHierarchy("account", "parentaccountid");
+// service.Update setting A.parentaccountid = B when B.parentaccountid = A throws:
+//   "Creating this parental association would create a loop in account hierarchy."
+```
+
+Hierarchies are also auto-detected from self-referential 1:N `EntityMetadata`. The guard catches both
+direct self-references and transitive loops, and is inert unless a hierarchy is registered.
+
+---
+
+## Elastic Tables
+
+```csharp
+context.MarkAsElasticTable("contoso_telemetry");
+context.IsElasticTable("contoso_telemetry"); // true (also auto-detected from EntityMetadata.TableType)
+
+// partitionid + ttlinseconds round-trip; bulk messages work; opt-in TTL purge:
+var removed = context.RemoveExpiredElasticRecords("contoso_telemetry", DateTime.UtcNow);
+```
+
+Elastic limitations are enforced: multi-record transactions (`ExecuteTransaction`) and
+`Associate`/`Disassociate` against an elastic table throw, matching Dataverse.
+
 ---
 
 ## Supported SDK Messages
 
-DataverseFakes supports **62+ standard CRM messages**:
+DataverseFakes supports **70+ standard CRM messages**:
 
 | Category | Messages |
 |----------|----------|
@@ -131,7 +227,8 @@ DataverseFakes supports **62+ standard CRM messages**:
 | **Teams** | AddMembersTeam, RemoveMembersTeam |
 | **Queues** | AddToQueue, PickFromQueue, RemoveFromQueue |
 | **Sales** | QualifyLead, WinOpportunity, LoseOpportunity, CloseQuote, WinQuote, ReviseQuote, CloseIncident |
-| **Metadata** | CreateEntity, UpdateEntity, DeleteEntity, RetrieveEntity, RetrieveAttribute, RetrieveRelationship, RetrieveMetadataChanges, CRUD OptionSets |
+| **Entity Metadata** | CreateEntity, UpdateEntity, DeleteEntity, RetrieveEntity, RetrieveAllEntities, RetrieveAttribute, CreateAttribute, UpdateAttribute, DeleteAttribute, RetrieveRelationship, RetrieveMetadataChanges |
+| **OptionSet Metadata** | CreateOptionSet, UpdateOptionSet, DeleteOptionSet, RetrieveOptionSet, RetrieveAllOptionSets, InsertOptionValue, UpdateOptionValue, InsertStatusValue, UpdateStateValue |
 | **Utility** | WhoAmI, RetrieveVersion, CalculateRollupField, InitializeFrom, FetchXmlToQueryExpression, SendEmail, PublishXml |
 
 ---
@@ -206,6 +303,8 @@ service.Execute(new UpsertRequest { Target = upsert });
 | Business Rules | Client-side business rules are not simulated |
 | Real-time Workflows | Workflows and flows are not automatically triggered |
 | File/Image Attributes | Limited support for file and image column types |
+| OOB cascade rules | Out-of-box cascade behaviors are not built in — register them with `AddCascadeDeleteRelationship(...)` or supply `CascadeConfiguration` via `InitializeMetadata` |
+| Labels without metadata | `FormattedValues` use configured labels only when attribute metadata is loaded; without it, option sets fall back to the numeric value and booleans to "Yes"/"No" (Dataverse's default two-option labels, which differ from customized labels like "Allow") |
 
 ---
 
@@ -214,10 +313,17 @@ service.Execute(new UpsertRequest { Target = upsert });
 ```bash
 build.bat              # Restore, build, and test
 build.bat test         # Run tests only
-build.bat pack         # Create NuGet package
+build.bat pack         # Create NuGet package (+ symbol package)
 ```
 
-**Target Platform**: Dynamics 365 v9.x and later (.NET Framework 4.6.2)
+**Target Platforms**: Dynamics 365 v9.x and later. The library multi-targets **`net462`**, **`net48`**,
+and **`net10.0`**. The .NET Framework legs build against the `Microsoft.CrmSdk.*` assemblies; the `net10.0`
+leg builds against `Microsoft.PowerPlatform.Dataverse.Client` (same `Microsoft.Xrm.Sdk` identity as modern
+consumers). Workflow/CodeActivity simulation (`ExecuteCodeActivity`) is .NET Framework only; `XrmRealContext`
+(live-connect) works on all legs (via `ServiceClient` on `net10.0`).
+
+The package ships **Source Link** and a **symbol package (`.snupkg`)** so you can step into the framework
+while debugging.
 
 ---
 

@@ -1,0 +1,23 @@
+<Project>
+
+  <!--
+    Repo-wide build properties. Scoped to SDK-style projects so the legacy
+    DevToolkitSamples project (non-SDK, packages.config-era) is left untouched.
+  -->
+  <PropertyGroup Condition="'$(UsingMicrosoftNETSdk)' == 'true'">
+    <!-- Reproducible builds -->
+    <Deterministic>true</Deterministic>
+    <!-- Set automatically by GitHub Actions; enables deterministic source paths in CI -->
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+
+    <!-- Source Link: embed repo info + untracked sources, publish repo URL, portable PDBs -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(UsingMicrosoftNETSdk)' == 'true'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

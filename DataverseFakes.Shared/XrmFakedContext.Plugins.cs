@@ -272,6 +272,9 @@ namespace DataverseFakes
             // Validate parameter types before execution to match real CRM/Dataverse behavior
             ValidatePluginContextParameterTypes(ctx);
 
+            // Record this execution in the structured trace (captures all paths)
+            RecordPluginExecution(ctx, instance);
+
             var fakedServiceProvider = GetFakedServiceProvider(ctx);
 
             var fakedPlugin = A.Fake<IPlugin>();
@@ -302,21 +305,11 @@ namespace DataverseFakes
             var ctx = GetDefaultPluginContext();
             ctx.InputParameters.AddRange(inputParameters);
             ctx.OutputParameters.AddRange(outputParameters);
-            ctx.PreEntityImages.AddRange(preEntityImages);
-            ctx.PostEntityImages.AddRange(postEntityImages);
+            if (preEntityImages != null) ctx.PreEntityImages.AddRange(preEntityImages);
+            if (postEntityImages != null) ctx.PostEntityImages.AddRange(postEntityImages);
 
-            var fakedServiceProvider = GetFakedServiceProvider(ctx);
-
-            var fakedPlugin = A.Fake<IPlugin>();
-            A.CallTo(() => fakedPlugin.Execute(A<IServiceProvider>._))
-                .Invokes((IServiceProvider provider) =>
-                {
-                    var plugin = new T();
-                    plugin.Execute(fakedServiceProvider);
-                });
-
-            fakedPlugin.Execute(fakedServiceProvider); //Execute the plugin
-            return fakedPlugin;
+            // Route through the central funnel so execution is recorded
+            return this.ExecutePluginWith(ctx, new T());
         }
 
         /// <summary>
@@ -359,27 +352,16 @@ namespace DataverseFakes
         public IPlugin ExecutePluginWithConfigurations<T>(XrmFakedPluginExecutionContext plugCtx, T instance, string unsecureConfiguration="", string secureConfiguration="")
             where T : class, IPlugin
         {
-            var fakedServiceProvider = GetFakedServiceProvider(plugCtx);
+            var pluginType = typeof(T);
+            var constructors = pluginType.GetConstructors();
 
-            var fakedPlugin = A.Fake<IPlugin>();
+            if (!constructors.Any(c => c.GetParameters().Length == 2 && c.GetParameters().All(param => param.ParameterType == typeof(string))))
+            {
+                throw new ArgumentException("The plugin you are trying to execute does not specify a constructor for passing in two configuration strings.");
+            }
 
-            A.CallTo(() => fakedPlugin.Execute(A<IServiceProvider>._))
-                .Invokes((IServiceProvider provider) =>
-                {
-                    var pluginType = typeof(T);
-                    var constructors = pluginType.GetConstructors();
-
-                    if (!constructors.Any(c => c.GetParameters().Length == 2 && c.GetParameters().All(param => param.ParameterType == typeof(string))))
-                    {
-                        throw new ArgumentException("The plugin you are trying to execute does not specify a constructor for passing in two configuration strings.");
-                    }
-
-                    var plugin = instance;
-                    plugin.Execute(fakedServiceProvider);
-                });
-
-            fakedPlugin.Execute(fakedServiceProvider); //Execute the plugin
-            return fakedPlugin;
+            // Route through the central funnel so execution is recorded
+            return this.ExecutePluginWith(plugCtx, instance);
         }
 
         /// <summary>

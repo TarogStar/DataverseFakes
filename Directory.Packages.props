@@ -1,0 +1,41 @@
+<Project>
+
+  <!--
+    Central Package Management (CPM). All NuGet package versions for the SDK-style
+    projects (DataverseFakes, DataverseFakes.Tests, DataverseFakes.Smoke.Net10) are
+    declared here. Individual <PackageReference> elements must NOT carry a Version.
+    The legacy DevToolkitSamples project uses <Reference> HintPaths (no PackageReference)
+    and is unaffected.
+  -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Dynamics 365 / Dataverse SDK -->
+    <PackageVersion Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.60" />
+    <PackageVersion Include="Microsoft.CrmSdk.Workflow" Version="9.0.2.60" />
+    <PackageVersion Include="Microsoft.CrmSdk.XrmTooling.CoreAssembly" Version="9.1.1.65" />
+    <PackageVersion Include="Microsoft.CrmSdk.Deployment" Version="9.0.2.34" />
+    <PackageVersion Include="Microsoft.PowerPlatform.Dataverse.Client" Version="1.2.10" />
+
+    <!-- Mocking -->
+    <PackageVersion Include="FakeItEasy" Version="8.3.0" />
+
+    <!-- WCF / crypto shims (net10 leg; pinned to override transitive vulnerable versions) -->
+    <PackageVersion Include="System.ServiceModel.Http" Version="8.1.2" />
+    <PackageVersion Include="System.ServiceModel.Primitives" Version="8.1.2" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="8.0.3" />
+
+    <!-- Test stack -->
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+
+    <!-- Source Link (debugging into the package) -->
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

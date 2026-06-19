@@ -1,0 +1,107 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Full net10.0 test leg — runs the SAME shared test suite as DataverseFakes.Tests (net462)
+    against the net10.0 asset of the multi-target DataverseFakes library.
+
+    Intentionally NOT added to DataverseFakes.sln: it must consume the net10.0 asset
+    of DataverseFakes in isolation (against Microsoft.PowerPlatform.Dataverse.Client)
+    so that `dotnet build DataverseFakes.sln` semantics are unchanged. It is built and
+    run by its own CI step in .github/workflows/ci.yml. Run locally with:
+      dotnet test DataverseFakes.Tests.Net10\DataverseFakes.Tests.Net10.csproj -c Release
+
+    FW-only files excluded below (see "Compile Remove" section for full list + reasons).
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>DataverseFakes.Tests.Net10</AssemblyName>
+    <RootNamespace>DataverseFakes.Tests</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <IsPackable>false</IsPackable>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>TRACE;DEBUG;FAKE_XRM_EASY_9</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DefineConstants>TRACE;FAKE_XRM_EASY_9</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- xUnit test framework. Versions centralized in Directory.Packages.props (CPM). -->
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+
+    <!-- Cross-platform Dataverse SDK (same as library's net10 leg) -->
+    <PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" />
+
+    <!-- Mocking framework -->
+    <PackageReference Include="FakeItEasy" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Library under test — consumes net10.0 asset automatically -->
+    <ProjectReference Include="..\DataverseFakes\DataverseFakes.csproj" />
+  </ItemGroup>
+
+  <!-- Pull in ALL shared test code (wildcard include) -->
+  <Import Project="..\DataverseFakes.Tests.Shared\DataverseFakes.Tests.Shared.projitems" Label="Shared" />
+
+  <!--
+    ══════════════════════════════════════════════════════════════════════════
+    FW-ONLY FILE EXCLUSIONS — every excluded file listed with a one-line reason
+    Rule: only exclude for COMPILE errors caused by FW-only APIs.
+           NEVER exclude to hide a runtime behavioral failure.
+    ══════════════════════════════════════════════════════════════════════════
+
+    1. CodeActivitiesForTesting\AddActivity.cs
+       Reason: derives from CodeActivity<T> (System.Activities — FW-only, not available on net10).
+
+    2. CodeActivitiesForTesting\AddActivityWithConstant.cs
+       Reason: derives from CodeActivity<T> (System.Activities — FW-only).
+
+    3. CodeActivitiesForTesting\CheckContextPropertyActivity.cs
+       Reason: derives from CodeActivity<T> and references IWorkflowContext (System.Activities — FW-only).
+
+    4. CodeActivitiesForTesting\CreateTaskActivity.cs
+       Reason: derives from CodeActivity<T> (System.Activities — FW-only).
+
+    5. FakeContextTests\FakeContextTestCodeActivities.cs
+       Reason: calls XrmFakedContext.ExecuteCodeActivity<T>() which is excluded from the library
+               on net10 (XrmFakedContext.CodeActivities.cs is removed for .NETCoreApp).
+
+    6. Tracing\XrmFakeTracingExample.cs
+       Reason: one test calls ExecuteCodeActivity<AddActivity>() — FW-only API (see #5),
+               and AddActivity itself is excluded (see #1). The other three tests in this
+               file are cross-platform but cannot be split without editing the shared file.
+
+    7. IntegrationTests\DataverseDateTimeInvestigation.cs
+       Reason: uses Microsoft.Xrm.Tooling.Connector.CrmServiceClient which is net462-only
+               (the cross-platform equivalent is Microsoft.PowerPlatform.Dataverse.Client.ServiceClient).
+               All tests in this file are already [Fact(Skip=...)]; excluded for compile, not behavior.
+
+    8. FakeContextTests\QueryTests\BusinessIdTests.cs
+       Reason: calls XrmFakedContext.GetDefaultWorkflowContext() and uses XrmFakedWorkflowContext,
+               both of which live in XrmFakedContext.CodeActivities.cs / XrmFakedWorkflowContext.cs
+               — excluded from the library on net10.
+  -->
+  <ItemGroup>
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Tests.Shared\CodeActivitiesForTesting\AddActivity.cs" />
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Tests.Shared\CodeActivitiesForTesting\AddActivityWithConstant.cs" />
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Tests.Shared\CodeActivitiesForTesting\CheckContextPropertyActivity.cs" />
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Tests.Shared\CodeActivitiesForTesting\CreateTaskActivity.cs" />
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Tests.Shared\FakeContextTests\FakeContextTestCodeActivities.cs" />
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Tests.Shared\Tracing\XrmFakeTracingExample.cs" />
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Tests.Shared\IntegrationTests\DataverseDateTimeInvestigation.cs" />
+    <Compile Remove="$(MSBuildThisFileDirectory)..\DataverseFakes.Tests.Shared\FakeContextTests\QueryTests\BusinessIdTests.cs" />
+  </ItemGroup>
+
+</Project>

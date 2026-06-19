@@ -14,18 +14,24 @@
     <!-- NuGet package metadata -->
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>DataverseFakes.Community</PackageId>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>DataverseFakes Community Contributors</Authors>
     <Company>DataverseFakes Community</Company>
     <Product>DataverseFakes Community Edition</Product>
-    <Description>A modern, open-source unit testing framework for Dynamics 365 / Dataverse. Mock IOrganizationService with an in-memory context for fast plugin, workflow, and custom code testing. Supports 62+ SDK messages, FetchXML, QueryExpression, pipeline simulation, and more.</Description>
+    <Description>A modern, open-source unit testing framework for Dynamics 365 / Dataverse. Mock IOrganizationService with an in-memory context for fast plugin, workflow, and custom code testing. Supports 70+ SDK messages, FetchXML, QueryExpression, pipeline simulation, plugin tracing, relationship cascades, elastic tables, and more.</Description>
     <PackageProjectUrl>https://github.com/TarogStar/DataverseFakes</PackageProjectUrl>
     <RepositoryUrl>https://github.com/TarogStar/DataverseFakes.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Dynamics365 CRM CommonDataService PowerPlatform UnitTesting Mocking Testing Plugins Workflows DataverseFakes Dataverse Community OpenSource</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>FakeXrmEasyLogo_128x128.png</PackageIcon>
     <Copyright>Copyright © DataverseFakes Community Contributors</Copyright>
+    <PackageReleaseNotes>See CHANGELOG.md at https://github.com/TarogStar/DataverseFakes</PackageReleaseNotes>
+
+    <!-- Symbol package (snupkg) + Source Link for step-into debugging -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
     <!-- Build settings -->
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -41,27 +47,26 @@
     <DefineConstants>TRACE;FAKE_XRM_EASY_9</DefineConstants>
   </PropertyGroup>
 
-  <!-- .NET Framework (net462 + net48): legacy CRM SDK -->
+  <!-- .NET Framework (net462 + net48): legacy CRM SDK. Versions are centralized in Directory.Packages.props. -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'">
-    <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.60" />
-    <PackageReference Include="Microsoft.CrmSdk.Workflow" Version="9.0.2.60" />
-    <PackageReference Include="Microsoft.CrmSdk.XrmTooling.CoreAssembly" Version="9.1.1.65" />
-    <PackageReference Include="Microsoft.CrmSdk.Deployment" Version="9.0.2.34" />
+    <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" />
+    <PackageReference Include="Microsoft.CrmSdk.Workflow" />
+    <PackageReference Include="Microsoft.CrmSdk.XrmTooling.CoreAssembly" />
+    <PackageReference Include="Microsoft.CrmSdk.Deployment" />
   </ItemGroup>
 
   <!-- .NET (net10): cross-platform Dataverse SDK (bundles modern Microsoft.Xrm.Sdk + Microsoft.Crm.Sdk.Proxy) -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)'=='.NETCoreApp'">
-    <PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" Version="1.2.10" />
+    <PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" />
   </ItemGroup>
 
   <!-- both legs -->
   <ItemGroup>
-    <PackageReference Include="FakeItEasy" Version="8.3.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="System.ServiceModel.Http" Version="8.1.2" PrivateAssets="all" />
-    <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" PrivateAssets="all" />
+    <PackageReference Include="FakeItEasy" />
+    <PackageReference Include="System.ServiceModel.Http" PrivateAssets="all" />
+    <PackageReference Include="System.ServiceModel.Primitives" PrivateAssets="all" />
     <!-- Pin patched version to override the vulnerable 8.0.2 pulled transitively by System.ServiceModel.* (NU1903: GHSA-37gx-xxp4-5rgx, GHSA-w3x6-4m5h-cxqf) -->
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="8.0.3" PrivateAssets="all" />
+    <PackageReference Include="System.Security.Cryptography.Xml" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'">
@@ -82,6 +87,9 @@
 
     <!-- Include README in NuGet package -->
     <None Include="..\README.md" Pack="true" PackagePath="\" />
+
+    <!-- Package icon (replaces deprecated nuspec <iconUrl>, fixes NU5048) -->
+    <None Include="..\FakeXrmEasyLogo_128x128.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <Import Project="..\DataverseFakes.Shared\DataverseFakes.Shared.projitems" Label="Shared" />

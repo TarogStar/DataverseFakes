@@ -117,6 +117,62 @@ namespace DataverseFakes
             }
         }
 
+        // ---- Plugin execution assertions -----------------------------------------------------
+
+        /// <summary>
+        /// Asserts that plugin <typeparamref name="T"/> was executed at least once in this context.
+        /// </summary>
+        public static void AssertPluginExecuted<T>(this XrmFakedContext context)
+            where T : IPlugin
+        {
+            if (!context.PluginExecutions.Any(r => r.PluginType == typeof(T)))
+            {
+                throw new XrmFakedAssertException(
+                    $"Expected plugin {typeof(T).Name} to have been executed, but it was not found in the execution trace.\n{context.GetPluginStepTrace()}");
+            }
+        }
+
+        /// <summary>
+        /// Asserts that plugin <typeparamref name="T"/> was executed at least once for the given message name.
+        /// </summary>
+        public static void AssertPluginExecuted<T>(this XrmFakedContext context, string messageName)
+            where T : IPlugin
+        {
+            if (!context.PluginExecutions.Any(r => r.PluginType == typeof(T) && string.Equals(r.MessageName, messageName, StringComparison.OrdinalIgnoreCase)))
+            {
+                throw new XrmFakedAssertException(
+                    $"Expected plugin {typeof(T).Name} to have been executed for message '{messageName}', but it was not found in the execution trace.\n{context.GetPluginStepTrace()}");
+            }
+        }
+
+        /// <summary>
+        /// Asserts that plugin <typeparamref name="T"/> was executed exactly <paramref name="expectedCount"/> times.
+        /// </summary>
+        public static void AssertPluginExecutedTimes<T>(this XrmFakedContext context, int expectedCount)
+            where T : IPlugin
+        {
+            var actual = context.PluginExecutions.Count(r => r.PluginType == typeof(T));
+            if (actual != expectedCount)
+            {
+                throw new XrmFakedAssertException(
+                    $"Expected plugin {typeof(T).Name} to have been executed {expectedCount} time(s), but it was executed {actual} time(s).\n{context.GetPluginStepTrace()}");
+            }
+        }
+
+        /// <summary>
+        /// Asserts that plugin <typeparamref name="T"/> was NOT executed at all in this context.
+        /// </summary>
+        public static void AssertPluginNotExecuted<T>(this XrmFakedContext context)
+            where T : IPlugin
+        {
+            var actual = context.PluginExecutions.Count(r => r.PluginType == typeof(T));
+            if (actual > 0)
+            {
+                throw new XrmFakedAssertException(
+                    $"Expected plugin {typeof(T).Name} to NOT have been executed, but it was executed {actual} time(s).\n{context.GetPluginStepTrace()}");
+            }
+        }
+
         // ---- Helpers -------------------------------------------------------------------------
 
         private static bool TryGetRecord(XrmFakedContext context, string entityName, Guid id, out Entity record)

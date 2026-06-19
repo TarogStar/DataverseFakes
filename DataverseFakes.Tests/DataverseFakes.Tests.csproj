@@ -24,31 +24,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- xUnit test framework -->
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+    <!-- xUnit test framework. Versions centralized in Directory.Packages.props. -->
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    
+
     <!-- User Secrets for secure configuration -->
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
 
     <!-- Dynamics 365 SDK (matching main project versions) -->
-    <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.60" />
-    <PackageReference Include="Microsoft.CrmSdk.Workflow" Version="9.0.2.60" />
-    <PackageReference Include="Microsoft.CrmSdk.XrmTooling.CoreAssembly" Version="9.1.1.65" />
-    <PackageReference Include="Microsoft.CrmSdk.Deployment" Version="9.0.2.34" />
+    <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" />
+    <PackageReference Include="Microsoft.CrmSdk.Workflow" />
+    <PackageReference Include="Microsoft.CrmSdk.XrmTooling.CoreAssembly" />
+    <PackageReference Include="Microsoft.CrmSdk.Deployment" />
 
     <!-- Mocking framework -->
-    <PackageReference Include="FakeItEasy" Version="8.3.0" />
-
-    <!-- JSON -->
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-
-    <!-- Identity -->
+    <PackageReference Include="FakeItEasy" />
   </ItemGroup>
 
   <ItemGroup>
