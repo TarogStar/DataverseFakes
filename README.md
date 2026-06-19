@@ -303,6 +303,8 @@ service.Execute(new UpsertRequest { Target = upsert });
 | Business Rules | Client-side business rules are not simulated |
 | Real-time Workflows | Workflows and flows are not automatically triggered |
 | File/Image Attributes | Limited support for file and image column types |
+| OOB cascade rules | Out-of-box cascade behaviors are not built in — register them with `AddCascadeDeleteRelationship(...)` or supply `CascadeConfiguration` via `InitializeMetadata` |
+| Labels without metadata | `FormattedValues` use configured labels only when attribute metadata is loaded; without it, option sets fall back to the numeric value and booleans to "Yes"/"No" (Dataverse's default two-option labels, which differ from customized labels like "Allow") |
 
 ---
 
