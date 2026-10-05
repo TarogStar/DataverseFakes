@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2026-10-04
+
+### Fixed
+- **Concurrent `RetrieveMultiple` / `Execute` returned another call's result** (#7) - the faked
+  `IOrganizationService` passed results through a shared variable, so parallel calls on the same service
+  could silently get a different query's (often empty) collection.
+- **`RemoveUserFromRecordTeamRequest` reported as "not yet supported"** (#6) - the executor registered
+  under its own type instead of the request type.
+- **`RemoveUserFromRecordTeamRequest` could remove the wrong user** - the team membership lookup now
+  matches on both team and user.
+- `AddUserToRecordTeam` / `RemoveUserFromRecordTeam` "User does not exist" errors now report the user id
+  instead of the team template id.
+
 ## [1.3.0] - 2026-06-19
 
 ### Added

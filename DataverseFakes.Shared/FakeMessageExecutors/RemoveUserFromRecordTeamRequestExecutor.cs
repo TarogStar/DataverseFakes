@@ -60,7 +60,7 @@ namespace DataverseFakes.FakeMessageExecutors
             Entity user = ctx.CreateQuery("systemuser").FirstOrDefault(p => p.Id == systemuserId);
             if (user == null)
             {
-                throw new FaultException<OrganizationServiceFault>(new OrganizationServiceFault(), "User with id=" + teamTemplateId + " does not exist");
+                throw new FaultException<OrganizationServiceFault>(new OrganizationServiceFault(), "User with id=" + systemuserId + " does not exist");
             }
 
             IOrganizationService service = ctx.GetOrganizationService();
@@ -75,7 +75,9 @@ namespace DataverseFakes.FakeMessageExecutors
                 };
             }
                 
-            Entity tm = ctx.CreateQuery("teammembership").FirstOrDefault(p => (Guid)p["teamid"] == team.Id);
+            Entity tm = ctx.CreateQuery("teammembership").FirstOrDefault(p =>
+                p.GetAttributeValue<Guid>("teamid") == team.Id &&
+                p.GetAttributeValue<Guid>("systemuserid") == systemuserId);
             if (tm != null)
             {
                 service.Delete(tm.LogicalName, tm.Id);
@@ -90,7 +92,7 @@ namespace DataverseFakes.FakeMessageExecutors
         /// <summary>
         /// Gets the type of request this executor is responsible for
         /// </summary>
-        /// <returns>The type of RemoveUserFromRecordTeamRequestExecutor</returns>
+        /// <returns>The type of RemoveUserFromRecordTeamRequest</returns>
         public Type GetResponsibleRequestType()
         {
             return typeof(RemoveUserFromRecordTeamRequest);

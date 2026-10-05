@@ -62,7 +62,7 @@ namespace DataverseFakes.FakeMessageExecutors
             Entity user = ctx.CreateQuery("systemuser").FirstOrDefault(p => p.Id == systemuserId);
             if (user == null)
             {
-                throw new FaultException<OrganizationServiceFault>(new OrganizationServiceFault(), "User with id=" + teamTemplateId + " does not exist");
+                throw new FaultException<OrganizationServiceFault>(new OrganizationServiceFault(), "User with id=" + systemuserId + " does not exist");
             }
 
 
