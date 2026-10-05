@@ -42,6 +42,8 @@
 
     <!-- Cross-platform Dataverse SDK (same as library's net10 leg) -->
     <PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" />
+    <!-- Pin over the vulnerable transitive version from Dataverse.Client -->
+    <PackageReference Include="System.Security.Cryptography.Xml" />
 
     <!-- Mocking framework -->
     <PackageReference Include="FakeItEasy" />

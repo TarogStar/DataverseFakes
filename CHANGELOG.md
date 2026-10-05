@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2026-10-04
+
+### Fixed
+- **Concurrent `RetrieveMultiple` / `Execute` returned another call's result** (#7) - the faked
+  `IOrganizationService` passed results through a shared variable, so parallel calls on the same service
+  could silently get a different query's (often empty) collection.
+- **`RemoveUserFromRecordTeamRequest` reported as "not yet supported"** (#6) - the executor registered
+  under its own type instead of the request type.
+- **`RemoveUserFromRecordTeamRequest` could remove the wrong user** - the team membership lookup now
+  matches on both team and user.
+- **Record (access) teams are now per record** - `AddUserToRecordTeam` creates one team per record and
+  template (`regardingobjectid`, `teamtype` = Access) instead of sharing a single team across every record
+  using that template; `RemoveUserFromRecordTeam` targets the record's team. Teams seeded without
+  `regardingobjectid` still match any record. Teams without a `teamtemplateid` no longer throw
+  `KeyNotFoundException` during the lookup. **Behavior change:** tests that asserted a single `team` per
+  template across several records, or seeded a team whose `regardingobjectid` points at a different
+  record, will now see a separate team per record.
+- **`AddUserToRecordTeam` is idempotent** - adding a user who is already on the record's team no longer
+  creates a duplicate `teammembership`, and the team's `principalobjectaccess` share on the record is
+  created once rather than once per Add.
+- **`RemoveUserFromRecordTeam` only revokes team access** - it revokes the user's access only when it
+  actually removed a membership, so a user who wasn't on the team keeps any direct share of the record.
+  It also removes every matching membership (not just the first), and keeps the team's own share, which
+  the team's other members still rely on. Known limitation: the fake tracks one access entry per user, so
+  a user who was both directly shared and on the team loses the direct share too when removed.
+  Membership and share lookups accept ids stored as either `Guid` or `EntityReference`.
+- `AddUserToRecordTeam` / `RemoveUserFromRecordTeam` "User does not exist" errors now report the user id
+  instead of the team template id.
+
+### Changed
+- Bumped `System.Security.Cryptography.Xml` 8.0.3 -> 8.0.4 (private, net10 leg; also pinned in the
+  net10 test projects over the transitive 8.0.2 from Dataverse.Client) and `Microsoft.SourceLink.GitHub`
+  8.0.0 -> 10.0.401 (build-only) to clear NU1902/NU1903 advisories. Neither is a consumer-facing
+  dependency; the package's dependency list is unchanged from 1.3.0.
+- Publish workflow now runs the net10 smoke and full test legs before pushing to NuGet, and fails fast
+  if the pushed tag doesn't match `<Version>` in `DataverseFakes.csproj`.
+
 ## [1.3.0] - 2026-06-19
 
 ### Added
