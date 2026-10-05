@@ -128,11 +128,17 @@ namespace DataverseFakes.FakeMessageExecutors
         {
             var candidates = ctx.CreateQuery("team")
                 .AsEnumerable()
-                .Where(t => t.GetAttributeValue<EntityReference>("teamtemplateid")?.Id == teamTemplateId)
+                .Where(t => LookupOrNull(t, "teamtemplateid")?.Id == teamTemplateId)
                 .ToList();
 
-            return candidates.FirstOrDefault(t => t.GetAttributeValue<EntityReference>("regardingobjectid")?.Id == record.Id)
-                ?? candidates.FirstOrDefault(t => t.GetAttributeValue<EntityReference>("regardingobjectid") == null);
+            return candidates.FirstOrDefault(t => LookupOrNull(t, "regardingobjectid")?.Id == record.Id)
+                ?? candidates.FirstOrDefault(t => !t.Contains("regardingobjectid") || t["regardingobjectid"] == null);
+        }
+
+        // Tolerates seeded values of the wrong type instead of throwing InvalidCastException.
+        private static EntityReference LookupOrNull(Entity e, string attribute)
+        {
+            return e.Contains(attribute) ? e[attribute] as EntityReference : null;
         }
     }
 }
