@@ -79,6 +79,8 @@ namespace DataverseFakes.FakeMessageExecutors
             // Only revoke access that came from this team: a user who wasn't on it may still hold
             // a direct share of the record. The team's own share (principalobjectaccess) stays, since
             // the team and its other members keep their access to the record.
+            // Limitation: AccessRightsRepository keeps one entry per principal, so a user who was BOTH
+            // directly shared and on the team loses the direct share here too.
             if (memberships.Count > 0)
             {
                 ctx.AccessRightsRepository.RevokeAccessTo(target, user.ToEntityReference());

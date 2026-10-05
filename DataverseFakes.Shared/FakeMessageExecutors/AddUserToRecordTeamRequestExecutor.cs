@@ -93,8 +93,8 @@ namespace DataverseFakes.FakeMessageExecutors
 
             // One share (principalobjectaccess) per record and team, however many members the team has.
             var hasShare = ctx.CreateQuery("principalobjectaccess").AsEnumerable().Any(p =>
-                p.GetAttributeValue<Guid>("objectid") == target.Id &&
-                p.GetAttributeValue<Guid>("principalid") == team.Id);
+                IdOrEmpty(p, "objectid") == target.Id &&
+                IdOrEmpty(p, "principalid") == team.Id);
             if (!hasShare)
             {
                 service.Create(new Entity("principalobjectaccess")
@@ -154,15 +154,22 @@ namespace DataverseFakes.FakeMessageExecutors
         {
             return ctx.CreateQuery("teammembership")
                 .AsEnumerable()
-                .Where(m => m.GetAttributeValue<Guid>("teamid") == teamId &&
-                            m.GetAttributeValue<Guid>("systemuserid") == systemUserId)
+                .Where(m => IdOrEmpty(m, "teamid") == teamId &&
+                            IdOrEmpty(m, "systemuserid") == systemUserId)
                 .ToList();
         }
 
-        // Tolerates seeded values of the wrong type instead of throwing InvalidCastException.
+        // These tolerate seeded values of the wrong type instead of throwing InvalidCastException.
         private static EntityReference LookupOrNull(Entity e, string attribute)
         {
             return e.Contains(attribute) ? e[attribute] as EntityReference : null;
+        }
+
+        // Id stored either as a Guid or as an EntityReference.
+        private static Guid IdOrEmpty(Entity e, string attribute)
+        {
+            var value = e.Contains(attribute) ? e[attribute] : null;
+            return value is Guid id ? id : (value as EntityReference)?.Id ?? Guid.Empty;
         }
     }
 }
