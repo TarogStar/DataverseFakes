@@ -1,6 +1,5 @@
 ﻿#if FAKE_XRM_EASY_2013 || FAKE_XRM_EASY_2015 || FAKE_XRM_EASY_2016 || FAKE_XRM_EASY_365 || FAKE_XRM_EASY_9
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xrm.Sdk;
 using System.ServiceModel;
@@ -66,30 +65,48 @@ namespace DataverseFakes.FakeMessageExecutors
 
             IOrganizationService service = ctx.GetOrganizationService();
 
-            Entity team = AddUserToRecordTeamRequestExecutor.FindRecordTeam(ctx, target, teamTemplateId);
-            var memberships = team == null
-                ? new List<Entity>()
-                : AddUserToRecordTeamRequestExecutor.FindMemberships(ctx, team.Id, systemuserId);
+            var response = new RemoveUserFromRecordTeamResponse
+            {
+                ResponseName = "RemoveUserFromRecordTeam"
+            };
 
+            // No access team for this record yet: Dataverse succeeds and returns an empty AccessTeamId.
+            Entity team = AddUserToRecordTeamRequestExecutor.FindRecordTeam(ctx, target, teamTemplateId);
+            response.Results["AccessTeamId"] = team?.Id ?? Guid.Empty;
+            if (team == null)
+            {
+                return response;
+            }
+
+            // The user's access came from the team, so removing the membership is enough; any direct
+            // share the user holds is a separate principalobjectaccess row and is left alone.
+            var memberships = AddUserToRecordTeamRequestExecutor.FindMemberships(ctx, team.Id, systemuserId);
             foreach (var tm in memberships)
             {
                 service.Delete(tm.LogicalName, tm.Id);
             }
 
-            // Only revoke access that came from this team: a user who wasn't on it may still hold
-            // a direct share of the record. The team's own share (principalobjectaccess) stays, since
-            // the team and its other members keep their access to the record.
-            // Limitation: AccessRightsRepository keeps one entry per principal, so a user who was BOTH
-            // directly shared and on the team loses the direct share here too.
-            if (memberships.Count > 0)
+            // When the last member leaves a system-managed access team, Dataverse deletes the team and its
+            // share of the record. Removing a non-member changes nothing, and teams that weren't created by
+            // AddUserToRecordTeam (not systemmanaged, e.g. seeded by a test) are never auto-deleted.
+            var lastMemberLeft = memberships.Count > 0 &&
+                !ctx.CreateQuery("teammembership").AsEnumerable().Any(m => m.GetAttributeValue<Guid>("teamid") == team.Id);
+            if (lastMemberLeft && team.GetAttributeValue<bool>("systemmanaged"))
             {
-                ctx.AccessRightsRepository.RevokeAccessTo(target, user.ToEntityReference());
+                var teamShares = ctx.CreateQuery("principalobjectaccess").AsEnumerable()
+                    .Where(p => p.GetAttributeValue<Guid>("objectid") == target.Id &&
+                                p.GetAttributeValue<Guid>("principalid") == team.Id)
+                    .ToList();
+                foreach (var poa in teamShares)
+                {
+                    service.Delete(poa.LogicalName, poa.Id);
+                }
+
+                ctx.AccessRightsRepository.RevokeAccessTo(target, team.ToEntityReference());
+                service.Delete(team.LogicalName, team.Id);
             }
 
-            return new RemoveUserFromRecordTeamResponse
-            {
-                ResponseName = "RemoveUserFromRecordTeam"
-            };
+            return response;
         }
 
         /// <summary>

@@ -67,11 +67,14 @@ namespace DataverseFakes.Tests.FakeContextTests.RemoveUserFromRecordTeamRequestT
                 TeamTemplateId = teamTemplate.Id
             };
 
+            // The record is shared with the team (as AddUserToRecordTeam does); the user has access via membership.
             context.AccessRightsRepository.GrantAccessTo(account.ToEntityReference(), new PrincipalAccess
             {
-                Principal = user.ToEntityReference(),
+                Principal = team.ToEntityReference(),
                 AccessMask = AccessRights.ReadAccess
             });
+            Assert.Equal(AccessRights.ReadAccess,
+                context.AccessRightsRepository.RetrievePrincipalAccess(account.ToEntityReference(), user.ToEntityReference()).AccessRights);
 
             executor.Execute(req, context);
 

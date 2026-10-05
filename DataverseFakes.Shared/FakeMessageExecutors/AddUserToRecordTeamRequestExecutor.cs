@@ -70,11 +70,14 @@ namespace DataverseFakes.FakeMessageExecutors
             Entity team = FindRecordTeam(ctx, target, teamTemplateId);
             if (team == null)
             {
+                // Matches the system-managed access team Dataverse creates on first Add.
                 team = new Entity("team")
                 {
+                    ["name"] = $"{target.LogicalName} {target.Id}+{teamTemplateId}",
                     ["teamtemplateid"] = new EntityReference("teamtemplate", teamTemplateId),
                     ["regardingobjectid"] = target,
-                    ["teamtype"] = new OptionSetValue(AccessTeamType)
+                    ["teamtype"] = new OptionSetValue(AccessTeamType),
+                    ["systemmanaged"] = true
                 };
                 team.Id = service.Create(team);
             }
@@ -100,21 +103,28 @@ namespace DataverseFakes.FakeMessageExecutors
                 service.Create(new Entity("principalobjectaccess")
                 {
                     ["objectid"] = target.Id,
+                    ["objecttypecode"] = target.LogicalName,
                     ["principalid"] = team.Id,
-                    ["accessrightsmask"] = accessRightsMask
+                    ["principaltypecode"] = "team",
+                    ["accessrightsmask"] = accessRightsMask,
+                    ["inheritedaccessrightsmask"] = 0
                 });
             }
 
+            // The record is shared with the team, not the user: the user's access comes from membership,
+            // so it stays separate from any direct share the user has.
             ctx.AccessRightsRepository.GrantAccessTo(target, new PrincipalAccess
             {
-                Principal = user.ToEntityReference(),
+                Principal = team.ToEntityReference(),
                 AccessMask = (AccessRights)accessRightsMask
             });
-            
-            return new AddUserToRecordTeamResponse
+
+            var response = new AddUserToRecordTeamResponse
             {
                 ResponseName = "AddUserToRecordTeam"
             };
+            response.Results["AccessTeamId"] = team.Id;
+            return response;
         }
 
         /// <summary>
@@ -159,7 +169,8 @@ namespace DataverseFakes.FakeMessageExecutors
                 .ToList();
         }
 
-        // Tolerates seeded values of the wrong type instead of throwing InvalidCastException.
+        // Reads a lookup (teamtemplateid / regardingobjectid); a team missing it, or seeded with a
+        // non-lookup value, simply doesn't match.
         private static EntityReference LookupOrNull(Entity e, string attribute)
         {
             return e.Contains(attribute) ? e[attribute] as EntityReference : null;
