@@ -23,6 +23,12 @@ namespace DataverseFakes.Permissions
         }
 
         /// <summary>
+        /// Resolves the ids of the teams a user belongs to, so a user's access includes their teams'
+        /// shares (as in Dataverse). Set by <see cref="XrmFakedContext"/>; null means direct shares only.
+        /// </summary>
+        internal Func<Guid, IEnumerable<Guid>> TeamIdsForUser { get; set; }
+
+        /// <summary>
         /// Grants the specified rights to the security principal (user or team) for the specified record
         /// </summary>
         /// <param name="er">The record to which the access rights will be assigned.</param>
@@ -63,11 +69,18 @@ namespace DataverseFakes.Permissions
         public RetrievePrincipalAccessResponse RetrievePrincipalAccess(EntityReference er, EntityReference principal)
         {
             List<PrincipalAccess> accessList = GetAccessListForRecord(er);
-            PrincipalAccess pAcc = accessList.Where(pa => pa.Principal.Id == principal.Id).SingleOrDefault();
+            var principalIds = new HashSet<Guid> { principal.Id };
+            if (principal.LogicalName != "team" && TeamIdsForUser != null)
+            {
+                principalIds.UnionWith(TeamIdsForUser(principal.Id));
+            }
+
+            var matches = accessList.Where(pa => principalIds.Contains(pa.Principal.Id)).ToList();
             RetrievePrincipalAccessResponse resp = new RetrievePrincipalAccessResponse();
 
-            if (pAcc != null)
-                resp.Results["AccessRights"] = pAcc.AccessMask;
+            // Effective access is the union of the principal's own share and its teams' shares.
+            if (matches.Count > 0)
+                resp.Results["AccessRights"] = matches.Aggregate(AccessRights.None, (mask, pa) => mask | pa.AccessMask);
 
             return resp;
         }

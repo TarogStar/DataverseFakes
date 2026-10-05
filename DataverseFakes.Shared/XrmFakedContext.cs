@@ -229,7 +229,13 @@ namespace DataverseFakes
 
             EntityInitializerService = new DefaultEntityInitializerService();
 
-            AccessRightsRepository = new AccessRightsRepository();
+            AccessRightsRepository = new AccessRightsRepository
+            {
+                TeamIdsForUser = userId => CreateQuery("teammembership")
+                    .AsEnumerable()
+                    .Where(m => m.GetAttributeValue<Guid>("systemuserid") == userId)
+                    .Select(m => m.GetAttributeValue<Guid>("teamid"))
+            };
 
             SystemTimeZone = TimeZoneInfo.Local;
             DateBehaviour = DefaultDateBehaviour();
