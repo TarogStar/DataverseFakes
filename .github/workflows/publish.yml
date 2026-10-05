@@ -20,6 +20,16 @@ jobs:
         with:
           dotnet-version: '10.x'
 
+      # Fail fast if the tag doesn't match <Version> in the csproj; otherwise a tag pushed before the
+      # version bump would pack the previous version and --skip-duplicate would silently skip it.
+      - name: Verify tag matches package version
+        shell: pwsh
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          $version = dotnet msbuild DataverseFakes\DataverseFakes.csproj -getProperty:Version
+          if ("v$version" -ne $env:TAG) { throw "Tag $env:TAG does not match <Version>$version</Version> in DataverseFakes.csproj" }
+
       - name: Restore
         run: dotnet restore DataverseFakes.sln
 
@@ -28,6 +38,12 @@ jobs:
 
       - name: Test
         run: dotnet test DataverseFakes.Tests\DataverseFakes.Tests.csproj --configuration Release --no-build --verbosity normal
+
+      - name: Smoke test (net10 type identity)
+        run: dotnet test DataverseFakes.Smoke.Net10\DataverseFakes.Smoke.Net10.csproj --configuration Release
+
+      - name: Full test leg (net10 cross-platform)
+        run: dotnet test DataverseFakes.Tests.Net10\DataverseFakes.Tests.Net10.csproj --configuration Release
 
       # dotnet pack reads all package metadata from DataverseFakes.csproj and emits both
       # the .nupkg and (via IncludeSymbols/snupkg) the symbol package. This replaces the

@@ -71,6 +71,49 @@ namespace DataverseFakes.Tests.FakeContextTests.AddUserToRecordTeamRequestTests
             Assert.Equal((AccessRights)teamTemplate.DefaultAccessRightsMask, response.AccessRights);
 
         }
+
+        [Fact]
+        public void When_two_records_use_the_same_template_each_gets_its_own_access_team()
+        {
+            var context = new XrmFakedContext();
+            var teamTemplate = new TeamTemplate { Id = Guid.NewGuid() };
+            var user = new SystemUser { Id = Guid.NewGuid() };
+            var accountA = new Account { Id = Guid.NewGuid() };
+            var accountB = new Account { Id = Guid.NewGuid() };
+            // A team without a template must not break the lookup.
+            var unrelatedTeam = new Team { Id = Guid.NewGuid() };
+            context.Initialize(new Entity[] { teamTemplate, user, accountA, accountB, unrelatedTeam });
+            var service = context.GetOrganizationService();
+
+            foreach (var account in new[] { accountA, accountB })
+            {
+                service.Execute(new AddUserToRecordTeamRequest
+                {
+                    Record = account.ToEntityReference(),
+                    SystemUserId = user.Id,
+                    TeamTemplateId = teamTemplate.Id
+                });
+            }
+
+            var teams = context.CreateQuery<Team>().Where(t => t.TeamTemplateId != null).ToList();
+            Assert.Equal(2, teams.Count);
+            Assert.Contains(teams, t => t.RegardingObjectId.Id == accountA.Id);
+            Assert.Contains(teams, t => t.RegardingObjectId.Id == accountB.Id);
+            Assert.All(teams, t => Assert.Equal(1, t.GetAttributeValue<OptionSetValue>("teamtype").Value));
+
+            // Removing the user from record A leaves their membership on record B's team.
+            service.Execute(new RemoveUserFromRecordTeamRequest
+            {
+                Record = accountA.ToEntityReference(),
+                SystemUserId = user.Id,
+                TeamTemplateId = teamTemplate.Id
+            });
+
+            var teamB = teams.Single(t => t.RegardingObjectId.Id == accountB.Id);
+            var memberships = context.CreateQuery<TeamMembership>().ToList();
+            Assert.Single(memberships);
+            Assert.Equal(teamB.Id, memberships[0].TeamId);
+        }
     }
 }
 #endif

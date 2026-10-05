@@ -66,7 +66,7 @@ namespace DataverseFakes.FakeMessageExecutors
             IOrganizationService service = ctx.GetOrganizationService();
 
             ctx.AccessRightsRepository.RevokeAccessTo(target, user.ToEntityReference());
-            Entity team = ctx.CreateQuery("team").FirstOrDefault(p => ((EntityReference)p["teamtemplateid"]).Id == teamTemplateId);
+            Entity team = AddUserToRecordTeamRequestExecutor.FindRecordTeam(ctx, target, teamTemplateId);
             if (team == null)
             {
                 return new RemoveUserFromRecordTeamResponse

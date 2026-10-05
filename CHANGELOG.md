@@ -12,8 +12,20 @@ All notable changes to this project will be documented in this file.
   under its own type instead of the request type.
 - **`RemoveUserFromRecordTeamRequest` could remove the wrong user** - the team membership lookup now
   matches on both team and user.
+- **Record (access) teams are now per record** - `AddUserToRecordTeam` creates one team per record and
+  template (`regardingobjectid`, `teamtype` = Access) instead of sharing a single team across every record
+  using that template; `RemoveUserFromRecordTeam` targets the record's team. Teams seeded without
+  `regardingobjectid` still match any record. Teams without a `teamtemplateid` no longer throw
+  `KeyNotFoundException` during the lookup.
 - `AddUserToRecordTeam` / `RemoveUserFromRecordTeam` "User does not exist" errors now report the user id
   instead of the team template id.
+
+### Changed
+- Bumped `System.Security.Cryptography.Xml` 8.0.3 -> 8.0.4 (private, net10 leg) and
+  `Microsoft.SourceLink.GitHub` 8.0.0 -> 10.0.401 (build-only) to clear NU1902/NU1903 advisories.
+  Neither is a consumer-facing dependency.
+- Publish workflow now runs the net10 smoke and full test legs before pushing to NuGet, and fails fast
+  if the pushed tag doesn't match `<Version>` in `DataverseFakes.csproj`.
 
 ## [1.3.0] - 2026-06-19
 

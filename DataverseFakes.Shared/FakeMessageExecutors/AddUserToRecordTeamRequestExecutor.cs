@@ -66,12 +66,14 @@ namespace DataverseFakes.FakeMessageExecutors
             }
 
 
-            Entity team = ctx.CreateQuery("team").FirstOrDefault(p => ((EntityReference)p["teamtemplateid"]).Id == teamTemplateId);
+            Entity team = FindRecordTeam(ctx, target, teamTemplateId);
             if (team == null)
             {
                 team = new Entity("team")
                 {
-                    ["teamtemplateid"] = new EntityReference("teamtemplate", teamTemplateId)
+                    ["teamtemplateid"] = new EntityReference("teamtemplate", teamTemplateId),
+                    ["regardingobjectid"] = target,
+                    ["teamtype"] = new OptionSetValue(AccessTeamType)
                 };
                 team.Id = service.Create(team);
             }
@@ -110,6 +112,27 @@ namespace DataverseFakes.FakeMessageExecutors
         public Type GetResponsibleRequestType()
         {
             return typeof(AddUserToRecordTeamRequest);
+        }
+
+        /// <summary>
+        /// team.teamtype value for access teams.
+        /// </summary>
+        internal const int AccessTeamType = 1;
+
+        /// <summary>
+        /// Finds the access team for a record and team template. Access teams are per record, so a team
+        /// whose regardingobjectid is the record wins; a team seeded without regardingobjectid matches any
+        /// record, for backwards compatibility.
+        /// </summary>
+        internal static Entity FindRecordTeam(XrmFakedContext ctx, EntityReference record, Guid teamTemplateId)
+        {
+            var candidates = ctx.CreateQuery("team")
+                .AsEnumerable()
+                .Where(t => t.GetAttributeValue<EntityReference>("teamtemplateid")?.Id == teamTemplateId)
+                .ToList();
+
+            return candidates.FirstOrDefault(t => t.GetAttributeValue<EntityReference>("regardingobjectid")?.Id == record.Id)
+                ?? candidates.FirstOrDefault(t => t.GetAttributeValue<EntityReference>("regardingobjectid") == null);
         }
     }
 }
