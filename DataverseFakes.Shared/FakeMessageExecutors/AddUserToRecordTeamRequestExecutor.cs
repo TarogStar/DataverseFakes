@@ -1,5 +1,6 @@
 ﻿#if FAKE_XRM_EASY_2013 || FAKE_XRM_EASY_2015 || FAKE_XRM_EASY_2016 || FAKE_XRM_EASY_365 || FAKE_XRM_EASY_9
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xrm.Sdk;
 using System.ServiceModel;
@@ -78,25 +79,36 @@ namespace DataverseFakes.FakeMessageExecutors
                 team.Id = service.Create(team);
             }
 
-            Entity tm = new Entity("teammembership")
+            // Adding a user who is already on the record's team is a no-op, as in Dataverse.
+            if (!FindMemberships(ctx, team.Id, systemuserId).Any())
             {
-                ["systemuserid"] = systemuserId,
-                ["teamid"] = team.Id
-            };
-            tm.Id = service.Create(tm);
+                service.Create(new Entity("teammembership")
+                {
+                    ["systemuserid"] = systemuserId,
+                    ["teamid"] = team.Id
+                });
+            }
 
-            Entity poa = new Entity("principalobjectaccess")
+            var accessRightsMask = teamTemplate.Contains("defaultaccessrightsmask") ? teamTemplate["defaultaccessrightsmask"] : 0;
+
+            // One share (principalobjectaccess) per record and team, however many members the team has.
+            var hasShare = ctx.CreateQuery("principalobjectaccess").AsEnumerable().Any(p =>
+                p.GetAttributeValue<Guid>("objectid") == target.Id &&
+                p.GetAttributeValue<Guid>("principalid") == team.Id);
+            if (!hasShare)
             {
-                ["objectid"] = target.Id,
-                ["principalid"] = team.Id,
-                ["accessrightsmask"] = teamTemplate.Contains("defaultaccessrightsmask") ? teamTemplate["defaultaccessrightsmask"] : 0
-            };
-            poa.Id = service.Create(poa);
+                service.Create(new Entity("principalobjectaccess")
+                {
+                    ["objectid"] = target.Id,
+                    ["principalid"] = team.Id,
+                    ["accessrightsmask"] = accessRightsMask
+                });
+            }
 
             ctx.AccessRightsRepository.GrantAccessTo(target, new PrincipalAccess
             {
                 Principal = user.ToEntityReference(),
-                AccessMask = (AccessRights)poa["accessrightsmask"]
+                AccessMask = (AccessRights)accessRightsMask
             });
             
             return new AddUserToRecordTeamResponse
@@ -133,6 +145,18 @@ namespace DataverseFakes.FakeMessageExecutors
 
             return candidates.FirstOrDefault(t => LookupOrNull(t, "regardingobjectid")?.Id == record.Id)
                 ?? candidates.FirstOrDefault(t => !t.Contains("regardingobjectid") || t["regardingobjectid"] == null);
+        }
+
+        /// <summary>
+        /// Finds a user's memberships of a team.
+        /// </summary>
+        internal static List<Entity> FindMemberships(XrmFakedContext ctx, Guid teamId, Guid systemUserId)
+        {
+            return ctx.CreateQuery("teammembership")
+                .AsEnumerable()
+                .Where(m => m.GetAttributeValue<Guid>("teamid") == teamId &&
+                            m.GetAttributeValue<Guid>("systemuserid") == systemUserId)
+                .ToList();
         }
 
         // Tolerates seeded values of the wrong type instead of throwing InvalidCastException.

@@ -1,5 +1,6 @@
 ﻿#if FAKE_XRM_EASY_2013 || FAKE_XRM_EASY_2015 || FAKE_XRM_EASY_2016 || FAKE_XRM_EASY_365 || FAKE_XRM_EASY_9
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xrm.Sdk;
 using System.ServiceModel;
@@ -65,22 +66,22 @@ namespace DataverseFakes.FakeMessageExecutors
 
             IOrganizationService service = ctx.GetOrganizationService();
 
-            ctx.AccessRightsRepository.RevokeAccessTo(target, user.ToEntityReference());
             Entity team = AddUserToRecordTeamRequestExecutor.FindRecordTeam(ctx, target, teamTemplateId);
-            if (team == null)
-            {
-                return new RemoveUserFromRecordTeamResponse
-                {
-                    ResponseName = "RemoveUserFromRecordTeam"
-                };
-            }
-                
-            Entity tm = ctx.CreateQuery("teammembership").FirstOrDefault(p =>
-                p.GetAttributeValue<Guid>("teamid") == team.Id &&
-                p.GetAttributeValue<Guid>("systemuserid") == systemuserId);
-            if (tm != null)
+            var memberships = team == null
+                ? new List<Entity>()
+                : AddUserToRecordTeamRequestExecutor.FindMemberships(ctx, team.Id, systemuserId);
+
+            foreach (var tm in memberships)
             {
                 service.Delete(tm.LogicalName, tm.Id);
+            }
+
+            // Only revoke access that came from this team: a user who wasn't on it may still hold
+            // a direct share of the record. The team's own share (principalobjectaccess) stays, since
+            // the team and its other members keep their access to the record.
+            if (memberships.Count > 0)
+            {
+                ctx.AccessRightsRepository.RevokeAccessTo(target, user.ToEntityReference());
             }
 
             return new RemoveUserFromRecordTeamResponse

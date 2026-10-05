@@ -19,6 +19,13 @@ All notable changes to this project will be documented in this file.
   `KeyNotFoundException` during the lookup. **Behavior change:** tests that asserted a single `team` per
   template across several records, or seeded a team whose `regardingobjectid` points at a different
   record, will now see a separate team per record.
+- **`AddUserToRecordTeam` is idempotent** - adding a user who is already on the record's team no longer
+  creates a duplicate `teammembership`, and the team's `principalobjectaccess` share on the record is
+  created once rather than once per Add.
+- **`RemoveUserFromRecordTeam` only revokes team access** - it revokes the user's access only when it
+  actually removed a membership, so a user who wasn't on the team keeps any direct share of the record.
+  It also removes every matching membership (not just the first), and keeps the team's own share, which
+  the team's other members still rely on.
 - `AddUserToRecordTeam` / `RemoveUserFromRecordTeam` "User does not exist" errors now report the user id
   instead of the team template id.
 

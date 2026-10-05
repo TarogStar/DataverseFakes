@@ -114,6 +114,34 @@ namespace DataverseFakes.Tests.FakeContextTests.AddUserToRecordTeamRequestTests
             Assert.Single(memberships);
             Assert.Equal(teamB.Id, memberships[0].TeamId);
         }
+
+        [Fact]
+        public void When_the_same_user_is_added_twice_no_duplicate_membership_or_share_is_created()
+        {
+            var context = new XrmFakedContext();
+            var teamTemplate = new TeamTemplate { Id = Guid.NewGuid(), DefaultAccessRightsMask = (int)AccessRights.ReadAccess };
+            var user = new SystemUser { Id = Guid.NewGuid() };
+            var otherUser = new SystemUser { Id = Guid.NewGuid() };
+            var account = new Account { Id = Guid.NewGuid() };
+            context.Initialize(new Entity[] { teamTemplate, user, otherUser, account });
+            var service = context.GetOrganizationService();
+
+            foreach (var userId in new[] { user.Id, user.Id, otherUser.Id })
+            {
+                service.Execute(new AddUserToRecordTeamRequest
+                {
+                    Record = account.ToEntityReference(),
+                    SystemUserId = userId,
+                    TeamTemplateId = teamTemplate.Id
+                });
+            }
+
+            Assert.Single(context.CreateQuery<Team>().ToList());
+            Assert.Equal(2, context.CreateQuery<TeamMembership>().Count());
+            Assert.Single(context.CreateQuery("principalobjectaccess").ToList());
+            Assert.Equal(AccessRights.ReadAccess,
+                context.AccessRightsRepository.RetrievePrincipalAccess(account.ToEntityReference(), user.ToEntityReference()).AccessRights);
+        }
     }
 }
 #endif
