@@ -27,7 +27,6 @@ All notable changes to this project will be documented in this file.
   It also removes every matching membership (not just the first), and keeps the team's own share, which
   the team's other members still rely on. Known limitation: the fake tracks one access entry per user, so
   a user who was both directly shared and on the team loses the direct share too when removed.
-  Membership and share lookups accept ids stored as either `Guid` or `EntityReference`.
 - `AddUserToRecordTeam` / `RemoveUserFromRecordTeam` "User does not exist" errors now report the user id
   instead of the team template id.
 
