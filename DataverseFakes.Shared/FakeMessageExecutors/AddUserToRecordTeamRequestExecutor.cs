@@ -169,7 +169,8 @@ namespace DataverseFakes.FakeMessageExecutors
                 .ToList();
         }
 
-        // Tolerates seeded values of the wrong type instead of throwing InvalidCastException.
+        // Reads a lookup (teamtemplateid / regardingobjectid); a team missing it, or seeded with a
+        // non-lookup value, simply doesn't match.
         private static EntityReference LookupOrNull(Entity e, string attribute)
         {
             return e.Contains(attribute) ? e[attribute] as EntityReference : null;

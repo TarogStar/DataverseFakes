@@ -80,15 +80,18 @@ namespace DataverseFakes.FakeMessageExecutors
 
             // The user's access came from the team, so removing the membership is enough; any direct
             // share the user holds is a separate principalobjectaccess row and is left alone.
-            foreach (var tm in AddUserToRecordTeamRequestExecutor.FindMemberships(ctx, team.Id, systemuserId))
+            var memberships = AddUserToRecordTeamRequestExecutor.FindMemberships(ctx, team.Id, systemuserId);
+            foreach (var tm in memberships)
             {
                 service.Delete(tm.LogicalName, tm.Id);
             }
 
-            // When the last member leaves, Dataverse deletes the access team and its share of the record.
-            var hasMembers = ctx.CreateQuery("teammembership").AsEnumerable()
-                .Any(m => m.GetAttributeValue<Guid>("teamid") == team.Id);
-            if (!hasMembers)
+            // When the last member leaves a system-managed access team, Dataverse deletes the team and its
+            // share of the record. Removing a non-member changes nothing, and teams that weren't created by
+            // AddUserToRecordTeam (not systemmanaged, e.g. seeded by a test) are never auto-deleted.
+            var lastMemberLeft = memberships.Count > 0 &&
+                !ctx.CreateQuery("teammembership").AsEnumerable().Any(m => m.GetAttributeValue<Guid>("teamid") == team.Id);
+            if (lastMemberLeft && team.GetAttributeValue<bool>("systemmanaged"))
             {
                 var teamShares = ctx.CreateQuery("principalobjectaccess").AsEnumerable()
                     .Where(p => p.GetAttributeValue<Guid>("objectid") == target.Id &&

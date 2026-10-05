@@ -136,6 +136,50 @@ namespace DataverseFakes.Tests.FakeContextTests.AccessTeamLifecycleTests
 
             Assert.Equal(AccessRights.ReadAccess, AccessOf(_userA));
         }
+
+        [Fact]
+        public void A_member_with_a_direct_share_has_both_until_removed_from_the_team()
+        {
+            _context.AccessRightsRepository.GrantAccessTo(_record.ToEntityReference(), new PrincipalAccess
+            {
+                Principal = _userA.ToEntityReference(),
+                AccessMask = AccessRights.ShareAccess
+            });
+            Add(_userA);
+            Add(_userB);
+
+            Assert.Equal((AccessRights)23 | AccessRights.ShareAccess, AccessOf(_userA));
+
+            Remove(_userA);
+
+            Assert.Single(_context.CreateQuery<Team>().ToList());
+            Assert.Equal(AccessRights.ShareAccess, AccessOf(_userA));
+        }
+
+        [Fact]
+        public void A_team_not_created_by_add_is_never_auto_deleted()
+        {
+            // Seeded like most existing tests do: template-based, but not systemmanaged.
+            var context = new XrmFakedContext();
+            var seededTeam = new Team { Id = Guid.NewGuid(), TeamTemplateId = _template.ToEntityReference() };
+            context.Initialize(new Entity[]
+            {
+                _template, _record, _userA, _userB, seededTeam,
+                new TeamMembership { Id = Guid.NewGuid(), ["systemuserid"] = _userA.Id, ["teamid"] = seededTeam.Id }
+            });
+            var service = context.GetOrganizationService();
+            Action<SystemUser> remove = user => service.Execute(new RemoveUserFromRecordTeamRequest
+            {
+                Record = _record.ToEntityReference(), SystemUserId = user.Id, TeamTemplateId = _template.Id
+            });
+
+            remove(_userB);  // non-member: nothing changes
+            Assert.Single(context.CreateQuery<Team>().ToList());
+
+            remove(_userA);  // last member leaves, but the team wasn't system-managed
+            Assert.Single(context.CreateQuery<Team>().ToList());
+            Assert.Empty(context.CreateQuery<TeamMembership>().ToList());
+        }
     }
 }
 #endif

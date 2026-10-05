@@ -9,8 +9,10 @@ an opportunity).
 
 ### Fixed
 - **Removing the last member deletes the access team** - `RemoveUserFromRecordTeam` now deletes the
-  team and its `principalobjectaccess` share of the record when the last member leaves, as Dataverse
-  does. The team and share are kept while other members remain.
+  team and its `principalobjectaccess` share of the record when the last member leaves a system-managed
+  access team (the kind `AddUserToRecordTeam` creates), as Dataverse does. The team and share are kept
+  while other members remain; removing a non-member changes nothing; teams seeded without
+  `systemmanaged` = true are never auto-deleted.
 - **Direct shares survive access-team removal** - the record is now shared with the access team rather
   than with each member, so a user's direct share (e.g. via `GrantAccess`) is a separate entry and is no
   longer wiped when they are removed from the team. This removes the 1.3.1 known limitation.
@@ -30,6 +32,13 @@ an opportunity).
   access, and expected `RemoveUserFromRecordTeam` to remove it, will now see the direct share kept. Seed
   the share on the team instead, or add the user with `AddUserToRecordTeam`.
 - After removing the last member, the access team no longer exists; a later Add creates a new team.
+- `RetrievePrincipalAccess` for a user who is a member of a team now includes that team's shares (as in
+  Dataverse), so assertions of `None` or an exact mask for team members can change.
+- `RetrieveSharedPrincipalsAndAccess` now lists the access team as the principal for access-team shares,
+  rather than each member.
+- `RetrievePrincipalAccess` reads `teammembership` rows to find a user's teams, so memberships seeded with
+  `EntityReference` ids (not a valid Dataverse shape) now throw `InvalidCastException` there; seed
+  `teamid` / `systemuserid` as `Guid`.
 
 ## [1.3.1] - 2026-10-04
 
