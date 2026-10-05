@@ -93,7 +93,7 @@ namespace DataverseFakes.FakeMessageExecutors
         /// <returns>The type of RemoveUserFromRecordTeamRequestExecutor</returns>
         public Type GetResponsibleRequestType()
         {
-            return typeof(RemoveUserFromRecordTeamRequestExecutor);
+            return typeof(RemoveUserFromRecordTeamRequest);
         }
     }
 }
