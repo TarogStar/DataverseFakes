@@ -535,7 +535,6 @@ namespace DataverseFakes
         /// </remarks>
         public static void FakeExecute(XrmFakedContext context, IOrganizationService fakedService)
         {
-            OrganizationResponse response = null;
             Func<OrganizationRequest, OrganizationResponse> execute = (req) =>
             {
                 if (context.ExecutionMocks.ContainsKey(req.GetType()))
@@ -552,9 +551,10 @@ namespace DataverseFakes
                 throw PullRequestException.NotImplementedOrganizationRequest(req.GetType());
             };
 
+            // Compute the result inside ReturnsLazily: passing it from Invokes via a captured
+            // variable races when the service is called concurrently.
             A.CallTo(() => fakedService.Execute(A<OrganizationRequest>._))
-                .Invokes((OrganizationRequest req) => response = execute(req))
-                .ReturnsLazily((OrganizationRequest req) => response);
+                .ReturnsLazily((OrganizationRequest req) => execute(req));
         }
 
         /// <summary>
@@ -617,7 +617,6 @@ namespace DataverseFakes
         /// <param name="fakedService">The faked <see cref="IOrganizationService"/> to configure.</param>
         public static void FakeRetrieveMultiple(XrmFakedContext context, IOrganizationService fakedService)
         {
-            EntityCollection entities = null;
             Func<QueryBase, EntityCollection> retriveMultiple = (QueryBase req) =>
             {
                 var request = new RetrieveMultipleRequest { Query = req };
@@ -629,9 +628,9 @@ namespace DataverseFakes
             };
 
             //refactored from RetrieveMultipleExecutor
+            // Computed inside ReturnsLazily so concurrent calls can't see each other's results.
             A.CallTo(() => fakedService.RetrieveMultiple(A<QueryBase>._))
-                .Invokes((QueryBase req) => entities = retriveMultiple(req))
-                .ReturnsLazily((QueryBase req) => entities);
+                .ReturnsLazily((QueryBase req) => retriveMultiple(req));
         }
 
         /// <summary>
